@@ -6,6 +6,7 @@
 package gui;
 
 import javax.swing.*;
+import java.io.*;
 
 /**
  *
@@ -46,6 +47,14 @@ public class LoginForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library System");
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         pa_top.setBackground(new java.awt.Color(0, 173, 181));
         pa_top.setToolTipText("");
@@ -170,8 +179,8 @@ public class LoginForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pa_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_rememberme))))
+                            .addComponent(cb_rememberme)
+                            .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(75, Short.MAX_VALUE))
             .addComponent(pa_signup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -186,7 +195,7 @@ public class LoginForm extends javax.swing.JFrame {
                 .addGroup(pa_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lb_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addComponent(cb_rememberme)
                 .addGap(18, 18, 18)
                 .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,6 +250,42 @@ public class LoginForm extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_lb_signupMouseClicked
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        try (FileOutputStream fout = new FileOutputStream("rememberMe.dat");
+             DataOutputStream dout = new DataOutputStream(fout);) {
+            if (cb_rememberme.isSelected()) {
+                dout.writeUTF("remember=" + tf_username.getText() + "=" + pf_password.getText());
+            } else {
+                dout.writeUTF("");
+            }
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        File f = new File("rememberMe.dat");
+        if (f.exists()) {
+            try (FileInputStream fin = new FileInputStream(f);
+                 DataInputStream din = new DataInputStream(fin);) {
+                String[] text_remember = din.readUTF().split("=");
+                if (text_remember[0].equals("remember"))
+                   cb_rememberme.setSelected(true);
+                
+                tf_username.setText(text_remember[1]);
+                pf_password.setText(text_remember[2]);
+                
+                System.out.println(text_remember[1] + "=" + text_remember[2]);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                System.out.println("No remembered username or password");
+            }
+        }
+
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -252,7 +297,7 @@ public class LoginForm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Darcula".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
