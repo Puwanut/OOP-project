@@ -233,6 +233,12 @@ public class LoginForm extends javax.swing.JFrame {
         String password = pf_password.getText().trim();
         if (username.equals("admin") && password.equals("123456")) {
             System.out.println("Welcome Admin");
+            AdminGUI adgui = new AdminGUI();
+            adgui.setVisible(true);
+            adgui.pack();
+            adgui.setLocationRelativeTo(null);
+            adgui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.dispose();
         }else {
 
             //******* ต้องมีการไปดึงข้อมูล user จาก database (sql) มาเช็ค  ********

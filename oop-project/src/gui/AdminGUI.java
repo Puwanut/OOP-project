@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.AdminGUI;
+package gui;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -13,26 +13,27 @@ import javax.swing.*;
  *
  * @author IsilenceT
  */
-public class adminJFrame extends javax.swing.JFrame {
+public class AdminGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form adminJFrame
      */
 
     
-    public adminJFrame() {
+    public AdminGUI() {
         initComponents();
+        this.setLocationRelativeTo(null);
         
-        ImageIcon icon_search = new ImageIcon(new ImageIcon(getClass().getResource("../../image/icon_search.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        ImageIcon icon_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_search_icon.setIcon(icon_search);
         
-        ImageIcon icon_borrow = new ImageIcon(new ImageIcon(getClass().getResource("../../image/icon_borrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        ImageIcon icon_borrow = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_borrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_borrow_icon.setIcon(icon_borrow);
         
-        ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../../image/icon_book.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_book.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_book_icon.setIcon(icon_book);
         
-        ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_logout_icon.setIcon(icon_logout);
         
         
@@ -195,6 +196,9 @@ public class adminJFrame extends javax.swing.JFrame {
         pa_menu_logout.setBackground(pa_menu.getBackground());
         pa_menu_logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_logout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pa_menu_logoutMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pa_menu_logoutMouseEntered(evt);
             }
@@ -312,6 +316,15 @@ public class adminJFrame extends javax.swing.JFrame {
         lb_logout_text.setForeground(Color.black);
     }//GEN-LAST:event_pa_menu_logoutMouseExited
 
+    private void pa_menu_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_logoutMouseClicked
+        LoginForm lgf = new LoginForm();
+        lgf.setVisible(true);
+        lgf.pack();
+        lgf.setLocationRelativeTo(null);
+        lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_pa_menu_logoutMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -329,20 +342,21 @@ public class adminJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(adminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(adminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(adminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(adminJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new adminJFrame().setVisible(true);
+                new AdminGUI().setVisible(true);
             }
         });
     }
