@@ -64,14 +64,28 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu_logout = new javax.swing.JPanel();
         lb_logout_icon = new javax.swing.JLabel();
         lb_logout_text = new javax.swing.JLabel();
+        pa_center = new javax.swing.JPanel();
         pa_search = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        pa_borrow = new javax.swing.JPanel();
+        pa_book = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library System");
+        setMinimumSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setResizable(false);
 
         pa_menu.setBackground(new java.awt.Color(204, 255, 204));
         pa_menu.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.black));
-        pa_menu.setMinimumSize(new java.awt.Dimension(1000, 700));
+        pa_menu.setMinimumSize(new java.awt.Dimension(0, 0));
 
         lb_ADMIN.setFont(new java.awt.Font("Kanit", 1, 36)); // NOI18N
         lb_ADMIN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -81,6 +95,9 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu_search.setBackground(pa_menu.getBackground());
         pa_menu_search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pa_menu_searchMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pa_menu_searchMouseEntered(evt);
             }
@@ -118,6 +135,9 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu_borrow.setBackground(pa_menu.getBackground());
         pa_menu_borrow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pa_menu_borrowMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pa_menu_borrowMouseEntered(evt);
             }
@@ -157,6 +177,9 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu_book.setBackground(pa_menu.getBackground());
         pa_menu_book.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_book.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pa_menu_bookMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pa_menu_bookMouseEntered(evt);
             }
@@ -227,7 +250,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(lb_logout_icon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lb_logout_text)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         pa_menu_logoutLayout.setVerticalGroup(
             pa_menu_logoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -242,14 +265,13 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu.setLayout(pa_menuLayout);
         pa_menuLayout.setHorizontalGroup(
             pa_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pa_menu_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lb_ADMIN, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pa_menu_book, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pa_menu_borrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pa_menuLayout.createSequentialGroup()
+            .addComponent(pa_menu_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lb_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_menuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pa_menu_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pa_menu_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pa_menuLayout.setVerticalGroup(
             pa_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -261,25 +283,184 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(pa_menu_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pa_menu_book, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addComponent(pa_menu_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
 
         getContentPane().add(pa_menu, java.awt.BorderLayout.LINE_START);
 
+        pa_center.setBackground(new java.awt.Color(255, 255, 255));
+        pa_center.setLayout(new java.awt.CardLayout());
+
+        pa_search.setBackground(new java.awt.Color(204, 204, 255));
+
+        jLabel1.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+        jLabel1.setText("ค้นหาจาก");
+
+        jLabel2.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+        jLabel2.setText("ข้อมูลที่ต้องการค้นหา");
+
+        jComboBox1.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "เลขเรียกหนังสือ", "ประเภทหนังสือ", "ชื่อหนังสือ" }));
+
+        jTextField1.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        jButton1.setText("ค้นหา");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        jButton2.setText("Reset");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "เลขเรียกหนังสือ", "ประเภทหนังสือ", "ชื่อหนังสือ", "สถานะ"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(150);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(150);
+            jTable1.getColumnModel().getColumn(1).setMinWidth(200);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(1).setMaxWidth(200);
+            jTable1.getColumnModel().getColumn(2).setMinWidth(300);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(300);
+            jTable1.getColumnModel().getColumn(2).setMaxWidth(500);
+            jTable1.getColumnModel().getColumn(3).setMinWidth(150);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(150);
+        }
+
         javax.swing.GroupLayout pa_searchLayout = new javax.swing.GroupLayout(pa_search);
         pa_search.setLayout(pa_searchLayout);
         pa_searchLayout.setHorizontalGroup(
             pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(pa_searchLayout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pa_searchLayout.createSequentialGroup()
+                        .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         pa_searchLayout.setVerticalGroup(
             pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(pa_searchLayout.createSequentialGroup()
+                .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pa_searchLayout.createSequentialGroup()
+                        .addContainerGap(64, Short.MAX_VALUE)
+                        .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pa_searchLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
-        getContentPane().add(pa_search, java.awt.BorderLayout.CENTER);
+        pa_center.add(pa_search, "panel_search");
+
+        pa_borrow.setBackground(new java.awt.Color(255, 204, 204));
+
+        javax.swing.GroupLayout pa_borrowLayout = new javax.swing.GroupLayout(pa_borrow);
+        pa_borrow.setLayout(pa_borrowLayout);
+        pa_borrowLayout.setHorizontalGroup(
+            pa_borrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
+        pa_borrowLayout.setVerticalGroup(
+            pa_borrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
+
+        pa_center.add(pa_borrow, "panel_borrow");
+
+        pa_book.setBackground(new java.awt.Color(255, 255, 153));
+
+        javax.swing.GroupLayout pa_bookLayout = new javax.swing.GroupLayout(pa_book);
+        pa_book.setLayout(pa_bookLayout);
+        pa_bookLayout.setHorizontalGroup(
+            pa_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
+        pa_bookLayout.setVerticalGroup(
+            pa_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 720, Short.MAX_VALUE)
+        );
+
+        pa_center.add(pa_book, "panel_book");
+
+        getContentPane().add(pa_center, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -325,6 +506,32 @@ public class AdminGUI extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_pa_menu_logoutMouseClicked
 
+    private void pa_menu_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_searchMouseClicked
+        CardLayout cl = (CardLayout)(pa_center.getLayout());
+        cl.show(pa_center, "panel_search");
+        System.out.println("change to panel_search");
+    }//GEN-LAST:event_pa_menu_searchMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void pa_menu_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_borrowMouseClicked
+        CardLayout cl = (CardLayout)(pa_center.getLayout());
+        cl.show(pa_center, "panel_borrow");
+        System.out.println("change to panel_borrow");
+    }//GEN-LAST:event_pa_menu_borrowMouseClicked
+
+    private void pa_menu_bookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_bookMouseClicked
+        CardLayout cl = (CardLayout)(pa_center.getLayout());
+        cl.show(pa_center, "panel_book");
+        System.out.println("change to panel_book");
+    }//GEN-LAST:event_pa_menu_bookMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -362,6 +569,14 @@ public class AdminGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lb_ADMIN;
     private javax.swing.JLabel lb_book_icon;
     private javax.swing.JLabel lb_book_text;
@@ -371,6 +586,9 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_logout_text;
     private javax.swing.JLabel lb_search_icon;
     private javax.swing.JLabel lb_search_text;
+    private javax.swing.JPanel pa_book;
+    private javax.swing.JPanel pa_borrow;
+    private javax.swing.JPanel pa_center;
     private javax.swing.JPanel pa_menu;
     private javax.swing.JPanel pa_menu_book;
     private javax.swing.JPanel pa_menu_borrow;
