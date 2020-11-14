@@ -5,12 +5,13 @@
  */
 package gui.AdminGUI;
 
+import java.sql.*;
+
 /**
  *
  * @author IsilenceT
  */
 public class adminJFrame extends javax.swing.JFrame {
-
     /**
      * Creates new form adminJFrame
      */

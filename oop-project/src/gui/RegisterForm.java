@@ -7,12 +7,15 @@ package gui;
 
 import javax.swing.JFrame;
 import java.sql.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author IsilenceT
  */
 public class RegisterForm extends javax.swing.JFrame {
-
+    Connection con = null;
+    PreparedStatement pst = null;
+    
     /**
      * Creates new form LoginForm
      */
@@ -35,7 +38,7 @@ public class RegisterForm extends javax.swing.JFrame {
         pa_center = new javax.swing.JPanel();
         lb_username = new javax.swing.JLabel();
         lb_password = new javax.swing.JLabel();
-        btn_login = new javax.swing.JButton();
+        btn_signup = new javax.swing.JButton();
         tf_username = new javax.swing.JTextField();
         pf_password = new javax.swing.JPasswordField();
         pa_backtologin = new javax.swing.JPanel();
@@ -87,15 +90,15 @@ public class RegisterForm extends javax.swing.JFrame {
         lb_password.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_password.setText("Password : ");
 
-        btn_login.setBackground(new java.awt.Color(82, 142, 177));
-        btn_login.setFont(new java.awt.Font("Kanit", 1, 24)); // NOI18N
-        btn_login.setForeground(new java.awt.Color(255, 255, 255));
-        btn_login.setText("Sign up");
-        btn_login.setBorder(null);
-        btn_login.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        btn_login.addActionListener(new java.awt.event.ActionListener() {
+        btn_signup.setBackground(new java.awt.Color(82, 142, 177));
+        btn_signup.setFont(new java.awt.Font("Kanit", 1, 24)); // NOI18N
+        btn_signup.setForeground(new java.awt.Color(255, 255, 255));
+        btn_signup.setText("Sign up");
+        btn_signup.setBorder(null);
+        btn_signup.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_signup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_loginActionPerformed(evt);
+                btn_signupActionPerformed(evt);
             }
         });
 
@@ -245,7 +248,7 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(pa_centerLayout.createSequentialGroup()
                 .addGap(218, 218, 218)
-                .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_signup, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pa_centerLayout.setVerticalGroup(
@@ -276,7 +279,7 @@ public class RegisterForm extends javax.swing.JFrame {
                     .addComponent(lb_password1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pf_password1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
-                .addComponent(btn_login, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_signup, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pa_backtologin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -299,9 +302,24 @@ public class RegisterForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pf_passwordActionPerformed
 
-    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        
-    }//GEN-LAST:event_btn_loginActionPerformed
+    private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
+        try{
+            String query = "INSERT INTO `register`(`id`, `fname`, `sname`, `email`, `user`, `pass`) VALUES (?, ?, ?, ?, ?, ?)";
+            con = DriverManager.getConnection("jdbc:mysql://loclahost:4433/mdb", "root", "");
+            pst=con.prepareStatement(query);
+            pst.setString(1, "001");
+            pst.setString(2, tf_firstname1.getText());
+            pst.setString(3, tf_surname.getText());
+            pst.setString(4, tf_email.getText());
+            pst.setString(5, tf_username.getText());
+            pst.setString(6, pf_password1.getText());
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Success");
+            System.out.println("check");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btn_signupActionPerformed
 
     private void pf_password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_password1ActionPerformed
         // TODO add your handling code here:
@@ -379,7 +397,7 @@ public class RegisterForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_login;
+    private javax.swing.JButton btn_signup;
     private javax.swing.JLabel lb_beforesignin;
     private javax.swing.JLabel lb_email;
     private javax.swing.JLabel lb_firstname;
