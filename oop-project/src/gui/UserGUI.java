@@ -7,7 +7,9 @@ package gui;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Image;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 /**
@@ -21,6 +23,18 @@ public class UserGUI extends javax.swing.JFrame {
      */
     public UserGUI() {
         initComponents();
+        
+        ImageIcon icon_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        lb_search_icon.setIcon(icon_search);
+        
+        ImageIcon icon_borrow = new ImageIcon(new ImageIcon(getClass().getResource("../image/list-bookborrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        lb_borrow_icon.setIcon(icon_borrow);
+        
+        ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../image/open-bookborrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        lb_book_icon.setIcon(icon_book);
+        
+        ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        lb_logout_icon.setIcon(icon_logout);
     }
 
     /**
@@ -73,7 +87,7 @@ public class UserGUI extends javax.swing.JFrame {
         lb_ADMIN.setText("ชื่อ USER");
         lb_ADMIN.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
 
-        pa_menu_search.setBackground(getBackground());
+        pa_menu_search.setBackground(pa_menu.getBackground());
         pa_menu_search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -113,7 +127,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pa_menu_borrow.setBackground(getBackground());
+        pa_menu_borrow.setBackground(pa_menu.getBackground());
         pa_menu_borrow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -155,7 +169,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pa_menu_book.setBackground(getBackground());
+        pa_menu_book.setBackground(pa_menu.getBackground());
         pa_menu_book.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_book.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -198,7 +212,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pa_menu_logout.setBackground(getBackground());
+        pa_menu_logout.setBackground(pa_menu.getBackground());
         pa_menu_logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -351,19 +365,20 @@ public class UserGUI extends javax.swing.JFrame {
         pa_searchLayout.setHorizontalGroup(
             pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_searchLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pa_searchLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 908, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pa_searchLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         pa_searchLayout.setVerticalGroup(
             pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,8 +396,8 @@ public class UserGUI extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63)))
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
