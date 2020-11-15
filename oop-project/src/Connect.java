@@ -16,13 +16,12 @@ public class Connect {
     public void  connectDB(){
         String db_name="mdb";
         String user="root";
-        String pass="root";
         String hostName="localhost";
         String driverName="com.mysql.jdbc.Driver";
         try{
             Class.forName(driverName);
             String url="jdbc:mysql://"+hostName+"/"+db_name;
-            Connection con=DriverManager.getConnection(url, user, pass);
+            Connection con=DriverManager.getConnection(url, user, "");
             System.out.println("เชื่อมต่อสำเร็จ");
             
         } catch (Exception e){

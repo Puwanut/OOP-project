@@ -15,7 +15,10 @@ import javax.swing.JOptionPane;
 public class RegisterForm extends javax.swing.JFrame {
     Connection con = null;
     PreparedStatement pst = null;
-    
+    String db_name="mdb";
+    String user="root";
+    String hostName="localhost";
+    String driverName="com.mysql.jdbc.Driver";
     /**
      * Creates new form LoginForm
      */
@@ -304,9 +307,11 @@ public class RegisterForm extends javax.swing.JFrame {
 
     private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
         try{
-            con = DriverManager.getConnection("jdbc:mysql://loclahost/mdb", "root", "");
+            Class.forName(driverName);
+            String url="jdbc:mysql://"+hostName+"/"+db_name;
+            Connection con1=DriverManager.getConnection(url, user, "");
             String query = "INSERT INTO `register`(`id`, `fname`, `sname`, `email`, `user`, `pass`) VALUES (?, ?, ?, ?, ?, ?)";
-            pst=con.prepareStatement(query);
+            pst=con1.prepareStatement(query);
             pst.setString(1, "001");
             pst.setString(2, tf_firstname1.getText());
             pst.setString(3, tf_surname.getText());
