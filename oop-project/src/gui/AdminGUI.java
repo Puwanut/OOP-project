@@ -66,12 +66,12 @@ public class AdminGUI extends javax.swing.JFrame {
         lb_logout_text = new javax.swing.JLabel();
         pa_center = new javax.swing.JPanel();
         pa_search = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        lb_searchby = new javax.swing.JLabel();
+        lb_searchdata = new javax.swing.JLabel();
+        cbb_searchby = new javax.swing.JComboBox<>();
+        tf_searchdata = new javax.swing.JTextField();
+        btn_search = new javax.swing.JButton();
+        btn_reset = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         pa_borrowNreturn = new javax.swing.JPanel();
@@ -299,31 +299,31 @@ public class AdminGUI extends javax.swing.JFrame {
 
         pa_search.setBackground(new java.awt.Color(204, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
-        jLabel1.setText("ค้นหาจาก");
+        lb_searchby.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+        lb_searchby.setText("ค้นหาจาก");
 
-        jLabel2.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
-        jLabel2.setText("ข้อมูลที่ต้องการค้นหา");
+        lb_searchdata.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+        lb_searchdata.setText("ข้อมูลที่ต้องการค้นหา");
 
-        jComboBox1.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "เลขเรียกหนังสือ", "ประเภทหนังสือ", "ชื่อหนังสือ" }));
+        cbb_searchby.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+        cbb_searchby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "เลขเรียกหนังสือ", "ประเภทหนังสือ", "ชื่อหนังสือ" }));
 
-        jTextField1.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+        tf_searchdata.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
-        jButton1.setText("ค้นหา");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_search.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        btn_search.setText("ค้นหา");
+        btn_search.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_searchActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
-        jButton2.setText("Reset");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_reset.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        btn_reset.setText("Reset");
+        btn_reset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_resetActionPerformed(evt);
             }
         });
 
@@ -398,16 +398,16 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pa_searchLayout.createSequentialGroup()
                         .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(lb_searchdata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lb_searchby, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tf_searchdata, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbb_searchby, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(37, 37, 37)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         pa_searchLayout.setVerticalGroup(
@@ -417,15 +417,15 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_searchLayout.createSequentialGroup()
                         .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lb_searchby)
+                            .addComponent(cbb_searchby, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lb_searchdata)
+                            .addComponent(tf_searchdata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -578,13 +578,13 @@ public class AdminGUI extends javax.swing.JFrame {
         System.out.println("change to panel_search");
     }//GEN-LAST:event_pa_menu_searchMouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_searchActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btn_resetActionPerformed
 
     private void pa_menu_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_borrowMouseClicked
         CardLayout cl = (CardLayout)(pa_center.getLayout());
@@ -645,14 +645,11 @@ public class AdminGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btn_reset;
+    private javax.swing.JButton btn_search;
+    private javax.swing.JComboBox<String> cbb_searchby;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel la_tab_borrow;
     private javax.swing.JLabel la_tab_return;
     private javax.swing.JLabel lb_ADMIN;
@@ -664,6 +661,8 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_logout_text;
     private javax.swing.JLabel lb_search_icon;
     private javax.swing.JLabel lb_search_text;
+    private javax.swing.JLabel lb_searchby;
+    private javax.swing.JLabel lb_searchdata;
     private javax.swing.JPanel pa_book;
     private javax.swing.JPanel pa_borrow;
     private javax.swing.JPanel pa_borrowNreturn;
@@ -676,5 +675,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JPanel pa_menu_search;
     private javax.swing.JPanel pa_return;
     private javax.swing.JPanel pa_search;
+    private javax.swing.JTextField tf_searchdata;
     // End of variables declaration//GEN-END:variables
 }
