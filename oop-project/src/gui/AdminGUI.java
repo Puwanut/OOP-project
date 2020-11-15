@@ -7,8 +7,10 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -30,6 +32,13 @@ public class AdminGUI extends javax.swing.JFrame {
     public AdminGUI() {
         initComponents();
         this.setLocationRelativeTo(null);
+        //test image url
+//        try {
+//            URL urltest = new URL("https://i.pinimg.com/originals/43/97/bd/4397bdfea4297f8c517f5901c72c31c3.png");
+//            Image imagetest = ImageIO.read(urltest);
+//            ImageIcon icon_search = new ImageIcon(new ImageIcon(imagetest).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+//            lb_search_icon.setIcon(icon_search);
+//        } catch (Exception ex){}
         
         ImageIcon icon_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_search_icon.setIcon(icon_search);
@@ -39,6 +48,9 @@ public class AdminGUI extends javax.swing.JFrame {
         
         ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_book.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_book_icon.setIcon(icon_book);
+        
+        ImageIcon icon_user = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_user.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        lb_userlist_icon.setIcon(icon_user);
         
         ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_logout_icon.setIcon(icon_logout);
@@ -85,6 +97,9 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu_logout = new javax.swing.JPanel();
         lb_logout_icon = new javax.swing.JLabel();
         lb_logout_text = new javax.swing.JLabel();
+        pa_menu_userlist = new javax.swing.JPanel();
+        lb_userlist_icon = new javax.swing.JLabel();
+        lb_userlist_text = new javax.swing.JLabel();
         pa_center = new javax.swing.JPanel();
         pa_search = new javax.swing.JPanel();
         lb_searchby = new javax.swing.JLabel();
@@ -147,10 +162,12 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu.setMinimumSize(new java.awt.Dimension(200, 500));
         pa_menu.setPreferredSize(new java.awt.Dimension(200, 500));
 
+        lb_ADMIN.setBackground(new java.awt.Color(153, 255, 204));
         lb_ADMIN.setFont(new java.awt.Font("Kanit", 1, 36)); // NOI18N
         lb_ADMIN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_ADMIN.setText("ADMIN");
         lb_ADMIN.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        lb_ADMIN.setOpaque(true);
 
         pa_menu_search.setBackground(pa_menu.getBackground());
         pa_menu_search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -269,11 +286,11 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu_bookLayout.setVerticalGroup(
             pa_menu_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_menu_bookLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(22, Short.MAX_VALUE)
                 .addComponent(lb_book_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lb_book_text)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pa_menu_logout.setBackground(pa_menu.getBackground());
@@ -306,9 +323,9 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu_logoutLayout.setHorizontalGroup(
             pa_menu_logoutLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_menu_logoutLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(lb_logout_icon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lb_logout_text)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -321,6 +338,48 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(lb_logout_text, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        pa_menu_userlist.setBackground(pa_menu.getBackground());
+        pa_menu_userlist.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pa_menu_userlist.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pa_menu_userlistMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pa_menu_userlistMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pa_menu_userlistMouseExited(evt);
+            }
+        });
+
+        lb_userlist_icon.setBackground(new java.awt.Color(153, 204, 255));
+        lb_userlist_icon.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        lb_userlist_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_userlist_icon.setMaximumSize(new java.awt.Dimension(50, 50));
+        lb_userlist_icon.setMinimumSize(new java.awt.Dimension(50, 50));
+        lb_userlist_icon.setPreferredSize(new java.awt.Dimension(50, 50));
+
+        lb_userlist_text.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        lb_userlist_text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_userlist_text.setText("ทะเบียนผู้ใช้");
+
+        javax.swing.GroupLayout pa_menu_userlistLayout = new javax.swing.GroupLayout(pa_menu_userlist);
+        pa_menu_userlist.setLayout(pa_menu_userlistLayout);
+        pa_menu_userlistLayout.setHorizontalGroup(
+            pa_menu_userlistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lb_userlist_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(lb_userlist_icon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pa_menu_userlistLayout.setVerticalGroup(
+            pa_menu_userlistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pa_menu_userlistLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lb_userlist_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lb_userlist_text)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout pa_menuLayout = new javax.swing.GroupLayout(pa_menu);
         pa_menu.setLayout(pa_menuLayout);
         pa_menuLayout.setHorizontalGroup(
@@ -330,6 +389,7 @@ public class AdminGUI extends javax.swing.JFrame {
             .addComponent(pa_menu_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lb_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pa_menu_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pa_menu_userlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pa_menuLayout.setVerticalGroup(
             pa_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,11 +397,13 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(lb_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pa_menu_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pa_menu_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pa_menu_book, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pa_menu_userlist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(pa_menu_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -899,7 +961,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(la_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(la_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
         );
         pa_borrowNreturnLayout.setVerticalGroup(
             pa_borrowNreturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1075,16 +1137,30 @@ public class AdminGUI extends javax.swing.JFrame {
     private void cbb_borrowdays1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_borrowdays1ActionPerformed
        int cbb_index = cbb_borrowdays1.getSelectedIndex();
        currentCal = Calendar.getInstance();
-       switch (cbb_index){
-           case 1: currentCal.add(Calendar.DATE, 1); break;
-           case 2: currentCal.add(Calendar.DATE, 3); break;
-           case 3: currentCal.add(Calendar.DATE, 7); break;
-           case 4: currentCal.add(Calendar.DATE, 14); break;
-       }
+       if (cbb_index > 0) {
+           switch (cbb_index){
+                case 1: currentCal.add(Calendar.DATE, 1); break;
+                case 2: currentCal.add(Calendar.DATE, 3); break;
+                case 3: currentCal.add(Calendar.DATE, 7); break;
+                case 4: currentCal.add(Calendar.DATE, 14); break;
+            }
         toDate = dateFormat.format(currentCal.getTime());
         tf_returndate1.setText(toDate);
+       }
        
     }//GEN-LAST:event_cbb_borrowdays1ActionPerformed
+
+    private void pa_menu_userlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_userlistMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pa_menu_userlistMouseClicked
+
+    private void pa_menu_userlistMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_userlistMouseEntered
+        lb_userlist_text.setForeground(Color.red);
+    }//GEN-LAST:event_pa_menu_userlistMouseEntered
+
+    private void pa_menu_userlistMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_userlistMouseExited
+        lb_userlist_text.setForeground(Color.black);
+    }//GEN-LAST:event_pa_menu_userlistMouseExited
 
     /**
      * @param args the command line arguments
@@ -1159,6 +1235,8 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_searchdata;
     private javax.swing.JLabel lb_userid1;
     private javax.swing.JLabel lb_userid2;
+    private javax.swing.JLabel lb_userlist_icon;
+    private javax.swing.JLabel lb_userlist_text;
     private javax.swing.JLabel lb_username1;
     private javax.swing.JLabel lb_username2;
     private javax.swing.JPanel pa_book;
@@ -1171,6 +1249,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JPanel pa_menu_borrow;
     private javax.swing.JPanel pa_menu_logout;
     private javax.swing.JPanel pa_menu_search;
+    private javax.swing.JPanel pa_menu_userlist;
     private javax.swing.JPanel pa_return;
     private javax.swing.JPanel pa_search;
     private javax.swing.JTextField tf_bookname1;
