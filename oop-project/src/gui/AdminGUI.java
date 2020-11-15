@@ -74,13 +74,17 @@ public class AdminGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        pa_borrowNreturn = new javax.swing.JPanel();
+        la_tab_borrow = new javax.swing.JLabel();
+        la_tab_return = new javax.swing.JLabel();
+        pa_borrowNreturn_cards = new javax.swing.JPanel();
         pa_borrow = new javax.swing.JPanel();
+        pa_return = new javax.swing.JPanel();
         pa_book = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library System");
         setMinimumSize(new java.awt.Dimension(1280, 720));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
 
         pa_menu.setBackground(new java.awt.Color(204, 255, 204));
@@ -283,7 +287,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(pa_menu_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pa_menu_book, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
                 .addComponent(pa_menu_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -308,6 +312,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
         jButton1.setText("ค้นหา");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -408,9 +413,9 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_searchLayout.setVerticalGroup(
             pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_searchLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pa_searchLayout.createSequentialGroup()
-                        .addContainerGap(64, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_searchLayout.createSequentialGroup()
                         .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -418,19 +423,41 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(pa_searchLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pa_center.add(pa_search, "panel_search");
 
-        pa_borrow.setBackground(new java.awt.Color(255, 204, 204));
+        pa_borrowNreturn.setBackground(new java.awt.Color(255, 204, 204));
+
+        la_tab_borrow.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        la_tab_borrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        la_tab_borrow.setText("ยืมหนังสือ");
+        la_tab_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                la_tab_borrowMouseClicked(evt);
+            }
+        });
+
+        la_tab_return.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        la_tab_return.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        la_tab_return.setText("คืนหนังสือ");
+        la_tab_return.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        la_tab_return.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                la_tab_returnMouseClicked(evt);
+            }
+        });
+
+        pa_borrowNreturn_cards.setBackground(pa_borrowNreturn.getBackground());
+        pa_borrowNreturn_cards.setLayout(new java.awt.CardLayout());
+
+        pa_borrow.setBackground(pa_borrowNreturn_cards.getBackground());
 
         javax.swing.GroupLayout pa_borrowLayout = new javax.swing.GroupLayout(pa_borrow);
         pa_borrow.setLayout(pa_borrowLayout);
@@ -440,10 +467,49 @@ public class AdminGUI extends javax.swing.JFrame {
         );
         pa_borrowLayout.setVerticalGroup(
             pa_borrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 614, Short.MAX_VALUE)
         );
 
-        pa_center.add(pa_borrow, "panel_borrow");
+        pa_borrowNreturn_cards.add(pa_borrow, "card2");
+
+        pa_return.setBackground(pa_borrowNreturn_cards.getBackground());
+
+        javax.swing.GroupLayout pa_returnLayout = new javax.swing.GroupLayout(pa_return);
+        pa_return.setLayout(pa_returnLayout);
+        pa_returnLayout.setHorizontalGroup(
+            pa_returnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
+        pa_returnLayout.setVerticalGroup(
+            pa_returnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 614, Short.MAX_VALUE)
+        );
+
+        pa_borrowNreturn_cards.add(pa_return, "card3");
+
+        javax.swing.GroupLayout pa_borrowNreturnLayout = new javax.swing.GroupLayout(pa_borrowNreturn);
+        pa_borrowNreturn.setLayout(pa_borrowNreturnLayout);
+        pa_borrowNreturnLayout.setHorizontalGroup(
+            pa_borrowNreturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pa_borrowNreturnLayout.createSequentialGroup()
+                .addComponent(la_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(la_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pa_borrowNreturnLayout.setVerticalGroup(
+            pa_borrowNreturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pa_borrowNreturnLayout.createSequentialGroup()
+                .addGroup(pa_borrowNreturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(la_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(la_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
+
+        pa_center.add(pa_borrowNreturn, "panel_borrowNreturn");
 
         pa_book.setBackground(new java.awt.Color(255, 255, 153));
 
@@ -455,7 +521,7 @@ public class AdminGUI extends javax.swing.JFrame {
         );
         pa_bookLayout.setVerticalGroup(
             pa_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 720, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
 
         pa_center.add(pa_book, "panel_book");
@@ -522,8 +588,8 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void pa_menu_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_borrowMouseClicked
         CardLayout cl = (CardLayout)(pa_center.getLayout());
-        cl.show(pa_center, "panel_borrow");
-        System.out.println("change to panel_borrow");
+        cl.show(pa_center, "panel_borrowNreturn");
+        System.out.println("change to panel_borrowNreturn");
     }//GEN-LAST:event_pa_menu_borrowMouseClicked
 
     private void pa_menu_bookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_bookMouseClicked
@@ -531,6 +597,16 @@ public class AdminGUI extends javax.swing.JFrame {
         cl.show(pa_center, "panel_book");
         System.out.println("change to panel_book");
     }//GEN-LAST:event_pa_menu_bookMouseClicked
+
+    private void la_tab_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_la_tab_borrowMouseClicked
+        la_tab_borrow.setBorder(null);
+        la_tab_return.setBorder(BorderFactory.createRaisedBevelBorder());
+    }//GEN-LAST:event_la_tab_borrowMouseClicked
+
+    private void la_tab_returnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_la_tab_returnMouseClicked
+        la_tab_borrow.setBorder(BorderFactory.createRaisedBevelBorder());
+        la_tab_return.setBorder(null);
+    }//GEN-LAST:event_la_tab_returnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -577,6 +653,8 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel la_tab_borrow;
+    private javax.swing.JLabel la_tab_return;
     private javax.swing.JLabel lb_ADMIN;
     private javax.swing.JLabel lb_book_icon;
     private javax.swing.JLabel lb_book_text;
@@ -588,12 +666,15 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_search_text;
     private javax.swing.JPanel pa_book;
     private javax.swing.JPanel pa_borrow;
+    private javax.swing.JPanel pa_borrowNreturn;
+    private javax.swing.JPanel pa_borrowNreturn_cards;
     private javax.swing.JPanel pa_center;
     private javax.swing.JPanel pa_menu;
     private javax.swing.JPanel pa_menu_book;
     private javax.swing.JPanel pa_menu_borrow;
     private javax.swing.JPanel pa_menu_logout;
     private javax.swing.JPanel pa_menu_search;
+    private javax.swing.JPanel pa_return;
     private javax.swing.JPanel pa_search;
     // End of variables declaration//GEN-END:variables
 }
