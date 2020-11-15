@@ -73,7 +73,7 @@ public class UserGUI extends javax.swing.JFrame {
         lb_ADMIN.setText("ชื่อ USER");
         lb_ADMIN.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
 
-        pa_menu_search.setBackground(new java.awt.Color(204, 255, 204));
+        pa_menu_search.setBackground(getBackground());
         pa_menu_search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -113,7 +113,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pa_menu_borrow.setBackground(new java.awt.Color(204, 255, 204));
+        pa_menu_borrow.setBackground(getBackground());
         pa_menu_borrow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -155,7 +155,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pa_menu_book.setBackground(new java.awt.Color(204, 255, 204));
+        pa_menu_book.setBackground(getBackground());
         pa_menu_book.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_book.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -198,7 +198,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pa_menu_logout.setBackground(new java.awt.Color(204, 255, 204));
+        pa_menu_logout.setBackground(getBackground());
         pa_menu_logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
