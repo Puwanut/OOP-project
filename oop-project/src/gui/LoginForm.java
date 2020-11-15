@@ -21,6 +21,41 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null); //set location Jframe Center
     }
+    
+    public void save_rememberme_handle(){
+        try (FileOutputStream fout = new FileOutputStream("rememberMe.dat");
+             DataOutputStream dout = new DataOutputStream(fout);) {
+            if (cb_rememberme.isSelected()) {
+                dout.writeUTF("remember=" + tf_username.getText() + "=" + pf_password.getText());
+            } else {
+                dout.writeUTF("");
+            }
+            
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void get_rememberme_handle(){
+        File f = new File("rememberMe.dat");
+        if (f.exists()) {
+            try (FileInputStream fin = new FileInputStream(f);
+                 DataInputStream din = new DataInputStream(fin);) {
+                String[] text_remember = din.readUTF().split("=");
+                if (text_remember[0].equals("remember"))
+                   cb_rememberme.setSelected(true);
+                
+                tf_username.setText(text_remember[1]);
+                pf_password.setText(text_remember[2]);
+                
+                System.out.println(text_remember[1] + "=" + text_remember[2]);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                System.out.println("No remembered username or password");
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -226,12 +261,11 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_remembermeActionPerformed
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        
-        
-        
+            
         String username = tf_username.getText().trim();
         String password = pf_password.getText().trim();
         if (username.equals("admin") && password.equals("123456")) {
+            save_rememberme_handle();
             System.out.println("Welcome Admin");
             AdminGUI adgui = new AdminGUI();
             adgui.setVisible(true);
@@ -257,38 +291,11 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lb_signupMouseClicked
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        try (FileOutputStream fout = new FileOutputStream("rememberMe.dat");
-             DataOutputStream dout = new DataOutputStream(fout);) {
-            if (cb_rememberme.isSelected()) {
-                dout.writeUTF("remember=" + tf_username.getText() + "=" + pf_password.getText());
-            } else {
-                dout.writeUTF("");
-            }
-            
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        save_rememberme_handle();
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        File f = new File("rememberMe.dat");
-        if (f.exists()) {
-            try (FileInputStream fin = new FileInputStream(f);
-                 DataInputStream din = new DataInputStream(fin);) {
-                String[] text_remember = din.readUTF().split("=");
-                if (text_remember[0].equals("remember"))
-                   cb_rememberme.setSelected(true);
-                
-                tf_username.setText(text_remember[1]);
-                pf_password.setText(text_remember[2]);
-                
-                System.out.println(text_remember[1] + "=" + text_remember[2]);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                System.out.println("No remembered username or password");
-            }
-        }
+        get_rememberme_handle();
 
     }//GEN-LAST:event_formWindowOpened
 
