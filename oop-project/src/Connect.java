@@ -10,16 +10,26 @@
  */
 import java.sql.*;
 public class Connect {
-    
-    public static Connection ConnectDB(){
+    public static void main(String[] args) {
+       new Connect().connectDB();
+    }
+    public void  connectDB(){
+        String db_name="mdb";
+        String user="root";
+        String pass="root";
+        String hostName="localhost";
+        String driverName="com.mysql.jdbc.Driver";
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://localhost/mdb";
-            Connection con = DriverManager.getConnection(url, "root", "");
-            return con;
-        }catch(Exception e){
-            e.printStackTrace();
+            Class.forName(driverName);
+            String url="jdbc:mysql://"+hostName+"/"+db_name;
+            Connection con=DriverManager.getConnection(url, user, pass);
+            System.out.println("เชื่อมต่อสำเร็จ");
+            
+        } catch (Exception e){
+            System.out.println("e.getMesssage()");
         }
-        return null;    
+    }
 }
-}
+        
+    
+      

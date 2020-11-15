@@ -304,8 +304,8 @@ public class RegisterForm extends javax.swing.JFrame {
 
     private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
         try{
+            con = DriverManager.getConnection("jdbc:mysql://loclahost/mdb", "root", "");
             String query = "INSERT INTO `register`(`id`, `fname`, `sname`, `email`, `user`, `pass`) VALUES (?, ?, ?, ?, ?, ?)";
-            con = DriverManager.getConnection("jdbc:mysql://loclahost:4433/mdb", "root", "");
             pst=con.prepareStatement(query);
             pst.setString(1, "001");
             pst.setString(2, tf_firstname1.getText());
