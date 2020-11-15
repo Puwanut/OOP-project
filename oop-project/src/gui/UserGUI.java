@@ -73,6 +73,7 @@ public class UserGUI extends javax.swing.JFrame {
         lb_ADMIN.setText("ชื่อ USER");
         lb_ADMIN.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
 
+        pa_menu_search.setBackground(new java.awt.Color(204, 255, 204));
         pa_menu_search.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_search.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -112,6 +113,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        pa_menu_borrow.setBackground(new java.awt.Color(204, 255, 204));
         pa_menu_borrow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -125,7 +127,7 @@ public class UserGUI extends javax.swing.JFrame {
             }
         });
 
-        lb_borrow_icon.setBackground(new java.awt.Color(153, 204, 255));
+        lb_borrow_icon.setBackground(new java.awt.Color(204, 255, 204));
         lb_borrow_icon.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
         lb_borrow_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_borrow_icon.setMaximumSize(new java.awt.Dimension(50, 50));
@@ -153,6 +155,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        pa_menu_book.setBackground(new java.awt.Color(204, 255, 204));
         pa_menu_book.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_book.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -195,6 +198,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        pa_menu_logout.setBackground(new java.awt.Color(204, 255, 204));
         pa_menu_logout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pa_menu_logout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -442,7 +446,7 @@ public class UserGUI extends javax.swing.JFrame {
             .addGroup(pa_borrowLayout.createSequentialGroup()
                 .addGap(275, 275, 275)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_borrowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2)
@@ -517,7 +521,7 @@ public class UserGUI extends javax.swing.JFrame {
             pa_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_bookLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 922, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(pa_bookLayout.createSequentialGroup()
                 .addGap(263, 263, 263)
