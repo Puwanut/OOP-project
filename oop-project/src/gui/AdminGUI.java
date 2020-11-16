@@ -7,11 +7,11 @@ package gui;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.net.URL;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -24,9 +24,10 @@ public class AdminGUI extends javax.swing.JFrame {
      */
     
     
-    SimpleDateFormat dateFormat;
-    Calendar currentCal;
-    String currentdate, toDate;
+    private SimpleDateFormat dateFormat;
+    private Calendar currentCal;
+    private String currentdate, toDate;
+    private JFileChooser file;
     
     
     public AdminGUI() {
@@ -66,11 +67,18 @@ public class AdminGUI extends javax.swing.JFrame {
         lb_img_book1.setIcon(img_book_sample);
         lb_img_book2.setIcon(img_book_sample);
         
-        //date for borrow panel
+        //date for panel 
         dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         currentCal = Calendar.getInstance();
         currentdate = dateFormat.format(currentCal.getTime());
         tf_borrowdate1.setText(currentdate);
+        
+        //Filechooser for panel addbook
+        file = new JFileChooser();
+        file.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".jpg, .gif, .png", "jpg", "gif", "png");
+//      file.addChoosableFileFilter(filter);
+        file.setFileFilter(filter);
         
     }
 
@@ -109,10 +117,10 @@ public class AdminGUI extends javax.swing.JFrame {
         btn_search = new javax.swing.JButton();
         btn_reset = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        JTable_bookinfo = new javax.swing.JTable();
         pa_borrowNreturn = new javax.swing.JPanel();
-        la_tab_borrow = new javax.swing.JLabel();
-        la_tab_return = new javax.swing.JLabel();
+        lb_tab_borrow = new javax.swing.JLabel();
+        lb_tab_return = new javax.swing.JLabel();
         pa_borrowNreturn_cards = new javax.swing.JPanel();
         pa_borrow = new javax.swing.JPanel();
         lb_borrownumber1 = new javax.swing.JLabel();
@@ -151,7 +159,34 @@ public class AdminGUI extends javax.swing.JFrame {
         lb_img_book2 = new javax.swing.JLabel();
         btn_record_returning = new javax.swing.JButton();
         pa_history = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        JTable_borrowhistory = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         pa_book = new javax.swing.JPanel();
+        lb_tab_addbook = new javax.swing.JLabel();
+        lb_tab_removebook = new javax.swing.JLabel();
+        pa_book_cards = new javax.swing.JPanel();
+        pa_addbook = new javax.swing.JPanel();
+        lb_callnumber3 = new javax.swing.JLabel();
+        tf_callnumber3 = new javax.swing.JTextField();
+        lb_bookname3 = new javax.swing.JLabel();
+        tf_bookname3 = new javax.swing.JTextField();
+        lb_img_book3 = new javax.swing.JLabel();
+        btn_addbook = new javax.swing.JButton();
+        lb_bookname5 = new javax.swing.JLabel();
+        btn_choosefile = new javax.swing.JButton();
+        lb_filename = new javax.swing.JLabel();
+        pa_removebook = new javax.swing.JPanel();
+        lb_callnumber4 = new javax.swing.JLabel();
+        tf_callnumber4 = new javax.swing.JTextField();
+        lb_bookname4 = new javax.swing.JLabel();
+        tf_bookname4 = new javax.swing.JTextField();
+        lb_img_book4 = new javax.swing.JLabel();
+        btn_removebook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Library System");
@@ -423,7 +458,7 @@ public class AdminGUI extends javax.swing.JFrame {
         lb_searchdata.setText("ข้อมูลที่ต้องการค้นหา");
 
         cbb_searchby.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
-        cbb_searchby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "เลขเรียกหนังสือ", "ประเภทหนังสือ", "ชื่อหนังสือ" }));
+        cbb_searchby.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "เลขเรียกหนังสือ", "ชื่อหนังสือ", "ชิ่อผู้แต่ง" }));
 
         tf_searchdata.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
 
@@ -448,9 +483,9 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        JTable_bookinfo.setAutoCreateRowSorter(true);
+        JTable_bookinfo.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
+        JTable_bookinfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -482,31 +517,42 @@ public class AdminGUI extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "เลขเรียกหนังสือ", "ประเภทหนังสือ", "ชื่อหนังสือ", "สถานะ"
+                "เลขเรียกหนังสือ", "ชื่อหนังสือ", "ชื่อผู้แต่ง", "สถานะ"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(0).setMaxWidth(150);
-            jTable1.getColumnModel().getColumn(1).setMinWidth(200);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(200);
-            jTable1.getColumnModel().getColumn(2).setMinWidth(300);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(300);
-            jTable1.getColumnModel().getColumn(2).setMaxWidth(500);
-            jTable1.getColumnModel().getColumn(3).setMinWidth(150);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(150);
+        jScrollPane1.setViewportView(JTable_bookinfo);
+        if (JTable_bookinfo.getColumnModel().getColumnCount() > 0) {
+            JTable_bookinfo.getColumnModel().getColumn(0).setMinWidth(150);
+            JTable_bookinfo.getColumnModel().getColumn(0).setPreferredWidth(150);
+            JTable_bookinfo.getColumnModel().getColumn(0).setMaxWidth(150);
+            JTable_bookinfo.getColumnModel().getColumn(0).setHeaderValue("เลขเรียกหนังสือ");
+            JTable_bookinfo.getColumnModel().getColumn(1).setMinWidth(300);
+            JTable_bookinfo.getColumnModel().getColumn(1).setPreferredWidth(300);
+            JTable_bookinfo.getColumnModel().getColumn(1).setMaxWidth(300);
+            JTable_bookinfo.getColumnModel().getColumn(1).setHeaderValue("ชื่อหนังสือ");
+            JTable_bookinfo.getColumnModel().getColumn(2).setMinWidth(200);
+            JTable_bookinfo.getColumnModel().getColumn(2).setPreferredWidth(200);
+            JTable_bookinfo.getColumnModel().getColumn(2).setMaxWidth(300);
+            JTable_bookinfo.getColumnModel().getColumn(2).setHeaderValue("ชื่อผู้แต่ง");
+            JTable_bookinfo.getColumnModel().getColumn(3).setMinWidth(200);
+            JTable_bookinfo.getColumnModel().getColumn(3).setPreferredWidth(200);
+            JTable_bookinfo.getColumnModel().getColumn(3).setMaxWidth(200);
+            JTable_bookinfo.getColumnModel().getColumn(3).setHeaderValue("สถานะ");
         }
 
         javax.swing.GroupLayout pa_searchLayout = new javax.swing.GroupLayout(pa_search);
@@ -534,7 +580,7 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_searchLayout.setVerticalGroup(
             pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_searchLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_searchLayout.createSequentialGroup()
                         .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -548,33 +594,33 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(btn_reset, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pa_center.add(pa_search, "panel_search");
 
         pa_borrowNreturn.setBackground(new java.awt.Color(255, 204, 204));
 
-        la_tab_borrow.setBackground(new java.awt.Color(255, 204, 204));
-        la_tab_borrow.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
-        la_tab_borrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        la_tab_borrow.setText("ยืมหนังสือ");
-        la_tab_borrow.setOpaque(true);
-        la_tab_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
+        lb_tab_borrow.setBackground(new java.awt.Color(255, 204, 204));
+        lb_tab_borrow.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        lb_tab_borrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_tab_borrow.setText("ยืมหนังสือ");
+        lb_tab_borrow.setOpaque(true);
+        lb_tab_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                la_tab_borrowMouseClicked(evt);
+                lb_tab_borrowMouseClicked(evt);
             }
         });
 
-        la_tab_return.setBackground(new java.awt.Color(153, 204, 255));
-        la_tab_return.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
-        la_tab_return.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        la_tab_return.setText("คืนหนังสือ");
-        la_tab_return.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        la_tab_return.setOpaque(true);
-        la_tab_return.addMouseListener(new java.awt.event.MouseAdapter() {
+        lb_tab_return.setBackground(new java.awt.Color(153, 204, 255));
+        lb_tab_return.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        lb_tab_return.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_tab_return.setText("คืนหนังสือ");
+        lb_tab_return.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lb_tab_return.setOpaque(true);
+        lb_tab_return.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                la_tab_returnMouseClicked(evt);
+                lb_tab_returnMouseClicked(evt);
             }
         });
 
@@ -724,9 +770,9 @@ public class AdminGUI extends javax.swing.JFrame {
                             .addComponent(lb_returndate1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tf_returndate1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 145, Short.MAX_VALUE)
                 .addComponent(lb_img_book1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
             .addGroup(pa_borrowLayout.createSequentialGroup()
                 .addGap(333, 333, 333)
                 .addComponent(btn_record_borrowing, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -905,9 +951,9 @@ public class AdminGUI extends javax.swing.JFrame {
                             .addComponent(lb_returndate2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tf_returndate2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 145, Short.MAX_VALUE)
                 .addComponent(lb_img_book2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
             .addGroup(pa_returnLayout.createSequentialGroup()
                 .addGap(333, 333, 333)
                 .addComponent(btn_record_returning, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -959,17 +1005,17 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_borrowNreturnLayout.setHorizontalGroup(
             pa_borrowNreturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_borrowNreturnLayout.createSequentialGroup()
-                .addComponent(la_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(la_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lb_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         pa_borrowNreturnLayout.setVerticalGroup(
             pa_borrowNreturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_borrowNreturnLayout.createSequentialGroup()
                 .addGroup(pa_borrowNreturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(la_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(la_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lb_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
                 .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -978,30 +1024,356 @@ public class AdminGUI extends javax.swing.JFrame {
 
         pa_history.setBackground(new java.awt.Color(255, 255, 153));
 
+        JTable_borrowhistory.setAutoCreateRowSorter(true);
+        JTable_borrowhistory.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
+        JTable_borrowhistory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "รหัสการยืม", "รหัสหนังสือ", "ชื่อหนังสือ", "ชื่อผู้ยืม", "วันที่ยืม", "วันที่คืน"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(JTable_borrowhistory);
+
+        jLabel1.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("ประวัติการยืม-คืนหนังสือ");
+
+        jLabel2.setBackground(new java.awt.Color(153, 255, 153));
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel2.setOpaque(true);
+
+        jLabel3.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        jLabel3.setText("คืนแล้ว");
+
+        jLabel4.setBackground(new java.awt.Color(255, 153, 153));
+        jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jLabel4.setOpaque(true);
+
+        jLabel5.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        jLabel5.setText("ยังไม่คืน");
+
         javax.swing.GroupLayout pa_historyLayout = new javax.swing.GroupLayout(pa_history);
         pa_history.setLayout(pa_historyLayout);
         pa_historyLayout.setHorizontalGroup(
             pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGroup(pa_historyLayout.createSequentialGroup()
+                .addContainerGap(75, Short.MAX_VALUE)
+                .addGroup(pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE))
+                    .addGroup(pa_historyLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         pa_historyLayout.setVerticalGroup(
             pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_historyLayout.createSequentialGroup()
+                .addContainerGap(42, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE))
+                    .addGroup(pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pa_center.add(pa_history, "panel_history");
 
         pa_book.setBackground(new java.awt.Color(254, 193, 247));
 
+        lb_tab_addbook.setBackground(new java.awt.Color(255, 204, 204));
+        lb_tab_addbook.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        lb_tab_addbook.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_tab_addbook.setText("เพิ่มข้อมูลหนังสือ");
+        lb_tab_addbook.setOpaque(true);
+        lb_tab_addbook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_tab_addbookMouseClicked(evt);
+            }
+        });
+
+        lb_tab_removebook.setBackground(new java.awt.Color(153, 204, 255));
+        lb_tab_removebook.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        lb_tab_removebook.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_tab_removebook.setText("ลบข้อมูลหนังสือ");
+        lb_tab_removebook.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        lb_tab_removebook.setOpaque(true);
+        lb_tab_removebook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lb_tab_removebookMouseClicked(evt);
+            }
+        });
+
+        pa_book_cards.setBackground(pa_borrowNreturn.getBackground());
+        pa_book_cards.setLayout(new java.awt.CardLayout());
+
+        pa_addbook.setBackground(new java.awt.Color(255, 204, 204));
+
+        lb_callnumber3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_callnumber3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_callnumber3.setText("รหัสเรียกหนังสือ : ");
+
+        tf_callnumber3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        tf_callnumber3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_callnumber3ActionPerformed(evt);
+            }
+        });
+
+        lb_bookname3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_bookname3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_bookname3.setText("ชื่อหนังสือ : ");
+
+        tf_bookname3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        tf_bookname3.setEnabled(false);
+        tf_bookname3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_bookname3ActionPerformed(evt);
+            }
+        });
+
+        lb_img_book3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_img_book3.setText("(รูปหนังสือ)");
+        lb_img_book3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
+
+        btn_addbook.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        btn_addbook.setText("เพิ่มข้อมูลหนังสือ");
+
+        lb_bookname5.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_bookname5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_bookname5.setText("รูปปกหนังสือ : ");
+
+        btn_choosefile.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        btn_choosefile.setText("Choose File");
+        btn_choosefile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_choosefileMouseClicked(evt);
+            }
+        });
+        btn_choosefile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_choosefileActionPerformed(evt);
+            }
+        });
+
+        lb_filename.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
+        lb_filename.setText("No file chosen");
+
+        javax.swing.GroupLayout pa_addbookLayout = new javax.swing.GroupLayout(pa_addbook);
+        pa_addbook.setLayout(pa_addbookLayout);
+        pa_addbookLayout.setHorizontalGroup(
+            pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pa_addbookLayout.createSequentialGroup()
+                .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pa_addbookLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pa_addbookLayout.createSequentialGroup()
+                                .addComponent(lb_callnumber3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_callnumber3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(pa_addbookLayout.createSequentialGroup()
+                                    .addComponent(lb_bookname3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(tf_bookname3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(pa_addbookLayout.createSequentialGroup()
+                                    .addComponent(lb_bookname5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btn_choosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_addbookLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lb_filename, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 145, Short.MAX_VALUE)
+                .addComponent(lb_img_book3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
+            .addGroup(pa_addbookLayout.createSequentialGroup()
+                .addGap(333, 333, 333)
+                .addComponent(btn_addbook, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pa_addbookLayout.setVerticalGroup(
+            pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_addbookLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pa_addbookLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_callnumber3)
+                            .addComponent(lb_callnumber3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_bookname3)
+                            .addComponent(lb_bookname3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lb_bookname5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_choosefile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lb_filename)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pa_addbookLayout.createSequentialGroup()
+                        .addComponent(lb_img_book3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 85, Short.MAX_VALUE)))
+                .addComponent(btn_addbook)
+                .addGap(30, 30, 30))
+        );
+
+        pa_book_cards.add(pa_addbook, "panel_addbook");
+
+        pa_removebook.setBackground(new java.awt.Color(153, 204, 255));
+
+        lb_callnumber4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_callnumber4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_callnumber4.setText("รหัสเรียกหนังสือ : ");
+
+        tf_callnumber4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        tf_callnumber4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_callnumber4ActionPerformed(evt);
+            }
+        });
+
+        lb_bookname4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_bookname4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_bookname4.setText("ชื่อหนังสือ : ");
+
+        tf_bookname4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        tf_bookname4.setEnabled(false);
+        tf_bookname4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_bookname4ActionPerformed(evt);
+            }
+        });
+
+        lb_img_book4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_img_book4.setText("(รูปหนังสือ)");
+        lb_img_book4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 5));
+
+        btn_removebook.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
+        btn_removebook.setText("ลบข้อมูลหนังสือ");
+
+        javax.swing.GroupLayout pa_removebookLayout = new javax.swing.GroupLayout(pa_removebook);
+        pa_removebook.setLayout(pa_removebookLayout);
+        pa_removebookLayout.setHorizontalGroup(
+            pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pa_removebookLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addGroup(pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pa_removebookLayout.createSequentialGroup()
+                        .addComponent(lb_callnumber4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_callnumber4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pa_removebookLayout.createSequentialGroup()
+                        .addComponent(lb_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 145, Short.MAX_VALUE)
+                .addComponent(lb_img_book4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(145, Short.MAX_VALUE))
+            .addGroup(pa_removebookLayout.createSequentialGroup()
+                .addGap(333, 333, 333)
+                .addComponent(btn_removebook, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pa_removebookLayout.setVerticalGroup(
+            pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_removebookLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_img_book4, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(pa_removebookLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_callnumber4)
+                            .addComponent(lb_callnumber4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_bookname4)
+                            .addComponent(lb_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addComponent(btn_removebook)
+                .addGap(30, 30, 30))
+        );
+
+        pa_book_cards.add(pa_removebook, "panel_removebook");
+
         javax.swing.GroupLayout pa_bookLayout = new javax.swing.GroupLayout(pa_book);
         pa_book.setLayout(pa_bookLayout);
         pa_bookLayout.setHorizontalGroup(
             pa_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGroup(pa_bookLayout.createSequentialGroup()
+                .addComponent(lb_tab_addbook, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(lb_tab_removebook, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pa_book_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         pa_bookLayout.setVerticalGroup(
             pa_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(pa_bookLayout.createSequentialGroup()
+                .addGroup(pa_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_tab_addbook, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_tab_removebook, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(pa_book_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pa_center.add(pa_book, "panel_book");
@@ -1079,21 +1451,21 @@ public class AdminGUI extends javax.swing.JFrame {
         System.out.println("change to panel_history");
     }//GEN-LAST:event_pa_menu_historyMouseClicked
 
-    private void la_tab_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_la_tab_borrowMouseClicked
-        la_tab_borrow.setBorder(null);
-        la_tab_return.setBorder(BorderFactory.createRaisedBevelBorder());
+    private void lb_tab_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_tab_borrowMouseClicked
+        lb_tab_borrow.setBorder(null);
+        lb_tab_return.setBorder(BorderFactory.createRaisedBevelBorder());
         CardLayout cl = (CardLayout)(pa_borrowNreturn_cards.getLayout());
         cl.show(pa_borrowNreturn_cards, "panel_borrow");
         System.out.println("Panel borrowNreturn cards: change to panel_borrow");
-    }//GEN-LAST:event_la_tab_borrowMouseClicked
+    }//GEN-LAST:event_lb_tab_borrowMouseClicked
 
-    private void la_tab_returnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_la_tab_returnMouseClicked
-        la_tab_borrow.setBorder(BorderFactory.createRaisedBevelBorder());
-        la_tab_return.setBorder(null);
+    private void lb_tab_returnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_tab_returnMouseClicked
+        lb_tab_borrow.setBorder(BorderFactory.createRaisedBevelBorder());
+        lb_tab_return.setBorder(null);
         CardLayout cl = (CardLayout)(pa_borrowNreturn_cards.getLayout());
         cl.show(pa_borrowNreturn_cards, "panel_return");
         System.out.println("Panel borrowNreturn cards: change to panel_return");
-    }//GEN-LAST:event_la_tab_returnMouseClicked
+    }//GEN-LAST:event_lb_tab_returnMouseClicked
 
     private void tf_borrownumber1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_borrownumber1ActionPerformed
         // TODO add your handling code here:
@@ -1182,6 +1554,59 @@ public class AdminGUI extends javax.swing.JFrame {
         lb_book_text.setForeground(Color.black);
     }//GEN-LAST:event_pa_menu_bookMouseExited
 
+    private void lb_tab_addbookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_tab_addbookMouseClicked
+        lb_tab_addbook.setBorder(null);
+        lb_tab_removebook.setBorder(BorderFactory.createRaisedBevelBorder());
+        CardLayout cl = (CardLayout)(pa_book_cards.getLayout());
+        cl.show(pa_book_cards, "panel_addbook");
+        System.out.println("Panel book cards: change to panel_addbook");
+    }//GEN-LAST:event_lb_tab_addbookMouseClicked
+
+    private void lb_tab_removebookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_tab_removebookMouseClicked
+        lb_tab_removebook.setBorder(null);
+        lb_tab_addbook.setBorder(BorderFactory.createRaisedBevelBorder());
+        CardLayout cl = (CardLayout)(pa_book_cards.getLayout());
+        cl.show(pa_book_cards, "panel_removebook");
+        System.out.println("Panel book cards: change to panel_removebook");
+    }//GEN-LAST:event_lb_tab_removebookMouseClicked
+
+    private void tf_callnumber4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_callnumber4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_callnumber4ActionPerformed
+
+    private void tf_bookname4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookname4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_bookname4ActionPerformed
+
+    private void tf_bookname3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookname3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_bookname3ActionPerformed
+
+    private void tf_callnumber3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_callnumber3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_callnumber3ActionPerformed
+
+    private void btn_choosefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_choosefileActionPerformed
+        int result = file.showOpenDialog(null);
+        //if the user click on open in Jfilechooser
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = file.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            String filename = selectedFile.getName();
+            System.out.println("Chosen file path: " + path);
+            lb_filename.setText(filename);
+            
+            ImageIcon img_book_chosen = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+            lb_img_book3.setIcon(img_book_chosen);
+        } else if (result == JFileChooser.CANCEL_OPTION) {
+            System.out.println("No File Select");
+        }
+    }//GEN-LAST:event_btn_choosefileActionPerformed
+
+    private void btn_choosefileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_choosefileMouseClicked
+
+    }//GEN-LAST:event_btn_choosefileMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1219,21 +1644,32 @@ public class AdminGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable JTable_bookinfo;
+    private javax.swing.JTable JTable_borrowhistory;
+    private javax.swing.JButton btn_addbook;
+    private javax.swing.JButton btn_choosefile;
     private javax.swing.JButton btn_record_borrowing;
     private javax.swing.JButton btn_record_returning;
+    private javax.swing.JButton btn_removebook;
     private javax.swing.JButton btn_reset;
     private javax.swing.JButton btn_search;
     private javax.swing.JComboBox<String> cbb_borrowdays1;
     private javax.swing.JComboBox<String> cbb_searchby;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel la_tab_borrow;
-    private javax.swing.JLabel la_tab_return;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_ADMIN;
     private javax.swing.JLabel lb_book_icon;
     private javax.swing.JLabel lb_book_text;
     private javax.swing.JLabel lb_bookname1;
     private javax.swing.JLabel lb_bookname2;
+    private javax.swing.JLabel lb_bookname3;
+    private javax.swing.JLabel lb_bookname4;
+    private javax.swing.JLabel lb_bookname5;
     private javax.swing.JLabel lb_borrow_icon;
     private javax.swing.JLabel lb_borrow_text;
     private javax.swing.JLabel lb_borrowdate1;
@@ -1243,10 +1679,15 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_borrownumber2;
     private javax.swing.JLabel lb_callnumber1;
     private javax.swing.JLabel lb_callnumber2;
+    private javax.swing.JLabel lb_callnumber3;
+    private javax.swing.JLabel lb_callnumber4;
+    private javax.swing.JLabel lb_filename;
     private javax.swing.JLabel lb_history_icon;
     private javax.swing.JLabel lb_history_text;
     private javax.swing.JLabel lb_img_book1;
     private javax.swing.JLabel lb_img_book2;
+    private javax.swing.JLabel lb_img_book3;
+    private javax.swing.JLabel lb_img_book4;
     private javax.swing.JLabel lb_logout_icon;
     private javax.swing.JLabel lb_logout_text;
     private javax.swing.JLabel lb_returndate1;
@@ -1255,11 +1696,17 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_search_text;
     private javax.swing.JLabel lb_searchby;
     private javax.swing.JLabel lb_searchdata;
+    private javax.swing.JLabel lb_tab_addbook;
+    private javax.swing.JLabel lb_tab_borrow;
+    private javax.swing.JLabel lb_tab_removebook;
+    private javax.swing.JLabel lb_tab_return;
     private javax.swing.JLabel lb_userid1;
     private javax.swing.JLabel lb_userid2;
     private javax.swing.JLabel lb_username1;
     private javax.swing.JLabel lb_username2;
+    private javax.swing.JPanel pa_addbook;
     private javax.swing.JPanel pa_book;
+    private javax.swing.JPanel pa_book_cards;
     private javax.swing.JPanel pa_borrow;
     private javax.swing.JPanel pa_borrowNreturn;
     private javax.swing.JPanel pa_borrowNreturn_cards;
@@ -1271,16 +1718,21 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JPanel pa_menu_history;
     private javax.swing.JPanel pa_menu_logout;
     private javax.swing.JPanel pa_menu_search;
+    private javax.swing.JPanel pa_removebook;
     private javax.swing.JPanel pa_return;
     private javax.swing.JPanel pa_search;
     private javax.swing.JTextField tf_bookname1;
     private javax.swing.JTextField tf_bookname2;
+    private javax.swing.JTextField tf_bookname3;
+    private javax.swing.JTextField tf_bookname4;
     private javax.swing.JTextField tf_borrowdate1;
     private javax.swing.JTextField tf_borrowdate2;
     private javax.swing.JTextField tf_borrownumber1;
     private javax.swing.JTextField tf_borrownumber2;
     private javax.swing.JTextField tf_callnumber1;
     private javax.swing.JTextField tf_callnumber2;
+    private javax.swing.JTextField tf_callnumber3;
+    private javax.swing.JTextField tf_callnumber4;
     private javax.swing.JTextField tf_returndate1;
     private javax.swing.JTextField tf_returndate2;
     private javax.swing.JTextField tf_searchdata;
