@@ -52,12 +52,12 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="pa_menu_book" alignment="0" max="32767" attributes="0"/>
+              <Component id="pa_menu_history" alignment="0" max="32767" attributes="0"/>
               <Component id="pa_menu_borrow" alignment="0" max="32767" attributes="0"/>
               <Component id="pa_menu_search" alignment="0" max="32767" attributes="0"/>
               <Component id="lb_ADMIN" alignment="0" max="32767" attributes="0"/>
               <Component id="pa_menu_logout" alignment="1" max="32767" attributes="0"/>
-              <Component id="pa_menu_userlist" alignment="0" max="32767" attributes="0"/>
+              <Component id="pa_menu_book" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -69,10 +69,10 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="pa_menu_borrow" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="pa_menu_book" min="-2" max="-2" attributes="0"/>
+                  <Component id="pa_menu_history" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="pa_menu_userlist" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="27" max="32767" attributes="0"/>
+                  <Component id="pa_menu_book" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="pa_menu_logout" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
@@ -222,7 +222,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="pa_menu_book">
+        <Container class="javax.swing.JPanel" name="pa_menu_history">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection component="pa_menu" name="background" type="property"/>
@@ -232,32 +232,32 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_bookMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_bookMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_bookMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_historyMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_historyMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_historyMouseExited"/>
           </Events>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lb_book_text" alignment="1" pref="200" max="32767" attributes="0"/>
-                  <Component id="lb_book_icon" alignment="1" max="32767" attributes="0"/>
+                  <Component id="lb_history_text" alignment="1" pref="200" max="32767" attributes="0"/>
+                  <Component id="lb_history_icon" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
-                      <Component id="lb_book_icon" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="lb_history_icon" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lb_book_text" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <Component id="lb_history_text" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lb_book_icon">
+            <Component class="javax.swing.JLabel" name="lb_history_icon">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="99" type="rgb"/>
@@ -277,13 +277,13 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lb_book_text">
+            <Component class="javax.swing.JLabel" name="lb_history_text">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Kanit" size="24" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="&#xe17;&#xe30;&#xe40;&#xe1a;&#xe35;&#xe22;&#xe19;&#xe2b;&#xe19;&#xe31;&#xe07;&#xe2a;&#xe37;&#xe2d;"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body style=&quot;text-align: center&quot;&gt;&#xe1b;&#xe23;&#xe30;&#xe27;&#xe31;&#xe15;&#xe34;&#xe01;&#xe32;&#xe23;&lt;br&gt;&#xe22;&#xe37;&#xe21;-&#xe04;&#xe37;&#xe19;&#xe2b;&#xe19;&#xe31;&#xe07;&#xe2a;&#xe37;&#xe2d;&lt;/body&gt;&lt;/html&gt;"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -359,7 +359,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="pa_menu_userlist">
+        <Container class="javax.swing.JPanel" name="pa_menu_book">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection component="pa_menu" name="background" type="property"/>
@@ -369,32 +369,32 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_userlistMouseClicked"/>
-            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_userlistMouseEntered"/>
-            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_userlistMouseExited"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_bookMouseClicked"/>
+            <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_bookMouseEntered"/>
+            <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pa_menu_bookMouseExited"/>
           </Events>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lb_userlist_text" alignment="1" pref="200" max="32767" attributes="0"/>
-                  <Component id="lb_userlist_icon" alignment="1" max="32767" attributes="0"/>
+                  <Component id="lb_book_text" alignment="1" pref="200" max="32767" attributes="0"/>
+                  <Component id="lb_book_icon" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="lb_userlist_icon" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="lb_book_icon" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lb_userlist_text" min="-2" max="-2" attributes="0"/>
+                      <Component id="lb_book_text" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lb_userlist_icon">
+            <Component class="javax.swing.JLabel" name="lb_book_icon">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="cc" red="99" type="rgb"/>
@@ -414,13 +414,13 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lb_userlist_text">
+            <Component class="javax.swing.JLabel" name="lb_book_text">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Kanit" size="24" style="0"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="&#xe17;&#xe30;&#xe40;&#xe1a;&#xe35;&#xe22;&#xe19;&#xe1c;&#xe39;&#xe49;&#xe43;&#xe0a;&#xe49;"/>
+                <Property name="text" type="java.lang.String" value="&#xe17;&#xe30;&#xe40;&#xe1a;&#xe35;&#xe22;&#xe19;&#xe2b;&#xe19;&#xe31;&#xe07;&#xe2a;&#xe37;&#xe2d;"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -1319,10 +1319,35 @@
             </Container>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="pa_book">
+        <Container class="javax.swing.JPanel" name="pa_history">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="ff" red="ff" type="rgb"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+              <CardConstraints cardName="panel_history"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="1080" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <EmptySpace min="0" pref="700" max="32767" attributes="0"/>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+        </Container>
+        <Container class="javax.swing.JPanel" name="pa_book">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="f7" green="c1" red="fe" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>

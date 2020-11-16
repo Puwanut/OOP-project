@@ -46,11 +46,11 @@ public class AdminGUI extends javax.swing.JFrame {
         ImageIcon icon_borrow = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_borrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_borrow_icon.setIcon(icon_borrow);
         
+        ImageIcon icon_borrowhistory = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_borrowhistory.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        lb_history_icon.setIcon(icon_borrowhistory);
+        
         ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_book.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_book_icon.setIcon(icon_book);
-        
-        ImageIcon icon_user = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_user.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_userlist_icon.setIcon(icon_user);
         
         ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_logout_icon.setIcon(icon_logout);
@@ -91,15 +91,15 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu_borrow = new javax.swing.JPanel();
         lb_borrow_icon = new javax.swing.JLabel();
         lb_borrow_text = new javax.swing.JLabel();
-        pa_menu_book = new javax.swing.JPanel();
-        lb_book_icon = new javax.swing.JLabel();
-        lb_book_text = new javax.swing.JLabel();
+        pa_menu_history = new javax.swing.JPanel();
+        lb_history_icon = new javax.swing.JLabel();
+        lb_history_text = new javax.swing.JLabel();
         pa_menu_logout = new javax.swing.JPanel();
         lb_logout_icon = new javax.swing.JLabel();
         lb_logout_text = new javax.swing.JLabel();
-        pa_menu_userlist = new javax.swing.JPanel();
-        lb_userlist_icon = new javax.swing.JLabel();
-        lb_userlist_text = new javax.swing.JLabel();
+        pa_menu_book = new javax.swing.JPanel();
+        lb_book_icon = new javax.swing.JLabel();
+        lb_book_text = new javax.swing.JLabel();
         pa_center = new javax.swing.JPanel();
         pa_search = new javax.swing.JPanel();
         lb_searchby = new javax.swing.JLabel();
@@ -150,6 +150,7 @@ public class AdminGUI extends javax.swing.JFrame {
         tf_returndate2 = new javax.swing.JTextField();
         lb_img_book2 = new javax.swing.JLabel();
         btn_record_returning = new javax.swing.JButton();
+        pa_history = new javax.swing.JPanel();
         pa_book = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -251,46 +252,46 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pa_menu_book.setBackground(pa_menu.getBackground());
-        pa_menu_book.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pa_menu_book.addMouseListener(new java.awt.event.MouseAdapter() {
+        pa_menu_history.setBackground(pa_menu.getBackground());
+        pa_menu_history.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pa_menu_history.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pa_menu_bookMouseClicked(evt);
+                pa_menu_historyMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pa_menu_bookMouseEntered(evt);
+                pa_menu_historyMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pa_menu_bookMouseExited(evt);
+                pa_menu_historyMouseExited(evt);
             }
         });
 
-        lb_book_icon.setBackground(new java.awt.Color(153, 204, 255));
-        lb_book_icon.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
-        lb_book_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_book_icon.setMaximumSize(new java.awt.Dimension(50, 50));
-        lb_book_icon.setMinimumSize(new java.awt.Dimension(50, 50));
-        lb_book_icon.setPreferredSize(new java.awt.Dimension(50, 50));
+        lb_history_icon.setBackground(new java.awt.Color(153, 204, 255));
+        lb_history_icon.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        lb_history_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_history_icon.setMaximumSize(new java.awt.Dimension(50, 50));
+        lb_history_icon.setMinimumSize(new java.awt.Dimension(50, 50));
+        lb_history_icon.setPreferredSize(new java.awt.Dimension(50, 50));
 
-        lb_book_text.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
-        lb_book_text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_book_text.setText("ทะเบียนหนังสือ");
+        lb_history_text.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        lb_history_text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_history_text.setText("<html><body style=\"text-align: center\">ประวัติการ<br>ยืม-คืนหนังสือ</body></html>");
 
-        javax.swing.GroupLayout pa_menu_bookLayout = new javax.swing.GroupLayout(pa_menu_book);
-        pa_menu_book.setLayout(pa_menu_bookLayout);
-        pa_menu_bookLayout.setHorizontalGroup(
-            pa_menu_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_book_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-            .addComponent(lb_book_icon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout pa_menu_historyLayout = new javax.swing.GroupLayout(pa_menu_history);
+        pa_menu_history.setLayout(pa_menu_historyLayout);
+        pa_menu_historyLayout.setHorizontalGroup(
+            pa_menu_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lb_history_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(lb_history_icon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        pa_menu_bookLayout.setVerticalGroup(
-            pa_menu_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pa_menu_bookLayout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(lb_book_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pa_menu_historyLayout.setVerticalGroup(
+            pa_menu_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pa_menu_historyLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lb_history_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_book_text)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addComponent(lb_history_text, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pa_menu_logout.setBackground(pa_menu.getBackground());
@@ -338,45 +339,45 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(lb_logout_text, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        pa_menu_userlist.setBackground(pa_menu.getBackground());
-        pa_menu_userlist.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pa_menu_userlist.addMouseListener(new java.awt.event.MouseAdapter() {
+        pa_menu_book.setBackground(pa_menu.getBackground());
+        pa_menu_book.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pa_menu_book.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pa_menu_userlistMouseClicked(evt);
+                pa_menu_bookMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pa_menu_userlistMouseEntered(evt);
+                pa_menu_bookMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                pa_menu_userlistMouseExited(evt);
+                pa_menu_bookMouseExited(evt);
             }
         });
 
-        lb_userlist_icon.setBackground(new java.awt.Color(153, 204, 255));
-        lb_userlist_icon.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
-        lb_userlist_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_userlist_icon.setMaximumSize(new java.awt.Dimension(50, 50));
-        lb_userlist_icon.setMinimumSize(new java.awt.Dimension(50, 50));
-        lb_userlist_icon.setPreferredSize(new java.awt.Dimension(50, 50));
+        lb_book_icon.setBackground(new java.awt.Color(153, 204, 255));
+        lb_book_icon.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        lb_book_icon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_book_icon.setMaximumSize(new java.awt.Dimension(50, 50));
+        lb_book_icon.setMinimumSize(new java.awt.Dimension(50, 50));
+        lb_book_icon.setPreferredSize(new java.awt.Dimension(50, 50));
 
-        lb_userlist_text.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
-        lb_userlist_text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_userlist_text.setText("ทะเบียนผู้ใช้");
+        lb_book_text.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        lb_book_text.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_book_text.setText("ทะเบียนหนังสือ");
 
-        javax.swing.GroupLayout pa_menu_userlistLayout = new javax.swing.GroupLayout(pa_menu_userlist);
-        pa_menu_userlist.setLayout(pa_menu_userlistLayout);
-        pa_menu_userlistLayout.setHorizontalGroup(
-            pa_menu_userlistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_userlist_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-            .addComponent(lb_userlist_icon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout pa_menu_bookLayout = new javax.swing.GroupLayout(pa_menu_book);
+        pa_menu_book.setLayout(pa_menu_bookLayout);
+        pa_menu_bookLayout.setHorizontalGroup(
+            pa_menu_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lb_book_text, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(lb_book_icon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        pa_menu_userlistLayout.setVerticalGroup(
-            pa_menu_userlistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pa_menu_userlistLayout.createSequentialGroup()
+        pa_menu_bookLayout.setVerticalGroup(
+            pa_menu_bookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pa_menu_bookLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lb_userlist_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_book_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_userlist_text)
+                .addComponent(lb_book_text)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -384,12 +385,12 @@ public class AdminGUI extends javax.swing.JFrame {
         pa_menu.setLayout(pa_menuLayout);
         pa_menuLayout.setHorizontalGroup(
             pa_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pa_menu_book, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pa_menu_history, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pa_menu_borrow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pa_menu_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lb_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pa_menu_logout, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pa_menu_userlist, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pa_menu_book, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pa_menuLayout.setVerticalGroup(
             pa_menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -400,10 +401,10 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pa_menu_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pa_menu_book, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pa_menu_history, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pa_menu_userlist, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(pa_menu_book, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pa_menu_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
@@ -961,7 +962,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(la_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(la_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         pa_borrowNreturnLayout.setVerticalGroup(
             pa_borrowNreturnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -975,7 +976,22 @@ public class AdminGUI extends javax.swing.JFrame {
 
         pa_center.add(pa_borrowNreturn, "panel_borrowNreturn");
 
-        pa_book.setBackground(new java.awt.Color(255, 255, 153));
+        pa_history.setBackground(new java.awt.Color(255, 255, 153));
+
+        javax.swing.GroupLayout pa_historyLayout = new javax.swing.GroupLayout(pa_history);
+        pa_history.setLayout(pa_historyLayout);
+        pa_historyLayout.setHorizontalGroup(
+            pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+        );
+        pa_historyLayout.setVerticalGroup(
+            pa_historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
+        );
+
+        pa_center.add(pa_history, "panel_history");
+
+        pa_book.setBackground(new java.awt.Color(254, 193, 247));
 
         javax.swing.GroupLayout pa_bookLayout = new javax.swing.GroupLayout(pa_book);
         pa_book.setLayout(pa_bookLayout);
@@ -1011,13 +1027,13 @@ public class AdminGUI extends javax.swing.JFrame {
         lb_borrow_text.setForeground(Color.black);
     }//GEN-LAST:event_pa_menu_borrowMouseExited
 
-    private void pa_menu_bookMouseEntered(MouseEvent evt) {//GEN-FIRST:event_pa_menu_bookMouseEntered
-        lb_book_text.setForeground(Color.red);
-    }//GEN-LAST:event_pa_menu_bookMouseEntered
+    private void pa_menu_historyMouseEntered(MouseEvent evt) {//GEN-FIRST:event_pa_menu_historyMouseEntered
+        lb_history_text.setForeground(Color.red);
+    }//GEN-LAST:event_pa_menu_historyMouseEntered
 
-    private void pa_menu_bookMouseExited(MouseEvent evt) {//GEN-FIRST:event_pa_menu_bookMouseExited
-        lb_book_text.setForeground(Color.black);
-    }//GEN-LAST:event_pa_menu_bookMouseExited
+    private void pa_menu_historyMouseExited(MouseEvent evt) {//GEN-FIRST:event_pa_menu_historyMouseExited
+        lb_history_text.setForeground(Color.black);
+    }//GEN-LAST:event_pa_menu_historyMouseExited
 
     private void pa_menu_logoutMouseEntered(MouseEvent evt) {//GEN-FIRST:event_pa_menu_logoutMouseEntered
         lb_logout_text.setForeground(Color.red);
@@ -1034,6 +1050,7 @@ public class AdminGUI extends javax.swing.JFrame {
         lgf.setLocationRelativeTo(null);
         lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
+        System.out.println("ADMIN Logout...");
     }//GEN-LAST:event_pa_menu_logoutMouseClicked
 
     private void pa_menu_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_searchMouseClicked
@@ -1056,11 +1073,11 @@ public class AdminGUI extends javax.swing.JFrame {
         System.out.println("change to panel_borrowNreturn");
     }//GEN-LAST:event_pa_menu_borrowMouseClicked
 
-    private void pa_menu_bookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_bookMouseClicked
+    private void pa_menu_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_historyMouseClicked
         CardLayout cl = (CardLayout)(pa_center.getLayout());
-        cl.show(pa_center, "panel_book");
-        System.out.println("change to panel_book");
-    }//GEN-LAST:event_pa_menu_bookMouseClicked
+        cl.show(pa_center, "panel_history");
+        System.out.println("change to panel_history");
+    }//GEN-LAST:event_pa_menu_historyMouseClicked
 
     private void la_tab_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_la_tab_borrowMouseClicked
         la_tab_borrow.setBorder(null);
@@ -1150,17 +1167,20 @@ public class AdminGUI extends javax.swing.JFrame {
        
     }//GEN-LAST:event_cbb_borrowdays1ActionPerformed
 
-    private void pa_menu_userlistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_userlistMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pa_menu_userlistMouseClicked
+    private void pa_menu_bookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_bookMouseClicked
+        CardLayout cl = (CardLayout)(pa_center.getLayout());
+        cl.show(pa_center, "panel_book");
+        System.out.println("change to panel_book");
+    }//GEN-LAST:event_pa_menu_bookMouseClicked
 
-    private void pa_menu_userlistMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_userlistMouseEntered
-        lb_userlist_text.setForeground(Color.red);
-    }//GEN-LAST:event_pa_menu_userlistMouseEntered
+    
+    private void pa_menu_bookMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_bookMouseEntered
+        lb_book_text.setForeground(Color.red);
+    }//GEN-LAST:event_pa_menu_bookMouseEntered
 
-    private void pa_menu_userlistMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_userlistMouseExited
-        lb_userlist_text.setForeground(Color.black);
-    }//GEN-LAST:event_pa_menu_userlistMouseExited
+    private void pa_menu_bookMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pa_menu_bookMouseExited
+        lb_book_text.setForeground(Color.black);
+    }//GEN-LAST:event_pa_menu_bookMouseExited
 
     /**
      * @param args the command line arguments
@@ -1223,6 +1243,8 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_borrownumber2;
     private javax.swing.JLabel lb_callnumber1;
     private javax.swing.JLabel lb_callnumber2;
+    private javax.swing.JLabel lb_history_icon;
+    private javax.swing.JLabel lb_history_text;
     private javax.swing.JLabel lb_img_book1;
     private javax.swing.JLabel lb_img_book2;
     private javax.swing.JLabel lb_logout_icon;
@@ -1235,8 +1257,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lb_searchdata;
     private javax.swing.JLabel lb_userid1;
     private javax.swing.JLabel lb_userid2;
-    private javax.swing.JLabel lb_userlist_icon;
-    private javax.swing.JLabel lb_userlist_text;
     private javax.swing.JLabel lb_username1;
     private javax.swing.JLabel lb_username2;
     private javax.swing.JPanel pa_book;
@@ -1244,12 +1264,13 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JPanel pa_borrowNreturn;
     private javax.swing.JPanel pa_borrowNreturn_cards;
     private javax.swing.JPanel pa_center;
+    private javax.swing.JPanel pa_history;
     private javax.swing.JPanel pa_menu;
     private javax.swing.JPanel pa_menu_book;
     private javax.swing.JPanel pa_menu_borrow;
+    private javax.swing.JPanel pa_menu_history;
     private javax.swing.JPanel pa_menu_logout;
     private javax.swing.JPanel pa_menu_search;
-    private javax.swing.JPanel pa_menu_userlist;
     private javax.swing.JPanel pa_return;
     private javax.swing.JPanel pa_search;
     private javax.swing.JTextField tf_bookname1;
