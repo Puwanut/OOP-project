@@ -7,13 +7,19 @@ package gui;
 
 import javax.swing.*;
 import java.io.*;
+import java.sql.*;
 
 /**
  *
  * @author IsilenceT
  */
 public class LoginForm extends javax.swing.JFrame {
-
+    Connection con = null;
+    PreparedStatement pst = null;
+    String db_name="mdb";
+    String user="root";
+    String hostName="localhost";
+    String driverName="com.mysql.jdbc.Driver";
     /**
      * Creates new form LoginForm
      */
@@ -273,11 +279,31 @@ public class LoginForm extends javax.swing.JFrame {
             adgui.setLocationRelativeTo(null);
             adgui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             this.dispose();
-        }else {
-
-            //******* ต้องมีการไปดึงข้อมูล user จาก database (sql) มาเช็ค  ********
-            System.out.println("Invalid user...");
-            JOptionPane.showMessageDialog(null,"Invalid User...","Alert",JOptionPane.ERROR_MESSAGE);
+        }else{
+            try{
+                Class.forName(driverName);
+                String url="jdbc:mysql://"+hostName+"/"+db_name;
+                Connection con1=DriverManager.getConnection(url, user, "");
+                String sql = "Select * From register where user=? and pass=?";
+                pst=con1.prepareStatement(sql);
+                pst.setString(1, tf_username.getText());
+                pst.setString(2, pf_password.getText());
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    UserGUI usergui = new UserGUI();
+                    usergui.setVisible(true);
+                    usergui.pack();
+                    usergui.setLocationRelativeTo(null);
+                    usergui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Invalid user...");
+                    tf_username.setText("");
+                    pf_password.setText("");
+                }
+            }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+            }
         }
     }//GEN-LAST:event_btn_loginActionPerformed
 
