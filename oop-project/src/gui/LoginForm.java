@@ -272,12 +272,7 @@ public class LoginForm extends javax.swing.JFrame {
         String password = pf_password.getText().trim();
         if (username.equals("admin") && password.equals("123456")) {
             save_rememberme_handle();
-            System.out.println("Welcome Admin");
-            AdminGUI adgui = new AdminGUI();
-            adgui.setVisible(true);
-            adgui.pack();
-            adgui.setLocationRelativeTo(null);
-            adgui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            GuiInit.initAdminGUI();
             this.dispose();
         }else{
             try{
@@ -290,11 +285,7 @@ public class LoginForm extends javax.swing.JFrame {
                 pst.setString(2, pf_password.getText());
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
-                    UserGUI usergui = new UserGUI();
-                    usergui.setVisible(true);
-                    usergui.pack();
-                    usergui.setLocationRelativeTo(null);
-                    usergui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    GuiInit.initUserGUI();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Invalid user...");

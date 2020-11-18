@@ -46,7 +46,7 @@ public class RegisterForm extends javax.swing.JFrame {
         pf_password = new javax.swing.JPasswordField();
         pa_backtologin = new javax.swing.JPanel();
         lb_beforesignin = new javax.swing.JLabel();
-        lb_signup = new javax.swing.JLabel();
+        lb_signin = new javax.swing.JLabel();
         lb_password1 = new javax.swing.JLabel();
         pf_password1 = new javax.swing.JPasswordField();
         lb_firstname = new javax.swing.JLabel();
@@ -130,13 +130,13 @@ public class RegisterForm extends javax.swing.JFrame {
         lb_beforesignin.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_beforesignin.setText("Already have an account?");
 
-        lb_signup.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
-        lb_signup.setForeground(new java.awt.Color(102, 153, 255));
-        lb_signup.setText("Sign in");
-        lb_signup.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lb_signup.addMouseListener(new java.awt.event.MouseAdapter() {
+        lb_signin.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
+        lb_signin.setForeground(new java.awt.Color(102, 153, 255));
+        lb_signin.setText("Sign in");
+        lb_signin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_signin.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_signupMouseClicked(evt);
+                lb_signinMouseClicked(evt);
             }
         });
 
@@ -148,13 +148,13 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addGap(175, 175, 175)
                 .addComponent(lb_beforesignin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lb_signup)
+                .addComponent(lb_signin)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pa_backtologinLayout.setVerticalGroup(
             pa_backtologinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_backtologinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(lb_signup, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_signin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(lb_beforesignin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -353,14 +353,10 @@ public class RegisterForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_surnameActionPerformed
 
-    private void lb_signupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_signupMouseClicked
-        LoginForm lgf = new LoginForm();
-        lgf.setVisible(true);
-        lgf.pack();
-        lgf.setLocationRelativeTo(null);
-        lgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    private void lb_signinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_signinMouseClicked
+        GuiInit.initLoginForm();
         this.dispose();
-    }//GEN-LAST:event_lb_signupMouseClicked
+    }//GEN-LAST:event_lb_signinMouseClicked
 
     /**
      * @param args the command line arguments
@@ -407,7 +403,7 @@ public class RegisterForm extends javax.swing.JFrame {
     private javax.swing.JLabel lb_firstname;
     private javax.swing.JLabel lb_password;
     private javax.swing.JLabel lb_password1;
-    private javax.swing.JLabel lb_signup;
+    private javax.swing.JLabel lb_signin;
     private javax.swing.JLabel lb_surname;
     private javax.swing.JLabel lb_username;
     private javax.swing.JLabel loginLabel;
