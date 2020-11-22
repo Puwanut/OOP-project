@@ -286,6 +286,7 @@ public class LoginForm extends javax.swing.JFrame {
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
                     GuiInit.initUserGUI();
+                    this.dispose();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Invalid user...");
