@@ -7,19 +7,13 @@ package gui;
 
 import javax.swing.*;
 import java.io.*;
-import java.sql.*;
 
 /**
  *
  * @author IsilenceT
  */
 public class LoginForm extends javax.swing.JFrame {
-    Connection con = null;
-    PreparedStatement pst = null;
-    String db_name="mdb";
-    String user="root";
-    String hostName="localhost";
-    String driverName="com.mysql.jdbc.Driver";
+
     /**
      * Creates new form LoginForm
      */
@@ -272,30 +266,14 @@ public class LoginForm extends javax.swing.JFrame {
         String password = pf_password.getText().trim();
         if (username.equals("admin") && password.equals("123456")) {
             save_rememberme_handle();
-            GuiInit.initAdminGUI();
+            System.out.println("Welcome Admin");
+            new AdminGUI();
             this.dispose();
-        }else{
-            try{
-                Class.forName(driverName);
-                String url="jdbc:mysql://"+hostName+"/"+db_name;
-                Connection con1=DriverManager.getConnection(url, user, "");
-                String sql = "Select * From register where user=? and pass=?";
-                pst=con1.prepareStatement(sql);
-                pst.setString(1, tf_username.getText());
-                pst.setString(2, pf_password.getText());
-                ResultSet rs = pst.executeQuery();
-                if(rs.next()){
-                    GuiInit.initUserGUI();
-                    this.dispose();
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Invalid user...");
-                    tf_username.setText("");
-                    pf_password.setText("");
-                }
-            }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
-            }
+        }else {
+
+            //******* ต้องมีการไปดึงข้อมูล user จาก database (sql) มาเช็ค  ********
+            System.out.println("Invalid user...");
+            JOptionPane.showMessageDialog(null,"Invalid User...","Alert",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_loginActionPerformed
 
