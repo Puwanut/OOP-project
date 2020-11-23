@@ -8,16 +8,23 @@ package gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.sql.*;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author IsilenceT
  */
 public class UserGUI extends javax.swing.JFrame {
-
+    Connection con = null;
+    PreparedStatement pst = null;
+    String db_name="mdb";
+    String user="root";
+    String hostName="localhost";
+    String driverName="com.mysql.jdbc.Driver";
     /**
      * Creates new form userJFrame
      */
@@ -633,7 +640,22 @@ public class UserGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        try{
+            Class.forName(driverName);
+            String url="jdbc:mysql://"+hostName+"/"+db_name;
+            Connection con1=DriverManager.getConnection(url, user, "");
+            Statement st = con.createStatement();
+            String sql = "SELECT * FROM `bookinfo`";
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                Blob
+            }
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Success");
+            
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
