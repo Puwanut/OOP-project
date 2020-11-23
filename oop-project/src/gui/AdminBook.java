@@ -57,6 +57,8 @@ public class AdminBook extends javax.swing.JPanel {
         lb_bookname5 = new javax.swing.JLabel();
         btn_choosefile = new javax.swing.JButton();
         lb_filename = new javax.swing.JLabel();
+        lb_bookauthor3 = new javax.swing.JLabel();
+        tf_bookauthor3 = new javax.swing.JTextField();
         pa_removebook = new javax.swing.JPanel();
         lb_callnumber4 = new javax.swing.JLabel();
         tf_callnumber4 = new javax.swing.JTextField();
@@ -64,6 +66,8 @@ public class AdminBook extends javax.swing.JPanel {
         tf_bookname4 = new javax.swing.JTextField();
         lb_img_book4 = new javax.swing.JLabel();
         btn_removebook = new javax.swing.JButton();
+        lb_bookauthor4 = new javax.swing.JLabel();
+        tf_bookauthor4 = new javax.swing.JTextField();
 
         lb_tab_addbook.setBackground(new java.awt.Color(255, 204, 204));
         lb_tab_addbook.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
@@ -137,32 +141,46 @@ public class AdminBook extends javax.swing.JPanel {
         lb_filename.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
         lb_filename.setText("No file chosen");
 
+        lb_bookauthor3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_bookauthor3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_bookauthor3.setText("ชื่อผู้แต่ง : ");
+
+        tf_bookauthor3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        tf_bookauthor3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_bookauthor3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pa_addbookLayout = new javax.swing.GroupLayout(pa_addbook);
         pa_addbook.setLayout(pa_addbookLayout);
         pa_addbookLayout.setHorizontalGroup(
             pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_addbookLayout.createSequentialGroup()
+                .addGap(76, 76, 76)
                 .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pa_addbookLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(pa_addbookLayout.createSequentialGroup()
+                            .addComponent(lb_callnumber3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tf_callnumber3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pa_addbookLayout.createSequentialGroup()
-                                .addComponent(lb_callnumber3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lb_bookname3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(tf_callnumber3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(pa_addbookLayout.createSequentialGroup()
-                                    .addComponent(lb_bookname3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(tf_bookname3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(pa_addbookLayout.createSequentialGroup()
-                                    .addComponent(lb_bookname5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_bookname3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pa_addbookLayout.createSequentialGroup()
+                                .addComponent(lb_bookname5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lb_filename, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btn_choosefile, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pa_addbookLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lb_filename, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 145, Short.MAX_VALUE)
+                    .addGroup(pa_addbookLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lb_bookauthor3, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tf_bookauthor3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 145, Short.MAX_VALUE)
                 .addComponent(lb_img_book3, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(145, Short.MAX_VALUE))
             .addGroup(pa_addbookLayout.createSequentialGroup()
@@ -185,6 +203,10 @@ public class AdminBook extends javax.swing.JPanel {
                             .addComponent(tf_bookname3)
                             .addComponent(lb_bookname3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
+                        .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_bookauthor3)
+                            .addComponent(lb_bookauthor3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(pa_addbookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lb_bookname5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_choosefile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -193,7 +215,7 @@ public class AdminBook extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pa_addbookLayout.createSequentialGroup()
                         .addComponent(lb_img_book3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 85, Short.MAX_VALUE)))
+                        .addGap(18, 80, Short.MAX_VALUE)))
                 .addComponent(btn_addbook)
                 .addGap(30, 30, 30))
         );
@@ -232,6 +254,18 @@ public class AdminBook extends javax.swing.JPanel {
         btn_removebook.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
         btn_removebook.setText("ลบข้อมูลหนังสือ");
 
+        lb_bookauthor4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_bookauthor4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_bookauthor4.setText("ชื่อผู้แต่ง : ");
+
+        tf_bookauthor4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        tf_bookauthor4.setEnabled(false);
+        tf_bookauthor4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_bookauthor4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pa_removebookLayout = new javax.swing.GroupLayout(pa_removebook);
         pa_removebook.setLayout(pa_removebookLayout);
         pa_removebookLayout.setHorizontalGroup(
@@ -243,10 +277,15 @@ public class AdminBook extends javax.swing.JPanel {
                         .addComponent(lb_callnumber4, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tf_callnumber4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pa_removebookLayout.createSequentialGroup()
-                        .addComponent(lb_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pa_removebookLayout.createSequentialGroup()
+                            .addComponent(lb_bookauthor4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tf_bookauthor4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pa_removebookLayout.createSequentialGroup()
+                            .addComponent(lb_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(tf_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 145, Short.MAX_VALUE)
                 .addComponent(lb_img_book4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(145, Short.MAX_VALUE))
@@ -269,7 +308,11 @@ public class AdminBook extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tf_bookname4)
-                            .addComponent(lb_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lb_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_bookauthor4)
+                            .addComponent(lb_bookauthor4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(btn_removebook)
                 .addGap(30, 30, 30))
@@ -343,11 +386,21 @@ public class AdminBook extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_bookname4ActionPerformed
 
+    private void tf_bookauthor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookauthor3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_bookauthor3ActionPerformed
+
+    private void tf_bookauthor4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookauthor4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_bookauthor4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addbook;
     private javax.swing.JButton btn_choosefile;
     private javax.swing.JButton btn_removebook;
+    private javax.swing.JLabel lb_bookauthor3;
+    private javax.swing.JLabel lb_bookauthor4;
     private javax.swing.JLabel lb_bookname3;
     private javax.swing.JLabel lb_bookname4;
     private javax.swing.JLabel lb_bookname5;
@@ -361,6 +414,8 @@ public class AdminBook extends javax.swing.JPanel {
     private javax.swing.JPanel pa_addbook;
     private javax.swing.JPanel pa_book_cards;
     private javax.swing.JPanel pa_removebook;
+    private javax.swing.JTextField tf_bookauthor3;
+    private javax.swing.JTextField tf_bookauthor4;
     private javax.swing.JTextField tf_bookname3;
     private javax.swing.JTextField tf_bookname4;
     private javax.swing.JTextField tf_callnumber3;
