@@ -7,6 +7,9 @@ package gui;
 
 import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.sql.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -15,7 +18,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author IsilenceT
  */
 public class AdminBook extends javax.swing.JPanel {
-
+    Connection con = null;
+    PreparedStatement pst = null;
+    String db_name="mdb";
+    String user="root";
+    String hostName="localhost";
+    String driverName="com.mysql.jdbc.Driver";
+    String s;
     /**
      * Creates new form AdminBook
      */
@@ -125,6 +134,11 @@ public class AdminBook extends javax.swing.JPanel {
 
         btn_addbook.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
         btn_addbook.setText("เพิ่มข้อมูลหนังสือ");
+        btn_addbook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addbookActionPerformed(evt);
+            }
+        });
 
         lb_bookname5.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         lb_bookname5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -370,9 +384,10 @@ public class AdminBook extends javax.swing.JPanel {
             String filename = selectedFile.getName();
             System.out.println("Chosen file path: " + path);
             lb_filename.setText(filename);
-
+            
             ImageIcon img_book_chosen = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
             lb_img_book3.setIcon(img_book_chosen);
+            s = path;
         } else if (result == JFileChooser.CANCEL_OPTION) {
             System.out.println("No File Select");
         }
@@ -393,6 +408,27 @@ public class AdminBook extends javax.swing.JPanel {
     private void tf_bookauthor4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookauthor4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_bookauthor4ActionPerformed
+
+    private void btn_addbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addbookActionPerformed
+        try{
+            Class.forName(driverName);
+            String url="jdbc:mysql://"+hostName+"/"+db_name;
+            Connection con1=DriverManager.getConnection(url, user, "");
+            String query = "INSERT INTO bookinfo(idbook, bname, bookauthor, imgbook, status) VALUES (?, ?, ?, ?, ?)";
+            pst=con1.prepareStatement(query);
+            InputStream is = new FileInputStream(new File(s));
+            pst.setString(1, tf_callnumber3.getText());
+            pst.setString(2, tf_bookname3.getText());
+            pst.setString(3, tf_bookauthor3.getText());
+            pst.setBlob(4, is);
+            pst.setBoolean(5, true);
+            pst.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Success");
+
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btn_addbookActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

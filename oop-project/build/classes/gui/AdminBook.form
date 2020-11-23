@@ -242,6 +242,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="&#xe40;&#xe1e;&#xe34;&#xe48;&#xe21;&#xe02;&#xe49;&#xe2d;&#xe21;&#xe39;&#xe25;&#xe2b;&#xe19;&#xe31;&#xe07;&#xe2a;&#xe37;&#xe2d;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_addbookActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_bookname5">
               <Properties>

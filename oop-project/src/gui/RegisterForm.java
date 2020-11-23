@@ -319,7 +319,7 @@ public class RegisterForm extends javax.swing.JFrame {
             pst.setString(5, pf_password1.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Success");
-            System.out.println("check");
+            
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }
