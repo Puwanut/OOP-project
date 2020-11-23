@@ -109,7 +109,6 @@ public class AdminBook extends javax.swing.JPanel {
         lb_bookname3.setText("ชื่อหนังสือ : ");
 
         tf_bookname3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        tf_bookname3.setEnabled(false);
         tf_bookname3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_bookname3ActionPerformed(evt);
