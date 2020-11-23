@@ -93,6 +93,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         lb_tab_borrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_tab_borrow.setText("ยืมหนังสือ");
         lb_tab_borrow.setOpaque(true);
+        lb_tab_borrow.setPreferredSize(new java.awt.Dimension(540, 80));
         lb_tab_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lb_tab_borrowMouseClicked(evt);
@@ -105,6 +106,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         lb_tab_return.setText("คืนหนังสือ");
         lb_tab_return.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         lb_tab_return.setOpaque(true);
+        lb_tab_return.setPreferredSize(new java.awt.Dimension(540, 80));
         lb_tab_return.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lb_tab_returnMouseClicked(evt);
@@ -114,6 +116,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         pa_borrowNreturn_cards.setLayout(new java.awt.CardLayout());
 
         pa_borrow.setBackground(new java.awt.Color(255, 204, 204));
+        pa_borrow.setPreferredSize(new java.awt.Dimension(1080, 620));
 
         lb_borrownumber1.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         lb_borrownumber1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -310,6 +313,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         pa_borrowNreturn_cards.add(pa_borrow, "panel_borrow");
 
         pa_return.setBackground(new java.awt.Color(153, 204, 255));
+        pa_return.setPreferredSize(new java.awt.Dimension(1080, 620));
 
         lb_borrownumber2.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         lb_borrownumber2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -491,19 +495,19 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lb_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(lb_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(lb_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lb_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lb_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lb_tab_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lb_tab_return, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
-                .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pa_borrowNreturn_cards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

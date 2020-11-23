@@ -46,6 +46,7 @@ public class AdminSearch extends javax.swing.JPanel {
         JTable_bookinfo = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 255));
+        setPreferredSize(new java.awt.Dimension(1080, 700));
 
         lb_searchby.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
         lb_searchby.setText("ค้นหาจาก");

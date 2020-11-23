@@ -17,22 +17,22 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="lb_tab_borrow" min="-2" pref="540" max="-2" attributes="0"/>
+              <Component id="lb_tab_borrow" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="lb_tab_return" min="-2" pref="540" max="-2" attributes="0"/>
+              <Component id="lb_tab_return" min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="pa_borrowNreturn_cards" alignment="0" pref="0" max="32767" attributes="0"/>
+          <Component id="pa_borrowNreturn_cards" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lb_tab_borrow" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
-                  <Component id="lb_tab_return" alignment="3" min="-2" pref="80" max="-2" attributes="0"/>
+                  <Component id="lb_tab_borrow" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lb_tab_return" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-              <Component id="pa_borrowNreturn_cards" min="-2" pref="614" max="-2" attributes="0"/>
+              <Component id="pa_borrowNreturn_cards" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -49,6 +49,9 @@
         <Property name="horizontalAlignment" type="int" value="0"/>
         <Property name="text" type="java.lang.String" value="&#xe22;&#xe37;&#xe21;&#xe2b;&#xe19;&#xe31;&#xe07;&#xe2a;&#xe37;&#xe2d;"/>
         <Property name="opaque" type="boolean" value="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[540, 80]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lb_tab_borrowMouseClicked"/>
@@ -70,6 +73,9 @@
           </Border>
         </Property>
         <Property name="opaque" type="boolean" value="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[540, 80]"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lb_tab_returnMouseClicked"/>
@@ -83,6 +89,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="cc" red="ff" type="rgb"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[1080, 620]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -404,6 +413,9 @@
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="cc" red="99" type="rgb"/>
+            </Property>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[1080, 620]"/>
             </Property>
           </Properties>
           <Constraints>

@@ -5,12 +5,10 @@
  */
 package gui;
 
-import java.awt.CardLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.io.File;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -25,6 +23,10 @@ public class AdminBook extends javax.swing.JPanel {
     
     public AdminBook() {
         initComponents();
+        file = new JFileChooser();
+        file.setCurrentDirectory(new File(System.getProperty("user.home") + "/Desktop"));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(".jpg, .gif, .png", "jpg", "gif", "png");
+        file.setFileFilter(filter);
     }
 
     public void getBookPanel(String panel_name){
@@ -86,6 +88,7 @@ public class AdminBook extends javax.swing.JPanel {
             }
         });
 
+        pa_book_cards.setPreferredSize(new java.awt.Dimension(1080, 620));
         pa_book_cards.setLayout(new java.awt.CardLayout());
 
         pa_addbook.setBackground(new java.awt.Color(255, 204, 204));
@@ -126,11 +129,6 @@ public class AdminBook extends javax.swing.JPanel {
 
         btn_choosefile.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         btn_choosefile.setText("Choose File");
-        btn_choosefile.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btn_choosefileMouseClicked(evt);
-            }
-        });
         btn_choosefile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_choosefileActionPerformed(evt);
@@ -273,7 +271,7 @@ public class AdminBook extends javax.swing.JPanel {
                         .addGroup(pa_removebookLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tf_bookname4)
                             .addComponent(lb_bookname4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addComponent(btn_removebook)
                 .addGap(30, 30, 30))
         );
@@ -288,7 +286,7 @@ public class AdminBook extends javax.swing.JPanel {
                 .addComponent(lb_tab_addbook, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(lb_tab_removebook, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(pa_book_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(pa_book_cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,7 +295,7 @@ public class AdminBook extends javax.swing.JPanel {
                     .addComponent(lb_tab_addbook, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_tab_removebook, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, 0)
-                .addComponent(pa_book_cards, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pa_book_cards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -320,10 +318,6 @@ public class AdminBook extends javax.swing.JPanel {
     private void tf_bookname3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookname3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_bookname3ActionPerformed
-
-    private void btn_choosefileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_choosefileMouseClicked
-
-    }//GEN-LAST:event_btn_choosefileMouseClicked
 
     private void btn_choosefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_choosefileActionPerformed
         int result = file.showOpenDialog(null);
