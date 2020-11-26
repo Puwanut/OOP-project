@@ -5,18 +5,13 @@
  */
 package gui;
 
-import booktable.Book;
-import booktable.MyQuery;
-import booktable.TheModel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.sql.*;
-import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.table.TableModel;
 
 /**
  *
@@ -53,33 +48,7 @@ public class UserGUI extends javax.swing.JFrame {
         jButton2.setIcon(icon_clear_search);
         
     }
-    public void populateJTable(){
-        MyQuery mq = new MyQuery();
-        ArrayList<Book> list = mq.BindTable();
-        String[] columnName = {"รูป", "ชื่อหนังสือ", "สถานะ"};
-        Object[][] rows = new Object[list.size()][3];
-        for(int i = 0; i < list.size(); i++){
-            rows[i][0] = list.get(i).getImage();
-            rows[i][1] = list.get(i).getName();
-            rows[i][2] = list.get(i).isStatus();
-            
-            if(list.get(i).getImage() != null){
-                
-             ImageIcon image = new ImageIcon(new ImageIcon(list.get(i).getImage()).getImage()
-             .getScaledInstance(150, 120, Image.SCALE_SMOOTH) );   
-                
-            rows[i][0] = image;
-            }
-            else{
-                rows[i][1] = null;
-            }
-        }
-        
-        TheModel model = new TheModel(rows, columnName);
-        jTable4.setModel(model);
-        jTable4.setRowHeight(120);
-        jTable4.getColumnModel().getColumn(3).setPreferredWidth(150);
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,7 +58,11 @@ public class UserGUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
+        entityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("mdb?zeroDateTimeBehavior=convertToNullPU").createEntityManager();
+        bookinfoQuery = java.beans.Beans.isDesignTime() ? null : entityManager.createQuery("SELECT b FROM Bookinfo b");
+        bookinfoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : bookinfoQuery.getResultList();
         pa_menu = new javax.swing.JPanel();
         lb_ADMIN = new javax.swing.JLabel();
         pa_menu_search = new javax.swing.JPanel();
@@ -366,17 +339,26 @@ public class UserGUI extends javax.swing.JFrame {
             }
         });
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable4.setRowHeight(200);
+
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, bookinfoList, jTable4);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idbook}"));
+        columnBinding.setColumnName("Idbook");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bname}"));
+        columnBinding.setColumnName("Bname");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bookauthor}"));
+        columnBinding.setColumnName("Bookauthor");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${image}"));
+        columnBinding.setColumnName("Imgbook");
+        columnBinding.setColumnClass(javax.swing.ImageIcon.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${status}"));
+        columnBinding.setColumnName("Status");
+        columnBinding.setColumnClass(Boolean.class);
+        bindingGroup.addBinding(jTableBinding);
+        jTableBinding.bind();
         jScrollPane4.setViewportView(jTable4);
 
         javax.swing.GroupLayout pa_searchLayout = new javax.swing.GroupLayout(pa_search);
@@ -574,6 +556,8 @@ public class UserGUI extends javax.swing.JFrame {
 
         getContentPane().add(pa_center, java.awt.BorderLayout.CENTER);
 
+        bindingGroup.bind();
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -685,6 +669,9 @@ public class UserGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.util.List<gui.Bookinfo> bookinfoList;
+    private javax.persistence.Query bookinfoQuery;
+    private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -715,5 +702,6 @@ public class UserGUI extends javax.swing.JFrame {
     private javax.swing.JPanel pa_menu_logout;
     private javax.swing.JPanel pa_menu_search;
     private javax.swing.JPanel pa_search;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
