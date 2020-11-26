@@ -26,4 +26,30 @@ public class MyQuery {
         }
         return con;
     }
+     public ArrayList<Book> BindTable(){
+        
+   ArrayList<Book> list = new ArrayList<>();
+   Connection con = getConnection();
+   Statement st;
+   ResultSet rs;
+   
+   try {
+   st = con.createStatement();
+   rs = st.executeQuery("SELECT * FROM `bookinfo`");
+   Book b;
+   while(rs.next()){
+   b = new Book(
+   rs.getBoolean("status"),
+   rs.getString("bname"),
+   rs.getBytes("imgbook")
+   );
+   list.add(b);
+   
+   }
+   
+   } catch (SQLException ex) {
+   Logger.getLogger(MyQuery.class.getName()).log(Level.SEVERE, null, ex);
+   }
+   return list;
+   }
 }

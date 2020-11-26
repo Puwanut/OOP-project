@@ -10,20 +10,20 @@ package booktable;
  * @author Kanasin
  */
 public class Book {
-    private String status;
+    private boolean status;
     private String name;
     private byte[] Image;
     
     public Book(){
         
     }
-    public Book(String status, String name, byte[] Image){
+    public Book(boolean status, String name, byte[] Image){
         this.status = status;
         this.name = name;
         this.Image = Image;
     }
 
-    public String getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
@@ -35,7 +35,7 @@ public class Book {
         return Image;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -46,5 +46,5 @@ public class Book {
     public void setImage(byte[] Image) {
         this.Image = Image;
     }
-    
+
 }
