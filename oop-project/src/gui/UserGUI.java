@@ -25,9 +25,8 @@ public class UserGUI extends javax.swing.JFrame {
     String user="root";
     String hostName="localhost";
     String driverName="com.mysql.jdbc.Driver";
-    /**
-     * Creates new form userJFrame
-     */
+    private String[] columns;
+    private Object[][] rows;
     public UserGUI() {
         initComponents();
         
@@ -648,7 +647,8 @@ public class UserGUI extends javax.swing.JFrame {
             String sql = "SELECT * FROM `bookinfo`";
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
-                Blob
+                String name = String.valueOf(rs.getString("bname"));
+                boolean status = String.valueOf(rs.getboolean("status"));
             }
             pst.executeUpdate();
             JOptionPane.showMessageDialog(null, "Success");
