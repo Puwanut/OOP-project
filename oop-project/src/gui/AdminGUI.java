@@ -47,7 +47,7 @@ public class AdminGUI {
 
     public static void logout() {
         frame.dispose();
-        new LoginForm().setVisible(true);
+        new LoginForm();
     }
 
     public static void main(String[] args) {
