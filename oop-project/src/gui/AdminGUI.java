@@ -37,7 +37,7 @@ public class AdminGUI {
         frame.setVisible(true);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+    } 
 
     public static void getCenterPanel(String panel_name){
         CardLayout card = (CardLayout)(pa_center.getLayout());
@@ -47,7 +47,7 @@ public class AdminGUI {
 
     public static void logout() {
         frame.dispose();
-        new LoginForm();
+        new LoginForm().setVisible(true);
     }
 
     public static void main(String[] args) {

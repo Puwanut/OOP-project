@@ -5,14 +5,18 @@
  */
 package gui;
 
+import booktable.Book;
+import booktable.MyQuery;
+import booktable.TheModel;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
 import java.sql.*;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -41,6 +45,40 @@ public class UserGUI extends javax.swing.JFrame {
         
         ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_logout_icon.setIcon(icon_logout);
+        
+        ImageIcon icon_search_small = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        jButton1.setIcon(icon_search_small);
+
+        ImageIcon icon_clear_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_clear_search.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        jButton2.setIcon(icon_clear_search);
+        
+    }
+    public void populateJTable(){
+        MyQuery mq = new MyQuery();
+        ArrayList<Book> list = mq.BindTable();
+        String[] columnName = {"รูป", "ชื่อหนังสือ", "สถานะ"};
+        Object[][] rows = new Object[list.size()][3];
+        for(int i = 0; i < list.size(); i++){
+            rows[i][0] = list.get(i).getImage();
+            rows[i][1] = list.get(i).getName();
+            rows[i][2] = list.get(i).isStatus();
+            
+            if(list.get(i).getImage() != null){
+                
+             ImageIcon image = new ImageIcon(new ImageIcon(list.get(i).getImage()).getImage()
+             .getScaledInstance(150, 120, Image.SCALE_SMOOTH) );   
+                
+            rows[i][0] = image;
+            }
+            else{
+                rows[i][1] = null;
+            }
+        }
+        
+        TheModel model = new TheModel(rows, columnName);
+        jTable4.setModel(model);
+        jTable4.setRowHeight(120);
+        jTable4.getColumnModel().getColumn(3).setPreferredWidth(150);
     }
 
     /**
@@ -72,8 +110,8 @@ public class UserGUI extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
         pa_borrow = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -286,7 +324,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addComponent(pa_menu_borrow, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pa_menu_book, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(pa_menu_logout, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -310,6 +348,8 @@ public class UserGUI extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
         jButton1.setText("ค้นหา");
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -318,77 +358,43 @@ public class UserGUI extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
         jButton2.setText("Reset");
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "รูป", "ชื่อหนังสือ", "สถานะ"
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
+        ));
+        jScrollPane4.setViewportView(jTable4);
 
         javax.swing.GroupLayout pa_searchLayout = new javax.swing.GroupLayout(pa_search);
         pa_search.setLayout(pa_searchLayout);
         pa_searchLayout.setHorizontalGroup(
             pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pa_searchLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pa_searchLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pa_searchLayout.createSequentialGroup()
+                .addComponent(jScrollPane4)
                 .addContainerGap())
         );
         pa_searchLayout.setVerticalGroup(
@@ -407,8 +413,8 @@ public class UserGUI extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63)))
-                .addGap(1, 1, 1)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -484,7 +490,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -560,7 +566,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addGap(33, 33, 33)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -639,23 +645,7 @@ public class UserGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        try{
-            Class.forName(driverName);
-            String url="jdbc:mysql://"+hostName+"/"+db_name;
-            Connection con1=DriverManager.getConnection(url, user, "");
-            Statement st = con.createStatement();
-            String sql = "SELECT * FROM `bookinfo`";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                String name = String.valueOf(rs.getString("bname"));
-                boolean status = String.valueOf(rs.getboolean("status"));
-            }
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Success");
-            
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
-        }
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
@@ -700,12 +690,12 @@ public class UserGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lb_ADMIN;
     private javax.swing.JLabel lb_book_icon;
