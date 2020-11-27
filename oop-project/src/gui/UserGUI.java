@@ -5,27 +5,21 @@
  */
 package gui;
 
+import database.Connect;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Image;
-import java.sql.*;
+import java.sql.ResultSet;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author IsilenceT
  */
 public class UserGUI extends javax.swing.JFrame {
-    Connection con = null;
-    PreparedStatement pst = null;
-    String db_name="mdb";
-    String user="root";
-    String hostName="localhost";
-    String driverName="com.mysql.jdbc.Driver";
-    private String[] columns;
-    private Object[][] rows;
     public UserGUI() {
         initComponents();
         
@@ -80,7 +74,7 @@ public class UserGUI extends javax.swing.JFrame {
         pa_center = new javax.swing.JPanel();
         pa_search = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        JT_f = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -312,10 +306,10 @@ public class UserGUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
         jLabel2.setText("ข้อมูลที่ต้องการค้นหา");
 
-        jTextField1.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        JT_f.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
+        JT_f.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                JT_fActionPerformed(evt);
             }
         });
 
@@ -345,21 +339,29 @@ public class UserGUI extends javax.swing.JFrame {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idbook}"));
         columnBinding.setColumnName("Idbook");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bname}"));
         columnBinding.setColumnName("Bname");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${bookauthor}"));
         columnBinding.setColumnName("Bookauthor");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${image}"));
         columnBinding.setColumnName("Imgbook");
         columnBinding.setColumnClass(javax.swing.ImageIcon.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${status}"));
         columnBinding.setColumnName("Status");
         columnBinding.setColumnClass(Boolean.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane4.setViewportView(jTable4);
+        if (jTable4.getColumnModel().getColumnCount() > 0) {
+            jTable4.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         javax.swing.GroupLayout pa_searchLayout = new javax.swing.GroupLayout(pa_search);
         pa_search.setLayout(pa_searchLayout);
@@ -369,7 +371,7 @@ public class UserGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JT_f, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -393,7 +395,7 @@ public class UserGUI extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(pa_searchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JT_f, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(63, 63, 63)))
                 .addGap(20, 20, 20)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -621,16 +623,33 @@ public class UserGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_pa_menu_logoutMouseExited
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       Connect f =  new Connect();
+       ResultSet rs = null;
+        String fn = "fname";
+        String ln = "lname";
+        String ag = "age";
+    
+    rs = f.find(JT_f.getText());
+    try{
+      if(rs.next()){
+          JT_fname.setText(rs.getString("fname"));
+            JT_lname.setText(rs.getString("lname"));
+              JT_age.setText(rs.getString("age"));
+      }  else{
+          JOptionPane.showMessageDialog(null, "NO DATA FOR THIS ID");
+      }
+    }catch(Exception ex){
+           JOptionPane.showMessageDialog(null, ex.getMessage());
+            }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void JT_fActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JT_fActionPerformed
         
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_JT_fActionPerformed
 
     /**
      * @param args the command line arguments
@@ -669,7 +688,8 @@ public class UserGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.util.List<gui.Bookinfo> bookinfoList;
+    private javax.swing.JTextField JT_f;
+    private java.util.List<database.Bookinfo> bookinfoList;
     private javax.persistence.Query bookinfoQuery;
     private javax.persistence.EntityManager entityManager;
     private javax.swing.JButton jButton1;
@@ -683,7 +703,6 @@ public class UserGUI extends javax.swing.JFrame {
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lb_ADMIN;
     private javax.swing.JLabel lb_book_icon;
     private javax.swing.JLabel lb_book_text;
