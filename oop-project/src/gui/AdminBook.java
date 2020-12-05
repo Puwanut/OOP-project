@@ -245,6 +245,11 @@ public class AdminBook extends javax.swing.JPanel {
                 tf_callnumber4ActionPerformed(evt);
             }
         });
+        tf_callnumber4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_callnumber4KeyReleased(evt);
+            }
+        });
 
         lb_bookname4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         lb_bookname4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -264,6 +269,11 @@ public class AdminBook extends javax.swing.JPanel {
 
         btn_removebook.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
         btn_removebook.setText("ลบข้อมูลหนังสือ");
+        btn_removebook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_removebookActionPerformed(evt);
+            }
+        });
 
         lb_bookauthor4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         lb_bookauthor4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -424,6 +434,50 @@ public class AdminBook extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_btn_addbookActionPerformed
+
+    private void btn_removebookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removebookActionPerformed
+        try{
+            Connection con = Connect.connectDB();
+            String query = "DELETE FROM `bookinfo` WHERE idbook=?";
+            pst = con.prepareStatement(query);
+            
+            pst.setString(1, tf_callnumber4.getText());
+            
+            pst.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Delete Success");
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_btn_removebookActionPerformed
+
+    private void tf_callnumber4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_callnumber4KeyReleased
+        try{
+            Connection con = Connect.connectDB();
+            String query = "SELECT * FROM `bookinfo` WHERE idbook=?";
+            pst = con.prepareStatement(query);
+            pst.setString(1, tf_callnumber4.getText());
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                byte[] img = rs.getBytes("imgbook");
+                tf_bookname4.setText(rs.getString("bname"));
+                tf_bookauthor4.setText(rs.getString("bookauthor"));
+                ImageIcon image = new ImageIcon(img);
+                Image im = image.getImage();
+                Image myImg = im.getScaledInstance(lb_img_book4.getWidth(), lb_img_book4.getHeight(),Image.SCALE_SMOOTH);
+                ImageIcon newImage = new ImageIcon(myImg);
+                lb_img_book4.setIcon(newImage);
+                }
+            else{
+                tf_bookname4.setText("ไม่พบ");
+                tf_bookauthor4.setText("ไม่พบ");
+                ImageIcon img_book_chosen = new ImageIcon(new ImageIcon(getClass().getResource("../image/questionbook.jpg")).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+                lb_img_book4.setIcon(img_book_chosen);
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_tf_callnumber4KeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
