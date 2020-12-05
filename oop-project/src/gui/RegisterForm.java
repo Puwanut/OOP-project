@@ -5,6 +5,7 @@
  */
 package gui;
 
+import database.Connect;
 import javax.swing.JFrame;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -307,9 +308,7 @@ public class RegisterForm extends javax.swing.JFrame {
 
     private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
         try{
-            Class.forName(driverName);
-            String url="jdbc:mysql://"+hostName+"/"+db_name;
-            Connection con1=DriverManager.getConnection(url, user, "");
+            Connection con1= Connect.connectDB();
             String query = "INSERT INTO `register`(`fname`, `sname`, `email`, `user`, `pass`) VALUES (?, ?, ?, ?, ?)";
             pst=con1.prepareStatement(query);
             pst.setString(1, tf_firstname1.getText());
