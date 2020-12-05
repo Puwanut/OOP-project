@@ -5,6 +5,7 @@
  */
 package gui;
 
+import database.Connect;
 import javax.swing.*;
 import java.io.*;
 import java.sql.*;
@@ -15,16 +16,11 @@ import java.sql.*;
  */
 public class LoginForm extends javax.swing.JFrame {
 
-    Connection con = null;
-    PreparedStatement pst = null;
-    String db_name="mdb";
-    String user="root";
-    String hostName="localhost";
-    String driverName="com.mysql.jdbc.Driver";
-    
     /**
      * Creates new form LoginForm
      */
+    PreparedStatement pst;
+    
     public LoginForm() {
         initComponents();
         this.pack();
@@ -283,20 +279,15 @@ public class LoginForm extends javax.swing.JFrame {
             this.dispose();
         }else{
             try{
-                Class.forName(driverName);
-                String url="jdbc:mysql://"+hostName+"/"+db_name;
-                Connection con1=DriverManager.getConnection(url, user, "");
+                Connection con1 = Connect.connectDB();
                 String sql = "Select * From register where user=? and pass=?";
                 pst=con1.prepareStatement(sql);
                 pst.setString(1, tf_username.getText());
                 pst.setString(2, pf_password.getText());
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
-                    UserGUI usergui = new UserGUI();
-                    usergui.setVisible(true);
-                    usergui.pack();
-                    usergui.setLocationRelativeTo(null);
-                    usergui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    new UserGUI();
+                    this.dispose();
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "Invalid user...");

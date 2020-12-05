@@ -5,6 +5,7 @@
  */
 package gui;
 
+import database.Connect;
 import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,12 +19,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  * @author IsilenceT
  */
 public class AdminBook extends javax.swing.JPanel {
-    Connection con = null;
+    
     PreparedStatement pst = null;
-    String db_name="mdb";
-    String user="root";
-    String hostName="localhost";
-    String driverName="com.mysql.jdbc.Driver";
     String s;
     /**
      * Creates new form AdminBook
@@ -411,11 +408,9 @@ public class AdminBook extends javax.swing.JPanel {
 
     private void btn_addbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addbookActionPerformed
         try{
-            Class.forName(driverName);
-            String url="jdbc:mysql://"+hostName+"/"+db_name;
-            Connection con1=DriverManager.getConnection(url, user, "");
+            Connection con = Connect.connectDB();
             String query = "INSERT INTO bookinfo(idbook, bname, bookauthor, imgbook, status) VALUES (?, ?, ?, ?, ?)";
-            pst=con1.prepareStatement(query);
+            pst = con.prepareStatement(query);
             InputStream is = new FileInputStream(new File(s));
             pst.setString(1, tf_callnumber3.getText());
             pst.setString(2, tf_bookname3.getText());

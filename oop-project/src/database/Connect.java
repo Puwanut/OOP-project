@@ -17,7 +17,7 @@ public class Connect {
         String db_name = "mdb";
         String user = "root";
         String pass = "";
-        String hostName = "192.168.1.41";
+        String hostName = "localhost";
         String driverName = "com.mysql.jdbc.Driver";
         try {
             Class.forName(driverName);

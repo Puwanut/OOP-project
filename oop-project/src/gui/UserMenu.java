@@ -4,42 +4,36 @@
  * and open the template in the editor.
  */
 package gui;
-
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
-
 /**
  *
  * @author IsilenceT
  */
-public class AdminMenu extends javax.swing.JPanel {
+public class UserMenu extends javax.swing.JPanel {
 
     /**
-     * Creates new form AdminMenu
+     * Creates new form UserMenu
      */
-    
-    public AdminMenu() {
+    public UserMenu() {
         initComponents();
         
         ImageIcon icon_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_menu_search.setIcon(icon_search);
-
-        ImageIcon icon_borrowNreturn = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_borrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_borrowNreturn.setIcon(icon_borrowNreturn);
-
-        ImageIcon icon_borrowhistory = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_borrowhistory.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_history.setIcon(icon_borrowhistory);
-
-        ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_book.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_book.setIcon(icon_book);
+        
+        ImageIcon icon_borrow = new ImageIcon(new ImageIcon(getClass().getResource("../image/list-bookborrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        lb_menu_borrow.setIcon(icon_borrow);
+        
+        ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../image/open-bookborrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        lb_menu_history.setIcon(icon_book);
         
         ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_menu_logout.setIcon(icon_logout);
         
+        
     }
-
+    
     public void lb_menu_mouseentered(MouseEvent evt){
         ((JLabel) evt.getSource()).setForeground(Color.red);
     }
@@ -47,7 +41,7 @@ public class AdminMenu extends javax.swing.JPanel {
     public void lb_menu_mouseexited(MouseEvent evt){
         ((JLabel) evt.getSource()).setForeground(Color.black);
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,9 +53,8 @@ public class AdminMenu extends javax.swing.JPanel {
 
         lb_ADMIN = new javax.swing.JLabel();
         lb_menu_search = new javax.swing.JLabel();
-        lb_menu_borrowNreturn = new javax.swing.JLabel();
+        lb_menu_borrow = new javax.swing.JLabel();
         lb_menu_history = new javax.swing.JLabel();
-        lb_menu_book = new javax.swing.JLabel();
         lb_menu_logout = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 255, 204));
@@ -69,7 +62,7 @@ public class AdminMenu extends javax.swing.JPanel {
         lb_ADMIN.setBackground(new java.awt.Color(153, 255, 204));
         lb_ADMIN.setFont(new java.awt.Font("Kanit", 1, 36)); // NOI18N
         lb_ADMIN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_ADMIN.setText("ADMIN");
+        lb_ADMIN.setText("(ชื่อ User)");
         lb_ADMIN.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
         lb_ADMIN.setOpaque(true);
 
@@ -91,21 +84,21 @@ public class AdminMenu extends javax.swing.JPanel {
             }
         });
 
-        lb_menu_borrowNreturn.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
-        lb_menu_borrowNreturn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_menu_borrowNreturn.setText("<html><body style=\"text-align: center\">ทำรายการ<br>ยืม-คืนหนังสือ</body></html>");
-        lb_menu_borrowNreturn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lb_menu_borrowNreturn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lb_menu_borrowNreturn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lb_menu_borrowNreturn.addMouseListener(new java.awt.event.MouseAdapter() {
+        lb_menu_borrow.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
+        lb_menu_borrow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_menu_borrow.setText("<html><body style=\"text-align: center\">รายการ<br>หนังสือที่ยืม</body></html>");
+        lb_menu_borrow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lb_menu_borrow.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lb_menu_borrow.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        lb_menu_borrow.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_menu_borrowNreturnMouseClicked(evt);
+                lb_menu_borrowMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lb_menu_borrowNreturnMouseEntered(evt);
+                lb_menu_borrowMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                lb_menu_borrowNreturnMouseExited(evt);
+                lb_menu_borrowMouseExited(evt);
             }
         });
 
@@ -124,24 +117,6 @@ public class AdminMenu extends javax.swing.JPanel {
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 lb_menu_historyMouseExited(evt);
-            }
-        });
-
-        lb_menu_book.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
-        lb_menu_book.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_menu_book.setText("ทะเบียนหนังสือ");
-        lb_menu_book.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lb_menu_book.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        lb_menu_book.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        lb_menu_book.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lb_menu_bookMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                lb_menu_bookMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                lb_menu_bookMouseExited(evt);
             }
         });
 
@@ -166,9 +141,8 @@ public class AdminMenu extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lb_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-            .addComponent(lb_menu_borrowNreturn)
+            .addComponent(lb_menu_borrow)
             .addComponent(lb_menu_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lb_menu_book, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lb_menu_history, javax.swing.GroupLayout.Alignment.TRAILING)
             .addComponent(lb_menu_logout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -179,19 +153,17 @@ public class AdminMenu extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lb_menu_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lb_menu_borrowNreturn)
+                .addComponent(lb_menu_borrow)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lb_menu_history)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lb_menu_book, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(57, 57, 57)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(lb_menu_logout)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void lb_menu_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_searchMouseClicked
-        AdminGUI.getCenterPanel("panel_search");
+        UserGUI.getCenterPanel("panel_search");
     }//GEN-LAST:event_lb_menu_searchMouseClicked
 
     private void lb_menu_searchMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_searchMouseEntered
@@ -202,20 +174,20 @@ public class AdminMenu extends javax.swing.JPanel {
         lb_menu_mouseexited(evt);
     }//GEN-LAST:event_lb_menu_searchMouseExited
 
-    private void lb_menu_borrowNreturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_borrowNreturnMouseClicked
-        AdminGUI.getCenterPanel("panel_borrowNreturn");
-    }//GEN-LAST:event_lb_menu_borrowNreturnMouseClicked
+    private void lb_menu_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_borrowMouseClicked
+        UserGUI.getCenterPanel("panel_borrow");
+    }//GEN-LAST:event_lb_menu_borrowMouseClicked
 
-    private void lb_menu_borrowNreturnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_borrowNreturnMouseEntered
+    private void lb_menu_borrowMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_borrowMouseEntered
         lb_menu_mouseentered(evt);
-    }//GEN-LAST:event_lb_menu_borrowNreturnMouseEntered
+    }//GEN-LAST:event_lb_menu_borrowMouseEntered
 
-    private void lb_menu_borrowNreturnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_borrowNreturnMouseExited
+    private void lb_menu_borrowMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_borrowMouseExited
         lb_menu_mouseexited(evt);
-    }//GEN-LAST:event_lb_menu_borrowNreturnMouseExited
+    }//GEN-LAST:event_lb_menu_borrowMouseExited
 
     private void lb_menu_historyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_historyMouseClicked
-        AdminGUI.getCenterPanel("panel_history");
+        UserGUI.getCenterPanel("panel_history");
     }//GEN-LAST:event_lb_menu_historyMouseClicked
 
     private void lb_menu_historyMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_historyMouseEntered
@@ -227,7 +199,7 @@ public class AdminMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_lb_menu_historyMouseExited
 
     private void lb_menu_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_logoutMouseClicked
-        AdminGUI.logout();
+        UserGUI.logout();
     }//GEN-LAST:event_lb_menu_logoutMouseClicked
 
     private void lb_menu_logoutMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_logoutMouseEntered
@@ -238,23 +210,10 @@ public class AdminMenu extends javax.swing.JPanel {
         lb_menu_mouseexited(evt);
     }//GEN-LAST:event_lb_menu_logoutMouseExited
 
-    private void lb_menu_bookMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_bookMouseExited
-        lb_menu_mouseexited(evt);
-    }//GEN-LAST:event_lb_menu_bookMouseExited
-
-    private void lb_menu_bookMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_bookMouseEntered
-        lb_menu_mouseentered(evt);
-    }//GEN-LAST:event_lb_menu_bookMouseEntered
-
-    private void lb_menu_bookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_menu_bookMouseClicked
-        AdminGUI.getCenterPanel("panel_book");
-    }//GEN-LAST:event_lb_menu_bookMouseClicked
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel lb_ADMIN;
-    private javax.swing.JLabel lb_menu_book;
-    private javax.swing.JLabel lb_menu_borrowNreturn;
+    private javax.swing.JLabel lb_menu_borrow;
     private javax.swing.JLabel lb_menu_history;
     private javax.swing.JLabel lb_menu_logout;
     private javax.swing.JLabel lb_menu_search;
