@@ -31,12 +31,12 @@ public class RunApp {
         } catch (Exception ex) {
             System.out.println(ex);
         }
-        try (InputStream in = RunApp.class.getResourceAsStream("/fonts/Kanit.ttf");) {
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, in));
-        } catch (IOException | FontFormatException ex) {
-            Logger.getLogger(RunApp.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try (InputStream in = RunApp.class.getResourceAsStream("/fonts/Kanit.ttf");) {
+//            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, in));
+//        } catch (IOException | FontFormatException ex) {
+//            Logger.getLogger(RunApp.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         new LoginForm();
     }
     

@@ -3,7 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/plair/OneDrive/Documents/GitHub/OOP-project/oop-project/src/gui/UserGUI.java</file>
+            <file>file:/D:/GithubRepository/OOP-project/oop-project/src/database/Connect.java</file>
+            <file>file:/D:/GithubRepository/OOP-project/oop-project/src/gui/AdminBook.java</file>
+            <file>file:/D:/GithubRepository/OOP-project/oop-project/src/RunApp.java</file>
+            <file>file:/D:/GithubRepository/OOP-project/oop-project/src/database/Book.java</file>
+            <file>file:/D:/GithubRepository/OOP-project/oop-project/src/gui/AdminSearch.java</file>
+            <file>file:/D:/GithubRepository/OOP-project/oop-project/src/gui/UserGUI.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,8 +5,15 @@
  */
 package gui;
 
+import database.Book;
+import database.Connect;
 import java.awt.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,6 +24,8 @@ public class AdminSearch extends javax.swing.JPanel {
     /**
      * Creates new form AdminSearch
      */
+    private ArrayList<Book> all_books_list;
+    
     public AdminSearch() {
         initComponents();
         
@@ -25,7 +34,70 @@ public class AdminSearch extends javax.swing.JPanel {
         
         ImageIcon icon_clear_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_clear_search.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
         btn_reset.setIcon(icon_clear_search);
+        
+        all_books_list = booklist();
+        showBookTable(all_books_list);
     }
+    
+    public ArrayList<Book> booklist(){
+        ArrayList<Book> booksList = new ArrayList<Book>();
+        try {
+            Connection con = Connect.connectDB();
+            String querybook = "SELECT * FROM bookinfo";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(querybook);
+            Book book;
+            while (rs.next()){
+                book = new Book(rs.getInt("idbook"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
+                booksList.add(book);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return booksList;
+    }
+    
+    public ArrayList<Book> booklist(int searchindex, String searchtext){
+        ArrayList<Book> booksList = new ArrayList<Book>();
+        try {
+            Connection con = Connect.connectDB();
+            String searchby="";
+            switch (searchindex){
+                case 0: searchby = "idbook"; break;
+                case 1: searchby = "bname"; break;
+                case 2: searchby = "bookauthor"; break;
+            }
+            String querybook = "SELECT * FROM bookinfo WHERE " + searchby + " LIKE '%" + searchtext + "%'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(querybook);
+            Book book;
+            while (rs.next()){
+                book = new Book(rs.getInt("idbook"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
+                booksList.add(book);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        return booksList;
+    }
+    
+    public void showBookTable(ArrayList<Book> list) {
+        DefaultTableModel model = (DefaultTableModel) JTable_bookinfo.getModel();
+        Object[] row = new Object[4];
+        model.setRowCount(0);
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getIdbook() + "";
+            row[1] = list.get(i).getBname();
+            row[2] = list.get(i).getBookauthor();
+            if (list.get(i).getStatus() == true) {
+                row[3] = "Available";
+            } else {
+                row[3] = "UnAvailable";
+            }
+            model.addRow(row);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,34 +156,7 @@ public class AdminSearch extends javax.swing.JPanel {
         JTable_bookinfo.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
         JTable_bookinfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "เลขเรียกหนังสือ", "ชื่อหนังสือ", "ชื่อผู้แต่ง", "สถานะ"
@@ -132,6 +177,7 @@ public class AdminSearch extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        JTable_bookinfo.setRowHeight(30);
         jScrollPane1.setViewportView(JTable_bookinfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -178,11 +224,11 @@ public class AdminSearch extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-        // TODO add your handling code here:
+        showBookTable(booklist(cbb_searchby.getSelectedIndex(), tf_searchdata.getText()));
     }//GEN-LAST:event_btn_searchActionPerformed
 
     private void btn_resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_resetActionPerformed
-        // TODO add your handling code here:
+        showBookTable(all_books_list);
     }//GEN-LAST:event_btn_resetActionPerformed
 
 

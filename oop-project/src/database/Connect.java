@@ -5,32 +5,30 @@ package database;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Kanasin
  */
 import java.sql.*;
+
 public class Connect {
-    public static void main(String[] args) {
-       new Connect().connectDB();
-    }
-    public void  connectDB(){
-        String db_name="mdb";
-        String user="root";
-        String hostName="localhost";
-        String driverName="com.mysql.jdbc.Driver";
-        try{
+
+    public static Connection connectDB() {
+        String db_name = "mdb";
+        String user = "root";
+        String pass = "";
+        String hostName = "192.168.1.41";
+        String driverName = "com.mysql.jdbc.Driver";
+        try {
             Class.forName(driverName);
-            String url="jdbc:mysql://"+hostName+"/"+db_name;
-            Connection con=DriverManager.getConnection(url, user, "");
-            System.out.println("เชื่อมต่อสำเร็จ");
-            
-        } catch (Exception e){
-            System.out.println("e.getMesssage()");
+            String url = "jdbc:mysql://" + hostName + "/" + db_name + "?useUnicode=true&characterEncoding=utf-8";
+            Connection con = DriverManager.getConnection(url, user, pass);
+            System.out.println("Successfully connected to the database.");
+            return con;
+
+        } catch (Exception e) {
+            System.out.println("Failed to connect to the database.");
         }
+        return null;
     }
 }
-        
-    
-      
