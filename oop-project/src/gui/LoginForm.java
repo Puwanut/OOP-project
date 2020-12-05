@@ -286,6 +286,7 @@ public class LoginForm extends javax.swing.JFrame {
                 pst.setString(2, pf_password.getText());
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
+                    save_rememberme_handle();
                     new UserGUI();
                     this.dispose();
                 }

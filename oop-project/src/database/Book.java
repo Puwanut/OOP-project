@@ -5,6 +5,9 @@
  */
 package database;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author IsilenceT
@@ -16,20 +19,21 @@ public class Book {
     private byte[] imgbook;
     private boolean status;
 
-    public Book(int idbook, String bname, String bookauthor, byte[] imgbook, boolean status) {
-        this.idbook = idbook;
-        this.bname = bname;
-        this.bookauthor = bookauthor;
-        this.imgbook = imgbook;
-        this.status = status;
-    }
-
     public Book(int idbook, String bname, String bookauthor, boolean status) {
         this.idbook = idbook;
         this.bname = bname;
         this.bookauthor = bookauthor;
         this.status = status;
     }
+
+    public Book(byte[] imgbook, String bname, String bookauthor, boolean status) {
+        this.imgbook = imgbook;
+        this.bname = bname;
+        this.bookauthor = bookauthor;
+        this.status = status;
+    }
+    
+    
 
     public int getIdbook() {
         return idbook;
