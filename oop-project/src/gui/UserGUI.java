@@ -28,8 +28,8 @@ public class UserGUI {
 
         pa_center = new JPanel();
         pa_search = new UserSearch();
-        pa_borrow = new UserBorrow();
-        pa_history = new UserHistory();
+        pa_borrow = new UserBorrow(userid);
+        pa_history = new UserHistory(userid);
 
         pa_center.setLayout(new CardLayout());
         pa_center.add(pa_search, "panel_search");

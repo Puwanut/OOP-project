@@ -5,6 +5,14 @@
  */
 package gui;
 
+import database.Connect;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author IsilenceT
@@ -14,10 +22,37 @@ public class UserHistory extends javax.swing.JPanel {
     /**
      * Creates new form UserHistory
      */
-    public UserHistory() {
+    public UserHistory(int userid) {
         initComponents();
+        setBorrowTable(userid);
     }
-
+    
+    public void setBorrowTable(int userid){
+         try {
+            Connection con = Connect.connectDB();
+            String queryhistory = "SELECT bname, borrowdate, returndate,status FROM borrowhistory "
+                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook WHERE userid = " + userid;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(queryhistory);
+            DefaultTableModel model = (DefaultTableModel) JTable_borrowhistory.getModel();
+            Object[] row = new Object[4];
+            while (rs.next()){
+                row[0] = rs.getString("bname");
+                row[1] = rs.getString("borrowdate");
+                row[2] = rs.getString("returndate");
+                if (rs.getBoolean("status") == false){
+                    row[3] = "Unavailable";
+                }
+                else {
+                    row[3] = "Available";
+                }
+                
+                model.addRow(row);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,46 +62,20 @@ public class UserHistory extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
+        lb_title = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        JTable_borrowhistory = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 204));
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("ประวัติการยืมหนังสือ");
+        lb_title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lb_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_title.setText("ประวัติการยืมหนังสือ");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        JTable_borrowhistory.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        JTable_borrowhistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "ชื่อ", "วันที่ยืม", "วันที่คืน", "สถานะ"
@@ -80,26 +89,35 @@ public class UserHistory extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable3);
+        JTable_borrowhistory.setRowHeight(30);
+        jScrollPane3.setViewportView(JTable_borrowhistory);
+        if (JTable_borrowhistory.getColumnModel().getColumnCount() > 0) {
+            JTable_borrowhistory.getColumnModel().getColumn(1).setPreferredWidth(150);
+            JTable_borrowhistory.getColumnModel().getColumn(1).setMaxWidth(150);
+            JTable_borrowhistory.getColumnModel().getColumn(2).setPreferredWidth(150);
+            JTable_borrowhistory.getColumnModel().getColumn(2).setMaxWidth(150);
+            JTable_borrowhistory.getColumnModel().getColumn(3).setPreferredWidth(150);
+            JTable_borrowhistory.getColumnModel().getColumn(3).setMaxWidth(150);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane3)
-                .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_title, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
@@ -108,8 +126,8 @@ public class UserHistory extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTable JTable_borrowhistory;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JLabel lb_title;
     // End of variables declaration//GEN-END:variables
 }

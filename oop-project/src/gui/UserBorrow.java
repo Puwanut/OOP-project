@@ -5,6 +5,15 @@
  */
 package gui;
 
+import database.Book;
+import database.Connect;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author IsilenceT
@@ -14,10 +23,32 @@ public class UserBorrow extends javax.swing.JPanel {
     /**
      * Creates new form UserBorrow
      */
-    public UserBorrow() {
+    public UserBorrow(int userid) {
         initComponents();
+        
+        setBorrowTable(userid);
     }
 
+    public void setBorrowTable(int userid){
+         try {
+            Connection con = Connect.connectDB();
+            String queryhistory = "SELECT bname, borrowdate, returndate FROM borrowhistory "
+                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook WHERE userid = " + userid + " AND returned = 0";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(queryhistory);
+            DefaultTableModel model = (DefaultTableModel) JTable_presentborrow.getModel();
+            Object[] row = new Object[3];
+            while (rs.next()){
+                row[0] = rs.getString("bname");
+                row[1] = rs.getString("borrowdate");
+                row[2] = rs.getString("returndate");
+                model.addRow(row);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,49 +58,23 @@ public class UserBorrow extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        lb_title = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        JTable_presentborrow = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("รายการหนังสือที่ยืมอยู่ปัจจุบัน");
+        lb_title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lb_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_title.setText("รายการหนังสือที่ยืมอยู่ปัจจุบัน");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        JTable_presentborrow.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        JTable_presentborrow.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "ชื่อ", "วันที่ยืม", "วันที่คืน"
+                "ชื่อหนังสือ", "วันที่ยืม", "วันที่คืน"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -80,27 +85,34 @@ public class UserBorrow extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        JTable_presentborrow.setRowHeight(30);
+        jScrollPane2.setViewportView(JTable_presentborrow);
+        if (JTable_presentborrow.getColumnModel().getColumnCount() > 0) {
+            JTable_presentborrow.getColumnModel().getColumn(1).setPreferredWidth(150);
+            JTable_presentborrow.getColumnModel().getColumn(1).setMaxWidth(150);
+            JTable_presentborrow.getColumnModel().getColumn(2).setPreferredWidth(150);
+            JTable_presentborrow.getColumnModel().getColumn(2).setMaxWidth(150);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lb_title, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
@@ -109,8 +121,8 @@ public class UserBorrow extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTable JTable_presentborrow;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lb_title;
     // End of variables declaration//GEN-END:variables
 }
