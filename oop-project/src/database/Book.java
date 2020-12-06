@@ -13,14 +13,14 @@ import javax.swing.ImageIcon;
  * @author IsilenceT
  */
 public class Book {
-    private int idbook;
+    private int callnumber;
     private String bname;
     private String bookauthor;
     private byte[] imgbook;
     private boolean status;
 
-    public Book(int idbook, String bname, String bookauthor, boolean status) {
-        this.idbook = idbook;
+    public Book(int callnumber, String bname, String bookauthor, boolean status) {
+        this.callnumber = callnumber;
         this.bname = bname;
         this.bookauthor = bookauthor;
         this.status = status;
@@ -33,12 +33,12 @@ public class Book {
         this.status = status;
     }
     
-    public int getIdbook() {
-        return idbook;
+    public int getCallnumber() {
+        return callnumber;
     }
 
-    public void setIdbook(int idbook) {
-        this.idbook = idbook;
+    public void setCallnumber(int callnumber) {
+        this.callnumber = callnumber;
     }
 
     public String getBname() {

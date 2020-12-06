@@ -33,7 +33,7 @@ public class UserBorrow extends javax.swing.JPanel {
          try {
             Connection con = Connect.connectDB();
             String queryhistory = "SELECT bname, borrowdate, returndate FROM borrowhistory "
-                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook WHERE userid = " + userid + " AND returned = 0";
+                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber WHERE userid = " + userid + " AND returned = 0";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryhistory);
             DefaultTableModel model = (DefaultTableModel) JTable_presentborrow.getModel();
@@ -68,7 +68,7 @@ public class UserBorrow extends javax.swing.JPanel {
         lb_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_title.setText("รายการหนังสือที่ยืมอยู่ปัจจุบัน");
 
-        JTable_presentborrow.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        JTable_presentborrow.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
         JTable_presentborrow.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

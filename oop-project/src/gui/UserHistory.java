@@ -31,7 +31,7 @@ public class UserHistory extends javax.swing.JPanel {
          try {
             Connection con = Connect.connectDB();
             String queryhistory = "SELECT bname, borrowdate, returndate,status FROM borrowhistory "
-                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook WHERE userid = " + userid;
+                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber WHERE userid = " + userid;
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryhistory);
             DefaultTableModel model = (DefaultTableModel) JTable_borrowhistory.getModel();
@@ -72,13 +72,13 @@ public class UserHistory extends javax.swing.JPanel {
         lb_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_title.setText("ประวัติการยืมหนังสือ");
 
-        JTable_borrowhistory.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        JTable_borrowhistory.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
         JTable_borrowhistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ชื่อ", "วันที่ยืม", "วันที่คืน", "สถานะ"
+                "ชื่อหนังสือ", "วันที่ยืม", "วันที่คืน", "สถานะ"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -106,12 +106,10 @@ public class UserHistory extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
+                    .addComponent(lb_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lb_title, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -38,7 +38,7 @@ public class AdminHistory extends javax.swing.JPanel {
             Connection con = Connect.connectDB();
             String queryhistory
                     = "SELECT * FROM borrowhistory "
-                    + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook "
+                    + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
                     + "INNER JOIN register ON borrowhistory.userid = register.userid";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryhistory);

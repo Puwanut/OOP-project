@@ -658,7 +658,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         if (!tf_callnumber1.getText().isEmpty()) {
             try {
                 Connection con = Connect.connectDB();
-                String querybook = "SELECT * FROM bookinfo WHERE idbook = " + tf_callnumber1.getText() + " AND status = 1";
+                String querybook = "SELECT * FROM bookinfo WHERE callnumber = " + tf_callnumber1.getText() + " AND status = 1";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(querybook);
                 if (rs.next()) {
@@ -713,7 +713,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             try {
                 Connection con = Connect.connectDB();
                 String insert = "INSERT INTO borrowhistory(callnumber, userid, borrowdate, returndate) VALUES (?, ?, ?, ?)";
-                String update = "UPDATE `bookinfo` SET `status`= 0 WHERE idbook=?";
+                String update = "UPDATE `bookinfo` SET `status`= 0 WHERE callnumber=?";
                 pst = con.prepareStatement(insert);
                 pst.setString(1, tf_callnumber1.getText());
                 pst.setString(2, tf_userid1.getText());
@@ -750,14 +750,14 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         try{
             Connection con = Connect.connectDB();
             String query = "SELECT * FROM borrowhistory "
-                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook "
+                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
                         + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE borrowid=? AND returned=0";
             pst = con.prepareStatement(query);
             pst.setString(1, tf_borrowid2.getText());
             ResultSet rs = pst.executeQuery();
             if(rs.next()){
                 byte[] img = rs.getBytes("imgbook");
-                tf_callnumber2.setText(rs.getString("idbook"));
+                tf_callnumber2.setText(rs.getString("callnumber"));
                 tf_bookname2.setText(rs.getString("bname"));
                 tf_userid2.setText(rs.getString("userid"));
                 tf_username2.setText(rs.getString("user"));
@@ -790,7 +790,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             try {
                 Connection con = Connect.connectDB();
                 String updateborrowhistory = "UPDATE `borrowhistory` SET `returned`= 1 WHERE borrowid=?";
-                String updatebookinfo = "UPDATE `bookinfo` SET `status`= 1 WHERE idbook=?";
+                String updatebookinfo = "UPDATE `bookinfo` SET `status`= 1 WHERE callnumber=?";
                 pst = con.prepareStatement(updateborrowhistory);
                 pst.setString(1, tf_borrowid2.getText());
                 pst.executeUpdate();
@@ -825,8 +825,8 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         try{
             Connection con = Connect.connectDB();
             String query = "SELECT * FROM borrowhistory "
-                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook "
-                        + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE idbook=? AND returned=0";
+                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
+                        + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE callnumber=? AND returned=0";
             pst = con.prepareStatement(query);
             pst.setString(1, tf_callnumber2.getText());
             ResultSet rs = pst.executeQuery();

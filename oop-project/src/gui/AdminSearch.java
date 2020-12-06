@@ -48,7 +48,7 @@ public class AdminSearch extends javax.swing.JPanel {
             ResultSet rs = st.executeQuery(querybook);
             Book book;
             while (rs.next()){
-                book = new Book(rs.getInt("idbook"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
+                book = new Book(rs.getInt("callnumber"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
                 booksList.add(book);
             }
         } catch (Exception e) {
@@ -63,12 +63,12 @@ public class AdminSearch extends javax.swing.JPanel {
             Connection con = Connect.connectDB();
             String searchby="";
             switch (searchindex){
-                case 0: searchby = "idbook"; break;
+                case 0: searchby = "callnumber"; break;
                 case 1: searchby = "bname"; break;
                 case 2: searchby = "bookauthor"; break;
             }
             String querybook;
-            if (searchby.equals("idbook"))
+            if (searchby.equals("callnumber"))
                 querybook = "SELECT * FROM bookinfo WHERE " + searchby + " LIKE '" + searchtext + "'";
             else
                 querybook = "SELECT * FROM bookinfo WHERE " + searchby + " LIKE '%" + searchtext + "%'";
@@ -76,7 +76,7 @@ public class AdminSearch extends javax.swing.JPanel {
             ResultSet rs = st.executeQuery(querybook);
             Book book;
             while (rs.next()){
-                book = new Book(rs.getInt("idbook"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
+                book = new Book(rs.getInt("callnumber"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
                 booksList.add(book);
             }
         } catch (Exception e) {
@@ -90,7 +90,7 @@ public class AdminSearch extends javax.swing.JPanel {
         Object[] row = new Object[4];
         model.setRowCount(0);
         for (int i = 0; i < list.size(); i++) {
-            row[0] = list.get(i).getIdbook() + "";
+            row[0] = list.get(i).getCallnumber() + "";
             row[1] = list.get(i).getBname();
             row[2] = list.get(i).getBookauthor();
             if (list.get(i).getStatus() == true) {

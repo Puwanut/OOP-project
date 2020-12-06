@@ -419,7 +419,7 @@ public class AdminBook extends javax.swing.JPanel {
     private void btn_addbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addbookActionPerformed
         try{
             Connection con = Connect.connectDB();
-            String query = "INSERT INTO bookinfo(idbook, bname, bookauthor, imgbook, status) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO bookinfo(callnumber, bname, bookauthor, imgbook, status) VALUES (?, ?, ?, ?, ?)";
             pst = con.prepareStatement(query);
             InputStream is = new FileInputStream(new File(s));
             pst.setString(1, tf_callnumber3.getText());
@@ -440,7 +440,7 @@ public class AdminBook extends javax.swing.JPanel {
     private void btn_removebookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removebookActionPerformed
         try{
             Connection con = Connect.connectDB();
-            String query = "DELETE FROM `bookinfo` WHERE idbook=?";
+            String query = "DELETE FROM `bookinfo` WHERE callnumber=?";
             pst = con.prepareStatement(query);
             
             pst.setString(1, tf_callnumber4.getText());
@@ -456,7 +456,7 @@ public class AdminBook extends javax.swing.JPanel {
     private void tf_callnumber4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_callnumber4KeyReleased
         try{
             Connection con = Connect.connectDB();
-            String query = "SELECT * FROM `bookinfo` WHERE idbook=?";
+            String query = "SELECT * FROM `bookinfo` WHERE callnumber=?";
             pst = con.prepareStatement(query);
             pst.setString(1, tf_callnumber4.getText());
             ResultSet rs = pst.executeQuery();

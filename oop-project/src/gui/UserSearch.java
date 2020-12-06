@@ -163,6 +163,7 @@ public class UserSearch extends javax.swing.JPanel {
             }
         });
 
+        JTable_bookinfo.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
         JTable_bookinfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
