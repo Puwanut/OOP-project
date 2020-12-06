@@ -278,36 +278,31 @@ public class LoginForm extends javax.swing.JFrame {
             new AdminGUI();
             this.dispose();
         }else{
-            try{
+            try {
                 Connection con1 = Connect.connectDB();
-                String sql = "Select * From register where user=? and pass=?";
-                pst=con1.prepareStatement(sql);
+                String sql = "Select * From userinfo where user=? and pass=?";
+                pst = con1.prepareStatement(sql);
                 pst.setString(1, tf_username.getText());
                 pst.setString(2, pf_password.getText());
                 ResultSet rs = pst.executeQuery();
-                if(rs.next()){
+                if (rs.next()) {
                     save_rememberme_handle();
                     System.out.println(rs.getInt("userid"));
                     new UserGUI(rs.getInt("userid"));
                     this.dispose();
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(null, "Invalid user...");
                     tf_username.setText("");
                     pf_password.setText("");
                 }
-            }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
             }
         }
     }//GEN-LAST:event_btn_loginActionPerformed
 
     private void lb_signupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_signupMouseClicked
-        RegisterForm rgf = new RegisterForm();
-        rgf.setVisible(true);
-        rgf.pack();
-        rgf.setLocationRelativeTo(null);
-        rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        new RegisterForm();
         this.dispose();
     }//GEN-LAST:event_lb_signupMouseClicked
 
@@ -317,7 +312,6 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         get_rememberme_handle();
-
     }//GEN-LAST:event_formWindowOpened
 
     /**

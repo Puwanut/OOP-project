@@ -59,9 +59,5 @@ public class AdminGUI {
         frame.dispose();
         new LoginForm().setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new AdminGUI();
-    }
     
 }

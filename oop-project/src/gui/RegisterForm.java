@@ -20,7 +20,11 @@ public class RegisterForm extends javax.swing.JFrame {
      */
     public RegisterForm() {
         initComponents();
-        this.setLocationRelativeTo(null); //set location Jframe Center
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /**
@@ -305,7 +309,7 @@ public class RegisterForm extends javax.swing.JFrame {
         if (pf_password1.getText().equals(pf_password2.getText())) {
             try {
                 Connection con1 = Connect.connectDB();
-                String query = "INSERT INTO `register`(`fname`, `sname`, `email`, `user`, `pass`) VALUES (?, ?, ?, ?, ?)";
+                String query = "INSERT INTO `userinfo`(`fname`, `sname`, `email`, `user`, `pass`) VALUES (?, ?, ?, ?, ?)";
                 pst = con1.prepareStatement(query);
                 pst.setString(1, tf_firstname1.getText());
                 pst.setString(2, tf_surname.getText());

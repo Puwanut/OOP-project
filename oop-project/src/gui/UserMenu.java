@@ -46,7 +46,7 @@ public class UserMenu extends javax.swing.JPanel {
     public void setUserFirstname(){
         try {
             Connection con = Connect.connectDB();
-        String queryname = "SELECT fname FROM register WHERE userid = " + userid;
+        String queryname = "SELECT fname FROM userinfo WHERE userid = " + userid;
         Statement st = con.createStatement();
         ResultSet rs = st.executeQuery(queryname);
         rs.next();

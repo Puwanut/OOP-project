@@ -690,7 +690,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         if (!tf_userid1.getText().isEmpty()) {
             try {
                 Connection con = Connect.connectDB();
-                String querybook = "SELECT * FROM register WHERE userid = " + tf_userid1.getText();
+                String querybook = "SELECT * FROM uesrinfo WHERE userid = " + tf_userid1.getText();
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(querybook);
                 if (rs.next()) {
@@ -751,7 +751,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             Connection con = Connect.connectDB();
             String query = "SELECT * FROM borrowhistory "
                         + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
-                        + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE borrowid=? AND returned=0";
+                        + "INNER JOIN uesrinfo ON borrowhistory.userid = uesrinfo.userid WHERE borrowid=? AND returned=0";
             pst = con.prepareStatement(query);
             pst.setString(1, tf_borrowid2.getText());
             ResultSet rs = pst.executeQuery();
@@ -826,7 +826,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             Connection con = Connect.connectDB();
             String query = "SELECT * FROM borrowhistory "
                         + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
-                        + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE callnumber=? AND returned=0";
+                        + "INNER JOIN uesrinfo ON borrowhistory.userid = uesrinfo.userid WHERE callnumber=? AND returned=0";
             pst = con.prepareStatement(query);
             pst.setString(1, tf_callnumber2.getText());
             ResultSet rs = pst.executeQuery();
