@@ -33,8 +33,6 @@ public class Book {
         this.status = status;
     }
     
-    
-
     public int getIdbook() {
         return idbook;
     }

@@ -5,10 +5,19 @@
  */
 package gui;
 
+import database.Connect;
 import java.awt.CardLayout;
+import java.awt.Image;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,17 +36,35 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
     public AdminBorrowNreturn() {
         initComponents();
         
+        setLastestBorrowid();
+        
         dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         currentCal = Calendar.getInstance();
         currentdate = dateFormat.format(currentCal.getTime());
         tf_borrowdate1.setText(currentdate);
     }
     
-    public void getBorrowPanel(String panel_name){
+    public void getBorrowNreturnPanel(String panel_name){
         CardLayout brcards = (CardLayout)(pa_borrowNreturn_cards.getLayout());
         brcards.show(pa_borrowNreturn_cards, panel_name);
         System.out.println("Panel borrowNreturn cards: change to " + panel_name);
     }
+    
+    public void setLastestBorrowid(){
+        try {
+            Connection con = Connect.connectDB();
+            String queryid = "SELECT borrowid FROM borrowhistory WHERE borrowid = (SELECT MAX(borrowid) FROM borrowhistory)";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(queryid);
+            rs.next();
+            tf_borrowid1.setText(String.format("%03d", rs.getInt("borrowid")+1));
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+        
+        
+    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -52,8 +79,8 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         lb_tab_return = new javax.swing.JLabel();
         pa_borrowNreturn_cards = new javax.swing.JPanel();
         pa_borrow = new javax.swing.JPanel();
-        lb_borrownumber1 = new javax.swing.JLabel();
-        tf_borrownumber1 = new javax.swing.JTextField();
+        lb_borrowid1 = new javax.swing.JLabel();
+        tf_borrowid1 = new javax.swing.JTextField();
         lb_callnumber1 = new javax.swing.JLabel();
         tf_callnumber1 = new javax.swing.JTextField();
         lb_bookname1 = new javax.swing.JLabel();
@@ -71,8 +98,8 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         lb_img_book1 = new javax.swing.JLabel();
         btn_record_borrowing = new javax.swing.JButton();
         pa_return = new javax.swing.JPanel();
-        lb_borrownumber2 = new javax.swing.JLabel();
-        tf_borrownumber2 = new javax.swing.JTextField();
+        lb_borrowid2 = new javax.swing.JLabel();
+        tf_borrowid2 = new javax.swing.JTextField();
         lb_callnumber2 = new javax.swing.JLabel();
         tf_callnumber2 = new javax.swing.JTextField();
         lb_bookname2 = new javax.swing.JLabel();
@@ -118,14 +145,15 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         pa_borrow.setBackground(new java.awt.Color(255, 204, 204));
         pa_borrow.setPreferredSize(new java.awt.Dimension(1080, 620));
 
-        lb_borrownumber1.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        lb_borrownumber1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lb_borrownumber1.setText("รหัสการยืม : ");
+        lb_borrowid1.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_borrowid1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_borrowid1.setText("รหัสการยืม : ");
 
-        tf_borrownumber1.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        tf_borrownumber1.addActionListener(new java.awt.event.ActionListener() {
+        tf_borrowid1.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        tf_borrowid1.setEnabled(false);
+        tf_borrowid1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_borrownumber1ActionPerformed(evt);
+                tf_borrowid1ActionPerformed(evt);
             }
         });
 
@@ -137,6 +165,11 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         tf_callnumber1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_callnumber1ActionPerformed(evt);
+            }
+        });
+        tf_callnumber1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_callnumber1KeyReleased(evt);
             }
         });
 
@@ -160,6 +193,11 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         tf_userid1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tf_userid1ActionPerformed(evt);
+            }
+        });
+        tf_userid1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_userid1KeyReleased(evt);
             }
         });
 
@@ -217,6 +255,11 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
 
         btn_record_borrowing.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
         btn_record_borrowing.setText("บันทึกการยืมหนังสือ");
+        btn_record_borrowing.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_record_borrowingActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pa_borrowLayout = new javax.swing.GroupLayout(pa_borrow);
         pa_borrow.setLayout(pa_borrowLayout);
@@ -231,9 +274,9 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tf_callnumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pa_borrowLayout.createSequentialGroup()
-                            .addComponent(lb_borrownumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_borrowid1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tf_borrownumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tf_borrowid1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pa_borrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pa_borrowLayout.createSequentialGroup()
                             .addComponent(lb_userid1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,8 +318,8 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                     .addComponent(lb_img_book1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pa_borrowLayout.createSequentialGroup()
                         .addGroup(pa_borrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_borrownumber1)
-                            .addComponent(lb_borrownumber1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(tf_borrowid1)
+                            .addComponent(lb_borrowid1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(pa_borrowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tf_callnumber1)
@@ -315,14 +358,14 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         pa_return.setBackground(new java.awt.Color(153, 204, 255));
         pa_return.setPreferredSize(new java.awt.Dimension(1080, 620));
 
-        lb_borrownumber2.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        lb_borrownumber2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lb_borrownumber2.setText("รหัสการยืม : ");
+        lb_borrowid2.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        lb_borrowid2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_borrowid2.setText("รหัสการยืม : ");
 
-        tf_borrownumber2.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        tf_borrownumber2.addActionListener(new java.awt.event.ActionListener() {
+        tf_borrowid2.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
+        tf_borrowid2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_borrownumber2ActionPerformed(evt);
+                tf_borrowid2ActionPerformed(evt);
             }
         });
 
@@ -417,9 +460,9 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(tf_callnumber2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(pa_returnLayout.createSequentialGroup()
-                            .addComponent(lb_borrownumber2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lb_borrowid2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tf_borrownumber2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(tf_borrowid2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(pa_returnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(pa_returnLayout.createSequentialGroup()
                             .addComponent(lb_userid2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -457,8 +500,8 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                     .addComponent(lb_img_book2, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(pa_returnLayout.createSequentialGroup()
                         .addGroup(pa_returnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_borrownumber2)
-                            .addComponent(lb_borrownumber2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(tf_borrowid2)
+                            .addComponent(lb_borrowid2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(pa_returnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tf_callnumber2)
@@ -514,18 +557,18 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
     private void lb_tab_borrowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_tab_borrowMouseClicked
         lb_tab_borrow.setBorder(null);
         lb_tab_return.setBorder(BorderFactory.createRaisedBevelBorder());
-        getBorrowPanel("panel_borrow");
+        getBorrowNreturnPanel("panel_borrow");
     }//GEN-LAST:event_lb_tab_borrowMouseClicked
 
     private void lb_tab_returnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_tab_returnMouseClicked
         lb_tab_borrow.setBorder(BorderFactory.createRaisedBevelBorder());
         lb_tab_return.setBorder(null);
-        getBorrowPanel("panel_return");
+        getBorrowNreturnPanel("panel_return");
     }//GEN-LAST:event_lb_tab_returnMouseClicked
 
-    private void tf_borrownumber1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_borrownumber1ActionPerformed
+    private void tf_borrowid1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_borrowid1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_borrownumber1ActionPerformed
+    }//GEN-LAST:event_tf_borrowid1ActionPerformed
 
     private void tf_callnumber1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_callnumber1ActionPerformed
         // TODO add your handling code here:
@@ -567,9 +610,9 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_returndate1ActionPerformed
 
-    private void tf_borrownumber2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_borrownumber2ActionPerformed
+    private void tf_borrowid2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_borrowid2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_borrownumber2ActionPerformed
+    }//GEN-LAST:event_tf_borrowid2ActionPerformed
 
     private void tf_callnumber2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_callnumber2ActionPerformed
         // TODO add your handling code here:
@@ -595,6 +638,81 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_returndate2ActionPerformed
 
+    private void tf_callnumber1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_callnumber1KeyReleased
+        if (!tf_callnumber1.getText().isEmpty()) {
+            try {
+                Connection con = Connect.connectDB();
+                String querybook = "SELECT * FROM bookinfo WHERE idbook = " + tf_callnumber1.getText();
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(querybook);
+                if (rs.next()) {
+                    tf_bookname1.setText(rs.getString("bname"));
+                    byte[] img = rs.getBytes("imgbook");
+                    ImageIcon image = new ImageIcon(img);
+                    Image im = image.getImage();
+                    Image myImg = im.getScaledInstance(lb_img_book1.getWidth(), lb_img_book1.getHeight(), Image.SCALE_SMOOTH);
+                    ImageIcon newImage = new ImageIcon(myImg);
+                    lb_img_book1.setIcon(newImage);
+                } else {
+                    tf_bookname1.setText("ไม่พบ");
+                    ImageIcon img_questionbook = new ImageIcon(new ImageIcon(getClass().getResource("../image/questionbook.jpg")).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+                    lb_img_book1.setIcon(img_questionbook);
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        } else {
+            tf_bookname1.setText("ไม่พบ");
+            ImageIcon img_questionbook = new ImageIcon(new ImageIcon(getClass().getResource("../image/questionbook.jpg")).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+            lb_img_book1.setIcon(img_questionbook);
+        }
+        
+        
+    }//GEN-LAST:event_tf_callnumber1KeyReleased
+
+    private void tf_userid1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_userid1KeyReleased
+        if (!tf_userid1.getText().isEmpty()) {
+            try {
+                Connection con = Connect.connectDB();
+                String querybook = "SELECT * FROM register WHERE userid = " + tf_userid1.getText();
+                Statement st = con.createStatement();
+                ResultSet rs = st.executeQuery(querybook);
+                if (rs.next()) {
+                    tf_username1.setText(rs.getString("fname") + " " + rs.getString("sname"));
+                } else {
+                    tf_username1.setText("ไม่พบ");
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        } else {
+            tf_username1.setText("ไม่พบ");
+        }
+    }//GEN-LAST:event_tf_userid1KeyReleased
+
+    private void btn_record_borrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_record_borrowingActionPerformed
+        PreparedStatement pst = null;
+        if (!tf_callnumber1.getText().isEmpty() && !tf_userid1.getText().isEmpty() && cbb_borrowdays1.getSelectedIndex() != 0){
+            try {
+                Connection con = Connect.connectDB();
+                String insert = "INSERT INTO borrowhistory(callnumber, userid, borrowdate, returndate) VALUES (?, ?, ?, ?)";
+                pst = con.prepareStatement(insert);
+//                pst.setString(1, tf_borrowid1.getText());
+                pst.setString(1, tf_callnumber1.getText());
+                pst.setString(2, tf_userid1.getText());
+                pst.setString(3, tf_borrowdate1.getText());
+                pst.setString(4, tf_returndate1.getText());
+//                pst.setBoolean(6, false);
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "ทำรายการยืมสำเร็จ");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "กรุณากรอกข้อมูลการยืมให้ถูกต้อง");
+        }
+    }//GEN-LAST:event_btn_record_borrowingActionPerformed
+
     
     //variable name -> 1 = panel_borrow, 2 = panel_return
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -606,8 +724,8 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
     private javax.swing.JLabel lb_borrowdate1;
     private javax.swing.JLabel lb_borrowdate2;
     private javax.swing.JLabel lb_borrowdays1;
-    private javax.swing.JLabel lb_borrownumber1;
-    private javax.swing.JLabel lb_borrownumber2;
+    private javax.swing.JLabel lb_borrowid1;
+    private javax.swing.JLabel lb_borrowid2;
     private javax.swing.JLabel lb_callnumber1;
     private javax.swing.JLabel lb_callnumber2;
     private javax.swing.JLabel lb_img_book1;
@@ -627,8 +745,8 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
     private javax.swing.JTextField tf_bookname2;
     private javax.swing.JTextField tf_borrowdate1;
     private javax.swing.JTextField tf_borrowdate2;
-    private javax.swing.JTextField tf_borrownumber1;
-    private javax.swing.JTextField tf_borrownumber2;
+    private javax.swing.JTextField tf_borrowid1;
+    private javax.swing.JTextField tf_borrowid2;
     private javax.swing.JTextField tf_callnumber1;
     private javax.swing.JTextField tf_callnumber2;
     private javax.swing.JTextField tf_returndate1;
