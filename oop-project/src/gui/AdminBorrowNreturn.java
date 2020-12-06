@@ -28,6 +28,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
     private SimpleDateFormat dateFormat;
     private Calendar currentCal;
     private String currentdate, toDate;
+    PreparedStatement pst = null;
     
     
     /**
@@ -368,6 +369,11 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                 tf_borrowid2ActionPerformed(evt);
             }
         });
+        tf_borrowid2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_borrowid2KeyReleased(evt);
+            }
+        });
 
         lb_callnumber2.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         lb_callnumber2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -446,6 +452,11 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
 
         btn_record_returning.setFont(new java.awt.Font("Kanit", 0, 36)); // NOI18N
         btn_record_returning.setText("บันทึกการคืนหนังสือ");
+        btn_record_returning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_record_returningActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pa_returnLayout = new javax.swing.GroupLayout(pa_return);
         pa_return.setLayout(pa_returnLayout);
@@ -691,7 +702,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
     }//GEN-LAST:event_tf_userid1KeyReleased
 
     private void btn_record_borrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_record_borrowingActionPerformed
-        PreparedStatement pst = null;
+
         if (!tf_callnumber1.getText().isEmpty() && !tf_userid1.getText().isEmpty() && cbb_borrowdays1.getSelectedIndex() != 0){
             try {
                 Connection con = Connect.connectDB();
@@ -712,6 +723,62 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "กรุณากรอกข้อมูลการยืมให้ถูกต้อง");
         }
     }//GEN-LAST:event_btn_record_borrowingActionPerformed
+
+    private void tf_borrowid2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_borrowid2KeyReleased
+        try{
+            Connection con = Connect.connectDB();
+            String query = "SELECT * FROM borrowhistory "
+                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook "
+                        + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE borrowid=?";
+            pst = con.prepareStatement(query);
+            pst.setString(1, tf_borrowid2.getText());
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                byte[] img = rs.getBytes("imgbook");
+                tf_callnumber2.setText(rs.getString("idbook"));
+                tf_bookname2.setText(rs.getString("bname"));
+                tf_userid2.setText(rs.getString("userid"));
+                tf_username2.setText(rs.getString("user"));
+                tf_borrowdate2.setText(rs.getString("borrowdate"));
+                tf_returndate2.setText(rs.getString("returndate"));
+                
+                ImageIcon image = new ImageIcon(img);
+                Image im = image.getImage();
+                Image myImg = im.getScaledInstance(lb_img_book2.getWidth(), lb_img_book2.getHeight(),Image.SCALE_SMOOTH);
+                ImageIcon newImage = new ImageIcon(myImg);
+                lb_img_book2.setIcon(newImage);
+                }
+            else{
+                tf_callnumber2.setText("ไม่พบ");
+                tf_bookname2.setText("ไม่พบ");
+                tf_userid2.setText("ไม่พบ");
+                tf_username2.setText("ไม่พบ");
+                tf_borrowdate2.setText("ไม่พบ");
+                tf_returndate2.setText("ไม่พบ");
+                ImageIcon img_book_chosen = new ImageIcon(new ImageIcon(getClass().getResource("../image/questionbook.jpg")).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+                lb_img_book2.setIcon(img_book_chosen);
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_tf_borrowid2KeyReleased
+
+    private void btn_record_returningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_record_returningActionPerformed
+        if (!tf_callnumber2.getText().isEmpty() && !tf_borrowid2.getText().isEmpty()){
+            try {
+                Connection con = Connect.connectDB();
+                String query = "INSERT INTO borrowhistory(callnumber, userid, borrowdate, returndate) VALUES (?, ?, ?, ?)";
+                pst = con.prepareStatement(query);
+                pst.setString(4, tf_returndate1.getText());
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "ทำรายการคืนสำเร็จ");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "กรุณากรอกข้อมูลการยืมให้ถูกต้อง");
+        }
+    }//GEN-LAST:event_btn_record_returningActionPerformed
 
     
     //variable name -> 1 = panel_borrow, 2 = panel_return
