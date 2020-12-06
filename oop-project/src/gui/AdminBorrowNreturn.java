@@ -385,6 +385,11 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                 tf_callnumber2ActionPerformed(evt);
             }
         });
+        tf_callnumber2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tf_callnumber2KeyReleased(evt);
+            }
+        });
 
         lb_bookname2.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         lb_bookname2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -653,7 +658,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         if (!tf_callnumber1.getText().isEmpty()) {
             try {
                 Connection con = Connect.connectDB();
-                String querybook = "SELECT * FROM bookinfo WHERE idbook = " + tf_callnumber1.getText();
+                String querybook = "SELECT * FROM bookinfo WHERE idbook = " + tf_callnumber1.getText() + " AND status=1";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(querybook);
                 if (rs.next()) {
@@ -703,17 +708,20 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
 
     private void btn_record_borrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_record_borrowingActionPerformed
 
-        if (!tf_callnumber1.getText().isEmpty() && !tf_userid1.getText().isEmpty() && cbb_borrowdays1.getSelectedIndex() != 0){
+        if (!tf_callnumber1.getText().isEmpty() && !tf_userid1.getText().isEmpty() && cbb_borrowdays1.getSelectedIndex() != 0 && 
+            !tf_bookname1.getText().equals("ไม่พบ")){
             try {
                 Connection con = Connect.connectDB();
                 String insert = "INSERT INTO borrowhistory(callnumber, userid, borrowdate, returndate) VALUES (?, ?, ?, ?)";
+                String update = "UPDATE `bookinfo` SET `status`= 0 WHERE idbook=?";
                 pst = con.prepareStatement(insert);
-//                pst.setString(1, tf_borrowid1.getText());
                 pst.setString(1, tf_callnumber1.getText());
                 pst.setString(2, tf_userid1.getText());
                 pst.setString(3, tf_borrowdate1.getText());
                 pst.setString(4, tf_returndate1.getText());
-//                pst.setBoolean(6, false);
+                pst.executeUpdate();
+                pst = con.prepareStatement(update);
+                pst.setString(1, tf_callnumber1.getText());
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "ทำรายการยืมสำเร็จ");
             } catch (SQLException ex) {
@@ -729,7 +737,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             Connection con = Connect.connectDB();
             String query = "SELECT * FROM borrowhistory "
                         + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook "
-                        + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE borrowid=?";
+                        + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE borrowid=? AND returned=0";
             pst = con.prepareStatement(query);
             pst.setString(1, tf_borrowid2.getText());
             ResultSet rs = pst.executeQuery();
@@ -749,7 +757,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                 lb_img_book2.setIcon(newImage);
                 }
             else{
-                tf_callnumber2.setText("ไม่พบ");
+                tf_callnumber2.setText("");
                 tf_bookname2.setText("ไม่พบ");
                 tf_userid2.setText("ไม่พบ");
                 tf_username2.setText("ไม่พบ");
@@ -767,9 +775,13 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         if (!tf_callnumber2.getText().isEmpty() && !tf_borrowid2.getText().isEmpty()){
             try {
                 Connection con = Connect.connectDB();
-                String query = "INSERT INTO borrowhistory(callnumber, userid, borrowdate, returndate) VALUES (?, ?, ?, ?)";
-                pst = con.prepareStatement(query);
-                pst.setString(4, tf_returndate1.getText());
+                String updateborrowhistory = "UPDATE `borrowhistory` SET `returned`= 1 WHERE borrowid=?";
+                String updatebookinfo = "UPDATE `bookinfo` SET `status`= 1 WHERE idbook=?";
+                pst = con.prepareStatement(updateborrowhistory);
+                pst.setString(1, tf_borrowid2.getText());
+                pst.executeUpdate();
+                pst = con.prepareStatement(updatebookinfo);
+                pst.setString(1, tf_callnumber2.getText());
                 pst.executeUpdate();
                 JOptionPane.showMessageDialog(null, "ทำรายการคืนสำเร็จ");
             } catch (SQLException ex) {
@@ -779,6 +791,45 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "กรุณากรอกข้อมูลการยืมให้ถูกต้อง");
         }
     }//GEN-LAST:event_btn_record_returningActionPerformed
+
+    private void tf_callnumber2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_callnumber2KeyReleased
+        try{
+            Connection con = Connect.connectDB();
+            String query = "SELECT * FROM borrowhistory "
+                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.idbook "
+                        + "INNER JOIN register ON borrowhistory.userid = register.userid WHERE idbook=? AND returned=0";
+            pst = con.prepareStatement(query);
+            pst.setString(1, tf_callnumber2.getText());
+            ResultSet rs = pst.executeQuery();
+            if(rs.next()){
+                byte[] img = rs.getBytes("imgbook");
+                tf_borrowid2.setText(rs.getString("borrowid"));
+                tf_bookname2.setText(rs.getString("bname"));
+                tf_userid2.setText(rs.getString("userid"));
+                tf_username2.setText(rs.getString("user"));
+                tf_borrowdate2.setText(rs.getString("borrowdate"));
+                tf_returndate2.setText(rs.getString("returndate"));
+                
+                ImageIcon image = new ImageIcon(img);
+                Image im = image.getImage();
+                Image myImg = im.getScaledInstance(lb_img_book2.getWidth(), lb_img_book2.getHeight(),Image.SCALE_SMOOTH);
+                ImageIcon newImage = new ImageIcon(myImg);
+                lb_img_book2.setIcon(newImage);
+                }
+            else{
+                tf_borrowid2.setText("");
+                tf_bookname2.setText("ไม่พบ");
+                tf_userid2.setText("ไม่พบ");
+                tf_username2.setText("ไม่พบ");
+                tf_borrowdate2.setText("ไม่พบ");
+                tf_returndate2.setText("ไม่พบ");
+                ImageIcon img_book_chosen = new ImageIcon(new ImageIcon(getClass().getResource("../image/questionbook.jpg")).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+                lb_img_book2.setIcon(img_book_chosen);
+            }
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_tf_callnumber2KeyReleased
 
     
     //variable name -> 1 = panel_borrow, 2 = panel_return
