@@ -199,9 +199,6 @@
                   <Font name="Kanit" size="20" style="0"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_callnumber3ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_bookname3">
               <Properties>
@@ -218,9 +215,6 @@
                   <Font name="Kanit" size="20" style="0"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_bookname3ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_img_book3">
               <Properties>
@@ -289,9 +283,6 @@
                   <Font name="Kanit" size="20" style="0"/>
                 </Property>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_bookauthor3ActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -390,7 +381,6 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_callnumber4ActionPerformed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_callnumber4KeyReleased"/>
               </Events>
             </Component>
@@ -410,9 +400,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_bookname4ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_img_book4">
               <Properties>
@@ -454,9 +441,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_bookauthor4ActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

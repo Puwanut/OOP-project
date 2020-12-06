@@ -8,9 +8,7 @@ package gui;
 import database.Book;
 import database.Connect;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -30,9 +28,9 @@ public class AdminSearch extends javax.swing.JPanel {
         initComponents();
         
         ImageIcon icon_search_small = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        btn_search.setIcon(icon_search_small);
-        
         ImageIcon icon_clear_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_clear_search.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        
+        btn_search.setIcon(icon_search_small);
         btn_reset.setIcon(icon_clear_search);
         
         all_books_list = booklist();
@@ -51,7 +49,7 @@ public class AdminSearch extends javax.swing.JPanel {
                 book = new Book(rs.getInt("callnumber"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
                 booksList.add(book);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
         return booksList;
@@ -79,7 +77,7 @@ public class AdminSearch extends javax.swing.JPanel {
                 book = new Book(rs.getInt("callnumber"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
                 booksList.add(book);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
         return booksList;
@@ -122,7 +120,7 @@ public class AdminSearch extends javax.swing.JPanel {
         tf_searchdata = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
         btn_reset = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        JScrollPane_bookinfo = new javax.swing.JScrollPane();
         JTable_bookinfo = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 255));
@@ -185,7 +183,7 @@ public class AdminSearch extends javax.swing.JPanel {
             }
         });
         JTable_bookinfo.setRowHeight(30);
-        jScrollPane1.setViewportView(JTable_bookinfo);
+        JScrollPane_bookinfo.setViewportView(JTable_bookinfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -194,7 +192,7 @@ public class AdminSearch extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JScrollPane_bookinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 930, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(lb_searchdata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,7 +223,7 @@ public class AdminSearch extends javax.swing.JPanel {
                     .addComponent(btn_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                     .addComponent(btn_reset, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JScrollPane_bookinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -240,11 +238,11 @@ public class AdminSearch extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane_bookinfo;
     private javax.swing.JTable JTable_bookinfo;
     private javax.swing.JButton btn_reset;
     private javax.swing.JButton btn_search;
     private javax.swing.JComboBox<String> cbb_searchby;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_searchby;
     private javax.swing.JLabel lb_searchdata;
     private javax.swing.JTextField tf_searchdata;

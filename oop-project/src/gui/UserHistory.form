@@ -24,7 +24,7 @@
           <Group type="102" attributes="0">
               <EmptySpace pref="20" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane3" pref="882" max="32767" attributes="0"/>
+                  <Component id="JScrollPane_borrowhistory" pref="882" max="32767" attributes="0"/>
                   <Component id="lb_title" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="20" max="32767" attributes="0"/>
@@ -37,7 +37,7 @@
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="lb_title" min="-2" pref="85" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane3" pref="153" max="32767" attributes="0"/>
+              <Component id="JScrollPane_borrowhistory" pref="153" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -53,7 +53,7 @@
         <Property name="text" type="java.lang.String" value="&#xe1b;&#xe23;&#xe30;&#xe27;&#xe31;&#xe15;&#xe34;&#xe01;&#xe32;&#xe23;&#xe22;&#xe37;&#xe21;&#xe2b;&#xe19;&#xe31;&#xe07;&#xe2a;&#xe37;&#xe2d;"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+    <Container class="javax.swing.JScrollPane" name="JScrollPane_borrowhistory">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>

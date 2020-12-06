@@ -7,14 +7,9 @@
 package gui;
 
 import database.Connect;
-import java.awt.Color;
-import java.awt.Component;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import java.awt.*;
+import java.sql.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -89,8 +84,6 @@ public class AdminHistory extends javax.swing.JPanel {
         setborrowhistoryTable();
     }
     
-    
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -100,7 +93,7 @@ public class AdminHistory extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane2 = new javax.swing.JScrollPane();
+        JScrollPane_borrowhistory = new javax.swing.JScrollPane();
         JTable_borrowhistory = new javax.swing.JTable();
         lb_title = new javax.swing.JLabel();
         lb_squaregreen = new javax.swing.JLabel();
@@ -135,7 +128,7 @@ public class AdminHistory extends javax.swing.JPanel {
             }
         });
         JTable_borrowhistory.setRowHeight(30);
-        jScrollPane2.setViewportView(JTable_borrowhistory);
+        JScrollPane_borrowhistory.setViewportView(JTable_borrowhistory);
         if (JTable_borrowhistory.getColumnModel().getColumnCount() > 0) {
             JTable_borrowhistory.getColumnModel().getColumn(0).setPreferredWidth(75);
             JTable_borrowhistory.getColumnModel().getColumn(0).setMaxWidth(75);
@@ -176,7 +169,7 @@ public class AdminHistory extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(lb_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE))
+                        .addComponent(JScrollPane_borrowhistory, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lb_squaregreen, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -201,15 +194,15 @@ public class AdminHistory extends javax.swing.JPanel {
                         .addComponent(lb_squarered, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lb_textunreturn, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JScrollPane_borrowhistory, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane_borrowhistory;
     private javax.swing.JTable JTable_borrowhistory;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_squaregreen;
     private javax.swing.JLabel lb_squarered;
     private javax.swing.JLabel lb_textreturned;

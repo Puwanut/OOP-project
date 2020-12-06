@@ -7,10 +7,7 @@ package gui;
 import database.Connect;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import javax.swing.*;
 /**
  *
@@ -25,37 +22,31 @@ public class UserMenu extends javax.swing.JPanel {
     
     public UserMenu(int userid) {
         initComponents();
-        this.userid = userid;
-        setUserFirstname();
+        setUserFirstname(userid);
         
         ImageIcon icon_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_search.setIcon(icon_search);
-        
         ImageIcon icon_borrow = new ImageIcon(new ImageIcon(getClass().getResource("../image/list-bookborrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_borrow.setIcon(icon_borrow);
-        
         ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../image/open-bookborrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_history.setIcon(icon_book);
-        
         ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_logout.setIcon(icon_logout);
         
+        lb_menu_search.setIcon(icon_search);
+        lb_menu_borrow.setIcon(icon_borrow);
+        lb_menu_history.setIcon(icon_book);
+        lb_menu_logout.setIcon(icon_logout);
         
     }
     
-    public void setUserFirstname(){
+    public void setUserFirstname(int userid){
         try {
             Connection con = Connect.connectDB();
-        String queryname = "SELECT fname FROM userinfo WHERE userid = " + userid;
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery(queryname);
-        rs.next();
-        lb_userFirstname.setText(rs.getString("fname"));
-        } catch (SQLException ex){
+            String queryname = "SELECT fname FROM userinfo WHERE userid = " + userid;
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(queryname);
+            if (rs.next())
+                lb_userFirstname.setText(rs.getString("fname"));
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-        
-        
     }
     
     public void lb_menu_mouseentered(MouseEvent evt){

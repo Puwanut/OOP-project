@@ -6,10 +6,7 @@
 package gui;
 
 import database.Connect;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,8 +27,9 @@ public class UserHistory extends javax.swing.JPanel {
     public void setBorrowTable(int userid){
          try {
             Connection con = Connect.connectDB();
-            String queryhistory = "SELECT bname, borrowdate, returndate,status FROM borrowhistory "
-                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber WHERE userid = " + userid;
+             String queryhistory = "SELECT bname, borrowdate, returndate,status FROM borrowhistory "
+                     + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
+                     + "WHERE userid = " + userid;
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryhistory);
             DefaultTableModel model = (DefaultTableModel) JTable_borrowhistory.getModel();
@@ -63,7 +61,7 @@ public class UserHistory extends javax.swing.JPanel {
     private void initComponents() {
 
         lb_title = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
+        JScrollPane_borrowhistory = new javax.swing.JScrollPane();
         JTable_borrowhistory = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 204));
@@ -90,7 +88,7 @@ public class UserHistory extends javax.swing.JPanel {
             }
         });
         JTable_borrowhistory.setRowHeight(30);
-        jScrollPane3.setViewportView(JTable_borrowhistory);
+        JScrollPane_borrowhistory.setViewportView(JTable_borrowhistory);
         if (JTable_borrowhistory.getColumnModel().getColumnCount() > 0) {
             JTable_borrowhistory.getColumnModel().getColumn(1).setPreferredWidth(150);
             JTable_borrowhistory.getColumnModel().getColumn(1).setMaxWidth(150);
@@ -107,7 +105,7 @@ public class UserHistory extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
+                    .addComponent(JScrollPane_borrowhistory, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE)
                     .addComponent(lb_title, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
@@ -117,15 +115,14 @@ public class UserHistory extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addComponent(lb_title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addComponent(JScrollPane_borrowhistory, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane_borrowhistory;
     private javax.swing.JTable JTable_borrowhistory;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lb_title;
     // End of variables declaration//GEN-END:variables
 }

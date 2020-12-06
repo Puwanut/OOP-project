@@ -234,9 +234,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_borrowid1ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_callnumber1">
               <Properties>
@@ -254,7 +251,6 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_callnumber1ActionPerformed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_callnumber1KeyReleased"/>
               </Events>
             </Component>
@@ -274,9 +270,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_bookname1ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_userid1">
               <Properties>
@@ -294,7 +287,6 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_userid1ActionPerformed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_userid1KeyReleased"/>
               </Events>
             </Component>
@@ -314,9 +306,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_username1ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="cbb_borrowdays1">
               <Properties>
@@ -356,9 +345,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_borrowdate1ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_borrowdate1">
               <Properties>
@@ -385,9 +371,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_returndate1ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_img_book1">
               <Properties>
@@ -554,7 +537,6 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_borrowid2ActionPerformed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_borrowid2KeyReleased"/>
               </Events>
             </Component>
@@ -574,7 +556,6 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_callnumber2ActionPerformed"/>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tf_callnumber2KeyReleased"/>
               </Events>
             </Component>
@@ -594,9 +575,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_bookname2ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_userid2">
               <Properties>
@@ -614,9 +592,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_userid2ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_username2">
               <Properties>
@@ -634,9 +609,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_username2ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="tf_borrowdate2">
               <Properties>
@@ -645,9 +617,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_borrowdate2ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_borrowdate2">
               <Properties>
@@ -674,9 +643,6 @@
                 </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_returndate2ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lb_img_book2">
               <Properties>

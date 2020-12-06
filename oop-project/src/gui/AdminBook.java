@@ -7,9 +7,7 @@ package gui;
 
 import database.Connect;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -20,8 +18,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class AdminBook extends javax.swing.JPanel {
     
-    PreparedStatement pst = null;
-    String s;
+    String bookimgpath;
     /**
      * Creates new form AdminBook
      */
@@ -108,22 +105,12 @@ public class AdminBook extends javax.swing.JPanel {
         lb_callnumber3.setText("รหัสเรียกหนังสือ : ");
 
         tf_callnumber3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        tf_callnumber3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_callnumber3ActionPerformed(evt);
-            }
-        });
 
         lb_bookname3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         lb_bookname3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_bookname3.setText("ชื่อหนังสือ : ");
 
         tf_bookname3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        tf_bookname3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_bookname3ActionPerformed(evt);
-            }
-        });
 
         lb_img_book3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_img_book3.setText("(รูปหนังสือ)");
@@ -157,11 +144,6 @@ public class AdminBook extends javax.swing.JPanel {
         lb_bookauthor3.setText("ชื่อผู้แต่ง : ");
 
         tf_bookauthor3.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        tf_bookauthor3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_bookauthor3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pa_addbookLayout = new javax.swing.GroupLayout(pa_addbook);
         pa_addbook.setLayout(pa_addbookLayout);
@@ -240,11 +222,6 @@ public class AdminBook extends javax.swing.JPanel {
         lb_callnumber4.setText("รหัสเรียกหนังสือ : ");
 
         tf_callnumber4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
-        tf_callnumber4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_callnumber4ActionPerformed(evt);
-            }
-        });
         tf_callnumber4.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tf_callnumber4KeyReleased(evt);
@@ -257,11 +234,6 @@ public class AdminBook extends javax.swing.JPanel {
 
         tf_bookname4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         tf_bookname4.setEnabled(false);
-        tf_bookname4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_bookname4ActionPerformed(evt);
-            }
-        });
 
         lb_img_book4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_img_book4.setText("(รูปหนังสือ)");
@@ -281,11 +253,6 @@ public class AdminBook extends javax.swing.JPanel {
 
         tf_bookauthor4.setFont(new java.awt.Font("Kanit", 0, 20)); // NOI18N
         tf_bookauthor4.setEnabled(false);
-        tf_bookauthor4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_bookauthor4ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pa_removebookLayout = new javax.swing.GroupLayout(pa_removebook);
         pa_removebook.setLayout(pa_removebookLayout);
@@ -374,14 +341,6 @@ public class AdminBook extends javax.swing.JPanel {
         getBookPanel("panel_removebook");
     }//GEN-LAST:event_lb_tab_removebookMouseClicked
 
-    private void tf_callnumber3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_callnumber3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_callnumber3ActionPerformed
-
-    private void tf_bookname3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookname3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_bookname3ActionPerformed
-
     private void btn_choosefileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_choosefileActionPerformed
         int result = file.showOpenDialog(null);
         //if the user click on open in Jfilechooser
@@ -394,34 +353,18 @@ public class AdminBook extends javax.swing.JPanel {
             
             ImageIcon img_book_chosen = new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
             lb_img_book3.setIcon(img_book_chosen);
-            s = path;
+            bookimgpath = path;
         } else if (result == JFileChooser.CANCEL_OPTION) {
             System.out.println("No File Select");
         }
     }//GEN-LAST:event_btn_choosefileActionPerformed
 
-    private void tf_callnumber4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_callnumber4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_callnumber4ActionPerformed
-
-    private void tf_bookname4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookname4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_bookname4ActionPerformed
-
-    private void tf_bookauthor3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookauthor3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_bookauthor3ActionPerformed
-
-    private void tf_bookauthor4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_bookauthor4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_bookauthor4ActionPerformed
-
     private void btn_addbookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addbookActionPerformed
         try{
             Connection con = Connect.connectDB();
             String query = "INSERT INTO bookinfo(callnumber, bname, bookauthor, imgbook, status) VALUES (?, ?, ?, ?, ?)";
-            pst = con.prepareStatement(query);
-            InputStream is = new FileInputStream(new File(s));
+            PreparedStatement pst = con.prepareStatement(query);
+            InputStream is = new FileInputStream(new File(bookimgpath));
             pst.setString(1, tf_callnumber3.getText());
             pst.setString(2, tf_bookname3.getText());
             pst.setString(3, tf_bookauthor3.getText());
@@ -441,7 +384,7 @@ public class AdminBook extends javax.swing.JPanel {
         try{
             Connection con = Connect.connectDB();
             String query = "DELETE FROM `bookinfo` WHERE callnumber=?";
-            pst = con.prepareStatement(query);
+            PreparedStatement pst = con.prepareStatement(query);
             
             pst.setString(1, tf_callnumber4.getText());
             
@@ -457,7 +400,7 @@ public class AdminBook extends javax.swing.JPanel {
         try{
             Connection con = Connect.connectDB();
             String query = "SELECT * FROM `bookinfo` WHERE callnumber=?";
-            pst = con.prepareStatement(query);
+            PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, tf_callnumber4.getText());
             ResultSet rs = pst.executeQuery();
             if(rs.next()){

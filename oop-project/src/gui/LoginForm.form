@@ -185,15 +185,8 @@
               <Font name="Kanit" size="18" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tf_usernameMouseClicked"/>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_usernameActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pf_password">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pf_passwordActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JCheckBox" name="cb_rememberme">
           <Properties>
@@ -206,9 +199,6 @@
             <Property name="text" type="java.lang.String" value="Remember me"/>
             <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_remembermeActionPerformed"/>
-          </Events>
         </Component>
         <Container class="javax.swing.JPanel" name="pa_signup">
           <Properties>

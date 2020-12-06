@@ -7,11 +7,8 @@ package gui;
 
 import database.Book;
 import database.Connect;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,8 +29,9 @@ public class UserBorrow extends javax.swing.JPanel {
     public void setBorrowTable(int userid){
          try {
             Connection con = Connect.connectDB();
-            String queryhistory = "SELECT bname, borrowdate, returndate FROM borrowhistory "
-                        + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber WHERE userid = " + userid + " AND returned = 0";
+             String queryhistory = "SELECT bname, borrowdate, returndate FROM borrowhistory "
+                     + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
+                     + "WHERE userid = " + userid + " AND returned = 0";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(queryhistory);
             DefaultTableModel model = (DefaultTableModel) JTable_presentborrow.getModel();
@@ -59,7 +57,7 @@ public class UserBorrow extends javax.swing.JPanel {
     private void initComponents() {
 
         lb_title = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        JScrollPane_presentborrow = new javax.swing.JScrollPane();
         JTable_presentborrow = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 204, 204));
@@ -86,7 +84,7 @@ public class UserBorrow extends javax.swing.JPanel {
             }
         });
         JTable_presentborrow.setRowHeight(30);
-        jScrollPane2.setViewportView(JTable_presentborrow);
+        JScrollPane_presentborrow.setViewportView(JTable_presentborrow);
         if (JTable_presentborrow.getColumnModel().getColumnCount() > 0) {
             JTable_presentborrow.getColumnModel().getColumn(1).setPreferredWidth(150);
             JTable_presentborrow.getColumnModel().getColumn(1).setMaxWidth(150);
@@ -105,7 +103,7 @@ public class UserBorrow extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lb_title, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
+                    .addComponent(JScrollPane_presentborrow, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 882, Short.MAX_VALUE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,15 +112,15 @@ public class UserBorrow extends javax.swing.JPanel {
                 .addGap(33, 33, 33)
                 .addComponent(lb_title, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addComponent(JScrollPane_presentborrow, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addGap(30, 30, 30))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane_presentborrow;
     private javax.swing.JTable JTable_presentborrow;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lb_title;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,10 +11,8 @@ import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -31,9 +29,9 @@ public class UserSearch extends javax.swing.JPanel {
         initComponents();
         
         ImageIcon icon_search_small = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
-        btn_search.setIcon(icon_search_small);
-
         ImageIcon icon_clear_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_clear_search.png")).getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH));
+        
+        btn_search.setIcon(icon_search_small);
         btn_reset.setIcon(icon_clear_search);
         
         all_books_list = booklist();
@@ -52,7 +50,7 @@ public class UserSearch extends javax.swing.JPanel {
                 book = new Book(rs.getBytes("imgbook"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
                 booksList.add(book);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
         return booksList;
@@ -70,18 +68,14 @@ public class UserSearch extends javax.swing.JPanel {
                 book = new Book(rs.getBytes("imgbook"), rs.getString("bname"), rs.getString("bookauthor"), rs.getBoolean("status"));
                 booksList.add(book);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e);
         }
         return booksList;
     }
     
     public void showBookTable(ArrayList<Book> list) {
-//        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-//        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         DefaultTableModel model = (DefaultTableModel) JTable_bookinfo.getModel();
-//        Object[] newIdentifiers = new Object[]{"รูปปกหนังสือ", "ชื่อหนังสือ", "ชื่อ", "d"};
-//        model.setColumnIdentifiers(newIdentifiers);
         JTable_bookinfo.getColumn("รูปปกหนังสือ").setCellRenderer(new MyTableCellRenderer());
         Object[] row = new Object[4];
         model.setRowCount(0);
@@ -99,18 +93,10 @@ public class UserSearch extends javax.swing.JPanel {
             }
             model.addRow(row);
         }
-//        for (int i=1; i<4; i++){
-//            JTable_bookinfo.getColumnModel().getColumn(i).setHeaderRenderer(centerRenderer);
-//            JTable_bookinfo.getColumnModel().getColumn(i).setCellRenderer(centerRenderer);
-//        }
     }
     
     class MyTableCellRenderer implements TableCellRenderer {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
-//            TableColumn tb = JTable_bookinfo.getColumn("รูปปกหนังสือ");
-//            tb.setPreferredWidth(150);
-//            tb.setMaxWidth(150);
-//            JTable_bookinfo.setRowHeight(200);
             return (Component) value;
         }
     }
@@ -128,7 +114,7 @@ public class UserSearch extends javax.swing.JPanel {
         tf_search = new javax.swing.JTextField();
         btn_search = new javax.swing.JButton();
         btn_reset = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        JScrollPane_bookinfo = new javax.swing.JScrollPane();
         JTable_bookinfo = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(204, 204, 255));
@@ -137,11 +123,6 @@ public class UserSearch extends javax.swing.JPanel {
         lb_search.setText("ข้อมูลที่ต้องการค้นหา");
 
         tf_search.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
-        tf_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_searchActionPerformed(evt);
-            }
-        });
 
         btn_search.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
         btn_search.setText("ค้นหา");
@@ -176,7 +157,7 @@ public class UserSearch extends javax.swing.JPanel {
             }
         ));
         JTable_bookinfo.setRowHeight(200);
-        jScrollPane1.setViewportView(JTable_bookinfo);
+        JScrollPane_bookinfo.setViewportView(JTable_bookinfo);
         if (JTable_bookinfo.getColumnModel().getColumnCount() > 0) {
             JTable_bookinfo.getColumnModel().getColumn(0).setMinWidth(150);
             JTable_bookinfo.getColumnModel().getColumn(0).setPreferredWidth(150);
@@ -198,7 +179,7 @@ public class UserSearch extends javax.swing.JPanel {
                         .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_reset, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JScrollPane_bookinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 882, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -217,14 +198,10 @@ public class UserSearch extends javax.swing.JPanel {
                             .addComponent(lb_search)
                             .addComponent(tf_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JScrollPane_bookinfo, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void tf_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_searchActionPerformed
-
-    }//GEN-LAST:event_tf_searchActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
        showBookTable(booklist(tf_search.getText()));
@@ -236,10 +213,10 @@ public class UserSearch extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane JScrollPane_bookinfo;
     private javax.swing.JTable JTable_bookinfo;
     private javax.swing.JButton btn_reset;
     private javax.swing.JButton btn_search;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_search;
     private javax.swing.JTextField tf_search;
     // End of variables declaration//GEN-END:variables

@@ -5,9 +5,8 @@
  */
 package gui;
 
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 import javax.swing.*;
 
 /**
@@ -24,18 +23,15 @@ public class AdminMenu extends javax.swing.JPanel {
         initComponents();
         
         ImageIcon icon_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_search.setIcon(icon_search);
-
         ImageIcon icon_borrowNreturn = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_borrow.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_borrowNreturn.setIcon(icon_borrowNreturn);
-
         ImageIcon icon_borrowhistory = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_borrowhistory.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_history.setIcon(icon_borrowhistory);
-
         ImageIcon icon_book = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_book.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        lb_menu_book.setIcon(icon_book);
-        
         ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        
+        lb_menu_search.setIcon(icon_search);
+        lb_menu_borrowNreturn.setIcon(icon_borrowNreturn);
+        lb_menu_history.setIcon(icon_borrowhistory);
+        lb_menu_book.setIcon(icon_book);
         lb_menu_logout.setIcon(icon_logout);
         
     }

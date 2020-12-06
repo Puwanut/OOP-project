@@ -19,7 +19,6 @@ public class LoginForm extends javax.swing.JFrame {
     /**
      * Creates new form LoginForm
      */
-    PreparedStatement pst;
     
     public LoginForm() {
         initComponents();
@@ -38,7 +37,6 @@ public class LoginForm extends javax.swing.JFrame {
             } else {
                 dout.writeUTF("");
             }
-            
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -56,7 +54,7 @@ public class LoginForm extends javax.swing.JFrame {
                 tf_username.setText(text_remember[1]);
                 pf_password.setText(text_remember[2]);
                 
-                System.out.println(text_remember[1] + "=" + text_remember[2]);
+                System.out.println("getRememberMe: username=" + text_remember[1] + ", password=" + text_remember[2]);
             } catch (IOException ex) {
                 ex.printStackTrace();
             } catch (ArrayIndexOutOfBoundsException ex) {
@@ -145,32 +143,11 @@ public class LoginForm extends javax.swing.JFrame {
         });
 
         tf_username.setFont(new java.awt.Font("Kanit", 0, 18)); // NOI18N
-        tf_username.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tf_usernameMouseClicked(evt);
-            }
-        });
-        tf_username.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_usernameActionPerformed(evt);
-            }
-        });
-
-        pf_password.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pf_passwordActionPerformed(evt);
-            }
-        });
 
         cb_rememberme.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
         cb_rememberme.setForeground(new java.awt.Color(255, 255, 255));
         cb_rememberme.setText("Remember me");
         cb_rememberme.setFocusPainted(false);
-        cb_rememberme.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cb_remembermeActionPerformed(evt);
-            }
-        });
 
         pa_signup.setBackground(pa_center.getBackground());
 
@@ -252,22 +229,6 @@ public class LoginForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_usernameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_usernameMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_usernameMouseClicked
-
-    private void tf_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_usernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tf_usernameActionPerformed
-
-    private void pf_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pf_passwordActionPerformed
-
-    private void cb_remembermeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_remembermeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cb_remembermeActionPerformed
-
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
             
         String username = tf_username.getText().trim();
@@ -281,7 +242,7 @@ public class LoginForm extends javax.swing.JFrame {
             try {
                 Connection con1 = Connect.connectDB();
                 String sql = "Select * From userinfo where user=? and pass=?";
-                pst = con1.prepareStatement(sql);
+                PreparedStatement pst = con1.prepareStatement(sql);
                 pst.setString(1, tf_username.getText());
                 pst.setString(2, pf_password.getText());
                 ResultSet rs = pst.executeQuery();
@@ -313,41 +274,6 @@ public class LoginForm extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         get_rememberme_handle();
     }//GEN-LAST:event_formWindowOpened
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginForm().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_login;

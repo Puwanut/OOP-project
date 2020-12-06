@@ -33,7 +33,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_reset" min="-2" pref="103" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" min="-2" pref="882" max="-2" attributes="0"/>
+                  <Component id="JScrollPane_bookinfo" min="-2" pref="882" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
@@ -60,7 +60,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="jScrollPane1" min="-2" pref="486" max="-2" attributes="0"/>
+              <Component id="JScrollPane_bookinfo" min="-2" pref="486" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -81,9 +81,6 @@
           <Font name="Kanit" size="18" style="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_searchActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_search">
       <Properties>
@@ -111,7 +108,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_resetActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+    <Container class="javax.swing.JScrollPane" name="JScrollPane_bookinfo">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>

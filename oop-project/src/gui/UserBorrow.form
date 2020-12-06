@@ -29,7 +29,7 @@
                       <Component id="lb_title" min="-2" pref="376" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane2" alignment="1" pref="882" max="32767" attributes="0"/>
+                  <Component id="JScrollPane_presentborrow" alignment="1" pref="882" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
@@ -41,7 +41,7 @@
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="lb_title" min="-2" pref="85" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jScrollPane2" pref="153" max="32767" attributes="0"/>
+              <Component id="JScrollPane_presentborrow" pref="153" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -57,7 +57,7 @@
         <Property name="text" type="java.lang.String" value="&#xe23;&#xe32;&#xe22;&#xe01;&#xe32;&#xe23;&#xe2b;&#xe19;&#xe31;&#xe07;&#xe2a;&#xe37;&#xe2d;&#xe17;&#xe35;&#xe48;&#xe22;&#xe37;&#xe21;&#xe2d;&#xe22;&#xe39;&#xe48;&#xe1b;&#xe31;&#xe08;&#xe08;&#xe38;&#xe1a;&#xe31;&#xe19;"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+    <Container class="javax.swing.JScrollPane" name="JScrollPane_presentborrow">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
       </AuxValues>
