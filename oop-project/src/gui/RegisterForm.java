@@ -14,12 +14,7 @@ import javax.swing.JOptionPane;
  * @author IsilenceT
  */
 public class RegisterForm extends javax.swing.JFrame {
-    Connection con = null;
     PreparedStatement pst = null;
-    String db_name="mdb";
-    String user="root";
-    String hostName="localhost";
-    String driverName="com.mysql.jdbc.Driver";
     /**
      * Creates new form LoginForm
      */
@@ -44,12 +39,12 @@ public class RegisterForm extends javax.swing.JFrame {
         lb_password = new javax.swing.JLabel();
         btn_signup = new javax.swing.JButton();
         tf_username = new javax.swing.JTextField();
-        pf_password = new javax.swing.JPasswordField();
+        pf_password1 = new javax.swing.JPasswordField();
         pa_backtologin = new javax.swing.JPanel();
         lb_beforesignin = new javax.swing.JLabel();
         lb_signin = new javax.swing.JLabel();
         lb_password1 = new javax.swing.JLabel();
-        pf_password1 = new javax.swing.JPasswordField();
+        pf_password2 = new javax.swing.JPasswordField();
         lb_firstname = new javax.swing.JLabel();
         lb_email = new javax.swing.JLabel();
         lb_surname = new javax.swing.JLabel();
@@ -118,9 +113,9 @@ public class RegisterForm extends javax.swing.JFrame {
             }
         });
 
-        pf_password.addActionListener(new java.awt.event.ActionListener() {
+        pf_password1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pf_passwordActionPerformed(evt);
+                pf_password1ActionPerformed(evt);
             }
         });
 
@@ -164,9 +159,9 @@ public class RegisterForm extends javax.swing.JFrame {
         lb_password1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_password1.setText("Confirm Password : ");
 
-        pf_password1.addActionListener(new java.awt.event.ActionListener() {
+        pf_password2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pf_password1ActionPerformed(evt);
+                pf_password2ActionPerformed(evt);
             }
         });
 
@@ -247,8 +242,8 @@ public class RegisterForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pa_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(tf_username, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pf_password1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(pf_password1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(pf_password2, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(37, Short.MAX_VALUE))
             .addGroup(pa_centerLayout.createSequentialGroup()
                 .addGap(218, 218, 218)
@@ -277,11 +272,11 @@ public class RegisterForm extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(pa_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lb_password, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pf_password, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pf_password1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(pa_centerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lb_password1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pf_password1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pf_password2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addComponent(btn_signup, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -302,31 +297,36 @@ public class RegisterForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_usernameActionPerformed
 
-    private void pf_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pf_passwordActionPerformed
-
-    private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
-        try{
-            Connection con1= Connect.connectDB();
-            String query = "INSERT INTO `register`(`fname`, `sname`, `email`, `user`, `pass`) VALUES (?, ?, ?, ?, ?)";
-            pst=con1.prepareStatement(query);
-            pst.setString(1, tf_firstname1.getText());
-            pst.setString(2, tf_surname.getText());
-            pst.setString(3, tf_email.getText());
-            pst.setString(4, tf_username.getText());
-            pst.setString(5, pf_password1.getText());
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Success");
-            
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, ex);
-        }
-    }//GEN-LAST:event_btn_signupActionPerformed
-
     private void pf_password1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_password1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pf_password1ActionPerformed
+
+    private void btn_signupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signupActionPerformed
+        if (pf_password1.getText().equals(pf_password2.getText())) {
+            try {
+                Connection con1 = Connect.connectDB();
+                String query = "INSERT INTO `register`(`fname`, `sname`, `email`, `user`, `pass`) VALUES (?, ?, ?, ?, ?)";
+                pst = con1.prepareStatement(query);
+                pst.setString(1, tf_firstname1.getText());
+                pst.setString(2, tf_surname.getText());
+                pst.setString(3, tf_email.getText());
+                pst.setString(4, tf_username.getText());
+                pst.setString(5, pf_password1.getText());
+                pst.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Success");
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }else {
+            JOptionPane.showMessageDialog(null, "Password and confirm password do not match.");
+        }
+
+    }//GEN-LAST:event_btn_signupActionPerformed
+
+    private void pf_password2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_password2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pf_password2ActionPerformed
 
     private void tf_emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_emailMouseClicked
         // TODO add your handling code here:
@@ -413,8 +413,8 @@ public class RegisterForm extends javax.swing.JFrame {
     private javax.swing.JPanel pa_backtologin;
     private javax.swing.JPanel pa_center;
     private javax.swing.JPanel pa_top;
-    private javax.swing.JPasswordField pf_password;
     private javax.swing.JPasswordField pf_password1;
+    private javax.swing.JPasswordField pf_password2;
     private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_firstname1;
     private javax.swing.JTextField tf_surname;

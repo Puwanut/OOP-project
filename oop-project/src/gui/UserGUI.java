@@ -21,9 +21,9 @@ public class UserGUI {
     private UserBorrow pa_borrow;
     private UserHistory pa_history;
 
-    public UserGUI() {
+    public UserGUI(int userid) {
         frame = new JFrame("Library System");
-        menu = new UserMenu();
+        menu = new UserMenu(userid);
         menu.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.black));
 
         pa_center = new JPanel();

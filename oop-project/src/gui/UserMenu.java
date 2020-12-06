@@ -4,8 +4,13 @@
  * and open the template in the editor.
  */
 package gui;
+import database.Connect;
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
 /**
  *
@@ -16,8 +21,12 @@ public class UserMenu extends javax.swing.JPanel {
     /**
      * Creates new form UserMenu
      */
-    public UserMenu() {
+    private int userid;
+    
+    public UserMenu(int userid) {
         initComponents();
+        this.userid = userid;
+        setUserFirstname();
         
         ImageIcon icon_search = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_search.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_menu_search.setIcon(icon_search);
@@ -30,6 +39,21 @@ public class UserMenu extends javax.swing.JPanel {
         
         ImageIcon icon_logout = new ImageIcon(new ImageIcon(getClass().getResource("../image/icon_logout.png")).getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
         lb_menu_logout.setIcon(icon_logout);
+        
+        
+    }
+    
+    public void setUserFirstname(){
+        try {
+            Connection con = Connect.connectDB();
+        String queryname = "SELECT fname FROM register WHERE userid = " + userid;
+        Statement st = con.createStatement();
+        ResultSet rs = st.executeQuery(queryname);
+        rs.next();
+        lb_userFirstname.setText(rs.getString("fname"));
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
         
         
     }
@@ -51,7 +75,7 @@ public class UserMenu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lb_ADMIN = new javax.swing.JLabel();
+        lb_userFirstname = new javax.swing.JLabel();
         lb_menu_search = new javax.swing.JLabel();
         lb_menu_borrow = new javax.swing.JLabel();
         lb_menu_history = new javax.swing.JLabel();
@@ -59,12 +83,12 @@ public class UserMenu extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 255, 204));
 
-        lb_ADMIN.setBackground(new java.awt.Color(153, 255, 204));
-        lb_ADMIN.setFont(new java.awt.Font("Kanit", 1, 36)); // NOI18N
-        lb_ADMIN.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_ADMIN.setText("(ชื่อ User)");
-        lb_ADMIN.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
-        lb_ADMIN.setOpaque(true);
+        lb_userFirstname.setBackground(new java.awt.Color(153, 255, 204));
+        lb_userFirstname.setFont(new java.awt.Font("Kanit", 1, 26)); // NOI18N
+        lb_userFirstname.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_userFirstname.setText("(ชื่อ User)");
+        lb_userFirstname.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
+        lb_userFirstname.setOpaque(true);
 
         lb_menu_search.setFont(new java.awt.Font("Kanit", 0, 24)); // NOI18N
         lb_menu_search.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -140,7 +164,7 @@ public class UserMenu extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lb_ADMIN, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+            .addComponent(lb_userFirstname, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
             .addComponent(lb_menu_borrow)
             .addComponent(lb_menu_search, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(lb_menu_history, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -149,16 +173,16 @@ public class UserMenu extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lb_ADMIN, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_userFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lb_menu_search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lb_menu_borrow)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lb_menu_history)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addComponent(lb_menu_logout)
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -212,10 +236,10 @@ public class UserMenu extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel lb_ADMIN;
     private javax.swing.JLabel lb_menu_borrow;
     private javax.swing.JLabel lb_menu_history;
     private javax.swing.JLabel lb_menu_logout;
     private javax.swing.JLabel lb_menu_search;
+    private javax.swing.JLabel lb_userFirstname;
     // End of variables declaration//GEN-END:variables
 }

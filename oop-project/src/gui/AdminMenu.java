@@ -186,7 +186,7 @@ public class AdminMenu extends javax.swing.JPanel {
                 .addComponent(lb_menu_book, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(57, 57, 57)
                 .addComponent(lb_menu_logout)
-                .addContainerGap())
+                .addGap(20, 20, 20))
         );
     }// </editor-fold>//GEN-END:initComponents
 
