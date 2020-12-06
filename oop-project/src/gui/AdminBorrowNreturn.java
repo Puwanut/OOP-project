@@ -658,7 +658,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         if (!tf_callnumber1.getText().isEmpty()) {
             try {
                 Connection con = Connect.connectDB();
-                String querybook = "SELECT * FROM bookinfo WHERE idbook = " + tf_callnumber1.getText() + " AND status=1";
+                String querybook = "SELECT * FROM bookinfo WHERE idbook = " + tf_callnumber1.getText() + " AND status = 1";
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(querybook);
                 if (rs.next()) {
@@ -723,6 +723,20 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                 pst = con.prepareStatement(update);
                 pst.setString(1, tf_callnumber1.getText());
                 pst.executeUpdate();
+                
+                AdminGUI.updateSearchTable();
+                AdminGUI.updateBorrowhistoryTable();
+                
+                //setup for next borrowing
+                setLastestBorrowid();
+                tf_callnumber1.setText("");
+                tf_bookname1.setText("");
+                tf_userid1.setText("");
+                tf_username1.setText("");
+                cbb_borrowdays1.setSelectedIndex(0);
+                tf_returndate1.setText("");
+                ImageIcon img_questionbook = new ImageIcon(new ImageIcon(getClass().getResource("../image/questionbook.jpg")).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+                lb_img_book1.setIcon(img_questionbook);
                 JOptionPane.showMessageDialog(null, "ทำรายการยืมสำเร็จ");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);
@@ -783,6 +797,21 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                 pst = con.prepareStatement(updatebookinfo);
                 pst.setString(1, tf_callnumber2.getText());
                 pst.executeUpdate();
+                
+                AdminGUI.updateSearchTable();
+                AdminGUI.updateBorrowhistoryTable();
+                
+                //setup for next returning
+                tf_borrowid2.setText("");
+                tf_callnumber2.setText("");
+                tf_bookname2.setText("");
+                tf_userid2.setText("");
+                tf_username2.setText("");
+                tf_borrowdate2.setText("");
+                tf_returndate2.setText("");
+                ImageIcon img_questionbook = new ImageIcon(new ImageIcon(getClass().getResource("../image/questionbook.jpg")).getImage().getScaledInstance(300, 400, Image.SCALE_SMOOTH));
+                lb_img_book2.setIcon(img_questionbook);
+                
                 JOptionPane.showMessageDialog(null, "ทำรายการคืนสำเร็จ");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);

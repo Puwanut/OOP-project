@@ -27,9 +27,10 @@ public class AdminHistory extends javax.swing.JPanel {
     /** Creates new form AdminHistory */
     public AdminHistory() {
         initComponents();
-        
+
         setborrowhistoryTable();
         setTableColor();
+
     }
     
     public void setborrowhistoryTable(){
@@ -83,6 +84,12 @@ public class AdminHistory extends javax.swing.JPanel {
             }
         });
     }
+    
+    public void updateBorrowhistoryTable(){
+        setborrowhistoryTable();
+    }
+    
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -103,7 +110,6 @@ public class AdminHistory extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 153));
 
-        JTable_borrowhistory.setAutoCreateRowSorter(true);
         JTable_borrowhistory.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
         JTable_borrowhistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

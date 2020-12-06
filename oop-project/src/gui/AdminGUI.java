@@ -7,9 +7,9 @@ public class AdminGUI {
     private AdminMenu menu;
     private static JFrame frame;
     private static JPanel pa_center;
-    private AdminSearch pa_search;
+    private static AdminSearch pa_search;
     private AdminBorrowNreturn pa_borrowNreturn;
-    private AdminHistory pa_history;
+    private static AdminHistory pa_history;
     private AdminBook pa_book;
 
     public AdminGUI() {
@@ -44,7 +44,17 @@ public class AdminGUI {
         card.show(pa_center, panel_name);
         System.out.println("Change to " + panel_name);
     }
+    
+    public static void updateSearchTable(){
+        pa_search.updateSearchTable();
+        System.out.println("Update Search Table");
+    }
 
+    public static void updateBorrowhistoryTable(){
+        pa_history.updateBorrowhistoryTable();
+        System.out.println("Update Borrowhistory Table");
+    }
+    
     public static void logout() {
         frame.dispose();
         new LoginForm().setVisible(true);

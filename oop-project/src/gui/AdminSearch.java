@@ -67,7 +67,11 @@ public class AdminSearch extends javax.swing.JPanel {
                 case 1: searchby = "bname"; break;
                 case 2: searchby = "bookauthor"; break;
             }
-            String querybook = "SELECT * FROM bookinfo WHERE " + searchby + " LIKE '%" + searchtext + "%'";
+            String querybook;
+            if (searchby.equals("idbook"))
+                querybook = "SELECT * FROM bookinfo WHERE " + searchby + " LIKE '" + searchtext + "'";
+            else
+                querybook = "SELECT * FROM bookinfo WHERE " + searchby + " LIKE '%" + searchtext + "%'";
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(querybook);
             Book book;
@@ -98,7 +102,11 @@ public class AdminSearch extends javax.swing.JPanel {
         }
     }
     
-
+    public void updateSearchTable(){
+        all_books_list = booklist();
+        showBookTable(all_books_list);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,7 +160,6 @@ public class AdminSearch extends javax.swing.JPanel {
             }
         });
 
-        JTable_bookinfo.setAutoCreateRowSorter(true);
         JTable_bookinfo.setFont(new java.awt.Font("Kanit", 0, 14)); // NOI18N
         JTable_bookinfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

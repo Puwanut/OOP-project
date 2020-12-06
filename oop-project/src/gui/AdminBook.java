@@ -428,7 +428,9 @@ public class AdminBook extends javax.swing.JPanel {
             pst.setBlob(4, is);
             pst.setBoolean(5, true);
             pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Success");
+            
+            AdminGUI.updateSearchTable();
+            JOptionPane.showMessageDialog(null, "เพิ่มข้อมูลหนังสือสำเร็จ");
 
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
@@ -444,8 +446,8 @@ public class AdminBook extends javax.swing.JPanel {
             pst.setString(1, tf_callnumber4.getText());
             
             pst.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Delete Success");
+            AdminGUI.updateSearchTable();
+            JOptionPane.showMessageDialog(null, "ลบข้อมูลหนังสือสำเร็จ");
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }
