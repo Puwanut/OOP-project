@@ -21,10 +21,10 @@ public class UserHistory extends javax.swing.JPanel {
      */
     public UserHistory(int userid) {
         initComponents();
-        setBorrowTable(userid);
+        setHistoryTable(userid);
     }
     
-    public void setBorrowTable(int userid){
+    public void setHistoryTable(int userid){
          try {
             Connection con = Connect.connectDB();
              String queryhistory = "SELECT bname, borrowdate, returndate,status FROM borrowhistory "

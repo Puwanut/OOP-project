@@ -13,15 +13,8 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author IsilenceT
- */
 public class AdminSearch extends javax.swing.JPanel {
 
-    /**
-     * Creates new form AdminSearch
-     */
     private ArrayList<Book> all_books_list;
     
     public AdminSearch() {

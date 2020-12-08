@@ -554,7 +554,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
         if (!tf_userid1.getText().isEmpty()) {
             try {
                 Connection con = Connect.connectDB();
-                String querybook = "SELECT * FROM uesrinfo WHERE userid = " + tf_userid1.getText();
+                String querybook = "SELECT * FROM userinfo WHERE userid = " + tf_userid1.getText();
                 Statement st = con.createStatement();
                 ResultSet rs = st.executeQuery(querybook);
                 if (rs.next()) {
@@ -615,7 +615,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             Connection con = Connect.connectDB();
             String query = "SELECT * FROM borrowhistory "
                     + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
-                    + "INNER JOIN uesrinfo ON borrowhistory.userid = uesrinfo.userid "
+                    + "INNER JOIN userinfo ON borrowhistory.userid = userinfo.userid "
                     + "WHERE borrowid=? AND returned=0";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, tf_borrowid2.getText());
@@ -625,7 +625,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                 tf_callnumber2.setText(rs.getString("callnumber"));
                 tf_bookname2.setText(rs.getString("bname"));
                 tf_userid2.setText(rs.getString("userid"));
-                tf_username2.setText(rs.getString("user"));
+                tf_username2.setText(rs.getString("fname") + " " + rs.getString("sname"));
                 tf_borrowdate2.setText(rs.getString("borrowdate"));
                 tf_returndate2.setText(rs.getString("returndate"));
 
@@ -690,8 +690,8 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
             Connection con = Connect.connectDB();
             String query = "SELECT * FROM borrowhistory "
                     + "INNER JOIN bookinfo ON borrowhistory.callnumber = bookinfo.callnumber "
-                    + "INNER JOIN uesrinfo ON borrowhistory.userid = uesrinfo.userid "
-                    + "WHERE callnumber=? AND returned=0";
+                    + "INNER JOIN userinfo ON borrowhistory.userid = userinfo.userid "
+                    + "WHERE borrowhistory.callnumber=? AND returned=0";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setString(1, tf_callnumber2.getText());
             ResultSet rs = pst.executeQuery();
@@ -700,7 +700,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
                 tf_borrowid2.setText(rs.getString("borrowid"));
                 tf_bookname2.setText(rs.getString("bname"));
                 tf_userid2.setText(rs.getString("userid"));
-                tf_username2.setText(rs.getString("user"));
+                tf_username2.setText(rs.getString("fname") + " " + rs.getString("sname"));
                 tf_borrowdate2.setText(rs.getString("borrowdate"));
                 tf_returndate2.setText(rs.getString("returndate"));
 

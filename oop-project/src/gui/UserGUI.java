@@ -55,7 +55,7 @@ public class UserGUI {
 
     public static void logout() {
         frame.dispose();
-        new LoginForm().setVisible(true);
+        new LoginForm();
     }
 
 }

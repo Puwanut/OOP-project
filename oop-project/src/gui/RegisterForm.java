@@ -356,11 +356,7 @@ public class RegisterForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_surnameActionPerformed
 
     private void lb_signinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lb_signinMouseClicked
-        LoginForm loginform = new LoginForm();
-        loginform.setVisible(true);
-        loginform.pack();
-        loginform.setLocationRelativeTo(null);
-        loginform.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        new LoginForm();
         this.dispose();
     }//GEN-LAST:event_lb_signinMouseClicked
 

@@ -19,7 +19,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AdminHistory extends javax.swing.JPanel {
 
-    /** Creates new form AdminHistory */
     public AdminHistory() {
         initComponents();
 
@@ -47,13 +46,10 @@ public class AdminHistory extends javax.swing.JPanel {
                 row[3] = rs.getString("fname") + " " + rs.getString("sname");
                 row[4] = rs.getString("borrowdate");
                 row[5] = rs.getString("returndate");
-                if (rs.getBoolean("returned") == false){
+                if (rs.getBoolean("returned") == false)
                     row[6] = "ยังไม่คืน";
-                }
-                else {
+                else
                     row[6] = "คืนแล้ว";
-                }
-                
                 model.addRow(row);
             }
             

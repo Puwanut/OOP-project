@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import database.Connect;
@@ -10,16 +5,8 @@ import javax.swing.*;
 import java.io.*;
 import java.sql.*;
 
-/**
- *
- * @author IsilenceT
- */
 public class LoginForm extends javax.swing.JFrame {
-
-    /**
-     * Creates new form LoginForm
-     */
-    
+  
     public LoginForm() {
         initComponents();
         this.pack();
@@ -230,7 +217,6 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-            
         String username = tf_username.getText().trim();
         String password = pf_password.getText().trim();
         if (username.equals("admin") && password.equals("123456")) {
