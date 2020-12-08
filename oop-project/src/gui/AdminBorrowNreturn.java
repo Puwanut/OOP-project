@@ -573,7 +573,7 @@ public class AdminBorrowNreturn extends javax.swing.JPanel {
     private void btn_record_borrowingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_record_borrowingActionPerformed
 
         if (!tf_callnumber1.getText().isEmpty() && !tf_userid1.getText().isEmpty() && cbb_borrowdays1.getSelectedIndex() != 0 && 
-            !tf_bookname1.getText().equals("ไม่พบ")){
+            !tf_bookname1.getText().equals("ไม่พบ") && !tf_username1.getText().equals("ไม่พบ")){
             try {
                 Connection con = Connect.connectDB();
                 String insert = "INSERT INTO borrowhistory(callnumber, userid, borrowdate, returndate) VALUES (?, ?, ?, ?)";

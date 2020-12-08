@@ -6,6 +6,8 @@ import java.io.*;
 import java.sql.*;
 
 public class LoginForm extends javax.swing.JFrame {
+    private final String username_admin = "admin" ;
+    private final String password_admin = "123456";
   
     public LoginForm() {
         initComponents();
@@ -219,7 +221,7 @@ public class LoginForm extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         String username = tf_username.getText().trim();
         String password = pf_password.getText().trim();
-        if (username.equals("admin") && password.equals("123456")) {
+        if (username.equals(username_admin) && password.equals(password_admin)) {
             save_rememberme_handle();
             System.out.println("Welcome Admin");
             new AdminGUI();

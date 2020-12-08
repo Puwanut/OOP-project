@@ -96,8 +96,8 @@ public class UserSearch extends javax.swing.JPanel {
     }
     
     class MyTableCellRenderer implements TableCellRenderer {
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
-            return (Component) value;
+        public JLabel getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
+            return (JLabel) value;
         }
     }
     

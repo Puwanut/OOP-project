@@ -177,6 +177,10 @@ public class AdminSearch extends javax.swing.JPanel {
         });
         JTable_bookinfo.setRowHeight(30);
         JScrollPane_bookinfo.setViewportView(JTable_bookinfo);
+        if (JTable_bookinfo.getColumnModel().getColumnCount() > 0) {
+            JTable_bookinfo.getColumnModel().getColumn(0).setPreferredWidth(100);
+            JTable_bookinfo.getColumnModel().getColumn(0).setMaxWidth(100);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
